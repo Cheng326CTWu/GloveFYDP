@@ -7,6 +7,7 @@
 
 #include "stdint.h"
 #include "stdbool.h"
+#include "string.h"
 
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
@@ -70,19 +71,11 @@ glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c)
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t IMU_ReadAll(motion_data_t * motionData)
+glove_status_t IMU_ReadAll(motion_data_t * motionData, motion_data_float_t * motionDataFloat)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
     int16_t gyroAndAccelData[6] = {0};
     int16_t magData[3] = {0};
-    float accelSens = 0.061;        // [mg/LSB]
-    float gyroSens = 0.0075;        // [dps/LSB]
-    float magSens = 0.122;          // [mGauss/LSB]
-
-    if (!motionData)
-    {
-        return GLOVE_STATUS_INVALID_ARGUMENT;
-    }
 
     // read gyro and accel data
     halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_AG_ADDR, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
@@ -93,21 +86,37 @@ glove_status_t IMU_ReadAll(motion_data_t * motionData)
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     // scale values
-    motionData->xAcc = gyroAndAccelData[0]*accelSens;
-    motionData->yAcc = gyroAndAccelData[1]*accelSens;
-    motionData->zAcc = gyroAndAccelData[2]*accelSens;
-    motionData->xGryo = gyroAndAccelData[3]*gyroSens;
-    motionData->yGryo = gyroAndAccelData[4]*gyroSens;
-    motionData->zGryo = gyroAndAccelData[5]*gyroSens;
-    motionData->xMag = magData[0]*magSens;
-    motionData->yMag = magData[1]*magSens;
-    motionData->zMag = magData[2]*magSens;
+    if (motionDataFloat)
+    {
+        motionDataFloat->xAcc = gyroAndAccelData[0]*ACCEL_SENS;
+        motionDataFloat->yAcc = gyroAndAccelData[1]*ACCEL_SENS;
+        motionDataFloat->zAcc = gyroAndAccelData[2]*ACCEL_SENS;
+        motionDataFloat->xGryo = gyroAndAccelData[3]*GYRO_SENS;
+        motionDataFloat->yGryo = gyroAndAccelData[4]*GYRO_SENS;
+        motionDataFloat->zGryo = gyroAndAccelData[5]*GYRO_SENS;
+        motionDataFloat->xMag = magData[0]*MAG_SENS;
+        motionDataFloat->yMag = magData[1]*MAG_SENS;
+        motionDataFloat->zMag = magData[2]*MAG_SENS;
+    }
+
+    if (motionData)
+    {
+        motionData->xAcc = gyroAndAccelData[0];
+        motionData->yAcc = gyroAndAccelData[1];
+        motionData->zAcc = gyroAndAccelData[2];
+        motionData->xGryo = gyroAndAccelData[3];
+        motionData->yGryo = gyroAndAccelData[4];
+        motionData->zGryo = gyroAndAccelData[5];
+        motionData->xMag = magData[0];
+        motionData->yMag = magData[1];
+        motionData->zMag = magData[2];
+    }
 
     // dump
-    printf("accel: %f %f %f\r\n", motionData->xAcc, motionData->yAcc, motionData->zAcc);
-    printf("gyro: %f %f %f\r\n", motionData->xGryo, motionData->yGryo, motionData->zGryo);
-    printf("mag: %f %f %f\r\n", motionData->xMag, motionData->yMag, motionData->zMag);
-    printf("\r\n");
+    // printf("accel: %f %f %f\r\n", motionData->xAcc, motionData->yAcc, motionData->zAcc);
+    // printf("gyro: %f %f %f\r\n", motionData->xGryo, motionData->yGryo, motionData->zGryo);
+    // printf("mag: %f %f %f\r\n", motionData->xMag, motionData->yMag, motionData->zMag);
+    // printf("\r\n");
 
     return GLOVE_STATUS_OK;
 }

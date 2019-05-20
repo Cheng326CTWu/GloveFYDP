@@ -25,6 +25,7 @@
 /* USER CODE BEGIN Includes */
 #include "stdio.h"
 #include "stdint.h"
+#include "stdbool.h"
 #include "unistd.h"
 
 #include "glove_status_codes.h"
@@ -68,7 +69,7 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-
+bool gfEnablePrintf = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,6 +97,10 @@ int main(void)
   uint8_t data = 0;
   glove_status_t status = GLOVE_STATUS_OK;
   motion_data_t motionData = {0};
+  motion_data_t allMotionData[16] = {0};
+  uint32_t i = 0;
+  uint32_t before = 0;
+  uint32_t after = 0;
 
   /* USER CODE END 1 */
 
@@ -137,6 +142,7 @@ int main(void)
     printf("IMU reg dump failed\r\n");
   }
 
+<<<<<<< HEAD
   // status = queue_test();
   // if (GLOVE_STATUS_OK != status)
   // {
@@ -163,6 +169,8 @@ int main(void)
   //   printf("IMU read all failed\r\n");
   // }
 
+=======
+>>>>>>> Change baud rate to 1 MB/s for fast data transfer
   printf("Main pre-loop done\r\n");
 
   /* USER CODE END 2 */
@@ -171,10 +179,23 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if ((status = IMU_ReadAll(&motionData)))
+    if ((status = IMU_ReadAll(&motionData, NULL)))
     {
       printf("IMU read all failed\r\n");
     }
+
+    // pretend we have 16 sensors
+    for (i = 0; i < 16; i++)
+    {
+      memcpy(&(allMotionData[i]), &motionData, sizeof(motion_data_t));
+    }
+    before = HAL_GetTick();
+	  HAL_UART_Transmit(&huart2, (uint8_t *)allMotionData, sizeof(allMotionData), UART_TIMEOUT);
+    after = HAL_GetTick();
+
+    gfEnablePrintf = true;
+    printf("time taken: %lu\r\n", after - before);
+    gfEnablePrintf = false;
     HAL_Delay(1500);
     /* USER CODE END WHILE */
 
@@ -299,7 +320,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 1152000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -362,21 +383,21 @@ int _read(int file, char *data, int len)
     {
         return -1;
     }
-
-	return HAL_UART_Receive(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
-
+    
+	  return HAL_UART_Receive(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
 }
 
 int _write(int file, char *data, int len)
 {
-
     if ((file != STDOUT_FILENO) && (file != STDERR_FILENO))
     {
         return -1;
     }
-
-	return HAL_UART_Transmit(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
-
+    if (gfEnablePrintf)
+    {
+	    return HAL_UART_Transmit(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
+    }
+    return 0;
 }
 
 // ****************** Tests *************************************
