@@ -45,5 +45,9 @@
 // magnetometer data register
 #define OUT_X_L_M 0x28
 
+// Sensitivities, assuming that the FS bits in the control registers are set to lowest value (00)
+#define ACCEL_SENS 0.061f        // = 4g/2^16 * 1000 [mg/LSB]
+#define GYRO_SENS 0.0075F        // = 245*2 / 2^16 [dps/LSB]
+#define MAG_SENSE 0.122          // [mGauss/LSB]
 
 #endif /* LSM9DS1_REG_H_ */

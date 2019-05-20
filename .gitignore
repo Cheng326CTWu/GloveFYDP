@@ -27,4 +27,6 @@ local.properties
 #build
 Debug/*
 
+RemoteSystemsTempFiles/*
+
 # End of https://www.gitignore.io/api/eclipse

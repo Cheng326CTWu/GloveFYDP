@@ -75,8 +75,9 @@ glove_status_t IMU_ReadAll(motion_data_t * motionData)
     HAL_StatusTypeDef halStatus = HAL_OK;
     int16_t gyroAndAccelData[6] = {0};
     int16_t magData[3] = {0};
-    float accelRange = 4.0f / (1 << 16);
-    printf("%f\r\n", accelRange);
+    float accelSens = 0.061;        // [mg/LSB]
+    float gyroSens = 0.0075;        // [dps/LSB]
+    float magSens = 0.122;          // [mGauss/LSB]
 
     if (!motionData)
     {
@@ -91,14 +92,22 @@ glove_status_t IMU_ReadAll(motion_data_t * motionData)
     halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_M_ADDR, OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
-    // dump
-    motionData->xAcc = gyroAndAccelData[0]*accelRange;
-    motionData->yAcc = gyroAndAccelData[1]*accelRange;
-    motionData->zAcc = gyroAndAccelData[2]*accelRange;
+    // scale values
+    motionData->xAcc = gyroAndAccelData[0]*accelSens;
+    motionData->yAcc = gyroAndAccelData[1]*accelSens;
+    motionData->zAcc = gyroAndAccelData[2]*accelSens;
+    motionData->xGryo = gyroAndAccelData[3]*gyroSens;
+    motionData->yGryo = gyroAndAccelData[4]*gyroSens;
+    motionData->zGryo = gyroAndAccelData[5]*gyroSens;
+    motionData->xMag = magData[0]*magSens;
+    motionData->yMag = magData[1]*magSens;
+    motionData->zMag = magData[2]*magSens;
 
+    // dump
     printf("accel: %f %f %f\r\n", motionData->xAcc, motionData->yAcc, motionData->zAcc);
-    // printf("gxl: %d %d %d %d %d %d\r\n", gyroAndAccelData[0], gyroAndAccelData[1], gyroAndAccelData[2], gyroAndAccelData[3], gyroAndAccelData[4], gyroAndAccelData[5]);
-    // printf("m: %d %d %d\r\n", magData[0], magData[1], magData[2]);
+    printf("gyro: %f %f %f\r\n", motionData->xGryo, motionData->yGryo, motionData->zGryo);
+    printf("mag: %f %f %f\r\n", motionData->xMag, motionData->yMag, motionData->zMag);
+    printf("\r\n");
 
     return GLOVE_STATUS_OK;
 }
