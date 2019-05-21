@@ -25,7 +25,10 @@ local.properties
 *.d
 
 #build
-Debug/*
+Debug/*.elf
+Debug/*.hex
+Debug/*.map
+
 
 RemoteSystemsTempFiles/*
 
