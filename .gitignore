@@ -20,7 +20,7 @@ local.properties
 .vscode
 
 # binary
-*.ld
+# *.ld
 *.o
 *.d
 
