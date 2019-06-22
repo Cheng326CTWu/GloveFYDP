@@ -31,7 +31,7 @@ typedef struct {
     I2C_HandleTypeDef *hi2c;
 } IMU_context_t;
 
-IMU_context_t gContext = {0};
+static IMU_context_t gContext = {0};
 
 // forward declarations
 static glove_status_t IMU_SetRegBits(uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);

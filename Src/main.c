@@ -29,6 +29,7 @@
 
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
+#include "sm.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -138,6 +139,17 @@ int main(void)
   // }
 
   printf("Main pre-loop done\r\n");
+
+  // sm test
+  SM_Init();
+  SM_Tick();
+  SM_PostEvent(EVENT_START_TRANSFERRING);
+  SM_Tick();
+  SM_PostEvent(EVENT_STOP_TRANSFERRING);
+  SM_Tick();
+  SM_Tick();
+  SM_PostEvent(EVENT_NONE);
+  SM_Tick();
 
   /* USER CODE END 2 */
 
