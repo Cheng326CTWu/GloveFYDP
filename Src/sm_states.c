@@ -47,7 +47,20 @@ glove_status_t IdleStateExit()
 sm_state_t * IdleStateHandler(sm_event_t event)
 {
     printf("%s\r\n", __FUNCTION__);
-    return &idleState;
+    if (EVENT_START_TRANSFERRING == event)
+    {
+        printf("Start transferring\r\n");
+        return &dataTransferState;
+    }
+    else if (EVENT_GET_LOGS == event)
+    {
+        printf("Get logs\r\n");
+        return &logTransferState;
+    }
+    else
+    {
+        return &idleState;
+    }
 }
 
 // init state
@@ -70,6 +83,11 @@ sm_state_t * InitStateHandler(sm_event_t event)
     {
         printf("Start transferring\r\n");
         return &dataTransferState;
+    }
+    else if (EVENT_GET_LOGS == event)
+    {
+        printf("Get logs\r\n");
+        return &logTransferState;
     }
     else
     {
