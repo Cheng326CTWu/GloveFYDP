@@ -1,0 +1,11 @@
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\bin\Debug\netcoreapp2.2\USB.deps.json
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\bin\Debug\netcoreapp2.2\USB.runtimeconfig.json
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\bin\Debug\netcoreapp2.2\USB.runtimeconfig.dev.json
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\bin\Debug\netcoreapp2.2\USB.dll
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\bin\Debug\netcoreapp2.2\USB.pdb
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.csprojAssemblyReference.cache
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.csproj.CoreCompileInputs.cache
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.AssemblyInfoInputs.cache
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.AssemblyInfo.cs
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.dll
+C:\Users\Owner\Desktop\FYDP\GloveFYDP\USB\obj\Debug\netcoreapp2.2\USB.pdb
