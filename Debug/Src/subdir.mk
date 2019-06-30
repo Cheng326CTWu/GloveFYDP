@@ -5,42 +5,51 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/LSM9DS1.c \
+../Src/TCA9548A.c \
 ../Src/glove_status_codes.c \
 ../Src/main.c \
 ../Src/queue.c \
 ../Src/scheduler.c \
+../Src/serial.c \
 ../Src/sm.c \
 ../Src/sm_states.c \
 ../Src/stm32l4xx_hal_msp.c \
 ../Src/stm32l4xx_it.c \
 ../Src/syscalls.c \
-../Src/system_stm32l4xx.c 
+../Src/system_stm32l4xx.c \
+../Src/tasks.c 
 
 OBJS += \
 ./Src/LSM9DS1.o \
+./Src/TCA9548A.o \
 ./Src/glove_status_codes.o \
 ./Src/main.o \
 ./Src/queue.o \
 ./Src/scheduler.o \
+./Src/serial.o \
 ./Src/sm.o \
 ./Src/sm_states.o \
 ./Src/stm32l4xx_hal_msp.o \
 ./Src/stm32l4xx_it.o \
 ./Src/syscalls.o \
-./Src/system_stm32l4xx.o 
+./Src/system_stm32l4xx.o \
+./Src/tasks.o 
 
 C_DEPS += \
 ./Src/LSM9DS1.d \
+./Src/TCA9548A.d \
 ./Src/glove_status_codes.d \
 ./Src/main.d \
 ./Src/queue.d \
 ./Src/scheduler.d \
+./Src/serial.d \
 ./Src/sm.d \
 ./Src/sm_states.d \
 ./Src/stm32l4xx_hal_msp.d \
 ./Src/stm32l4xx_it.d \
 ./Src/syscalls.d \
-./Src/system_stm32l4xx.d 
+./Src/system_stm32l4xx.d \
+./Src/tasks.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

@@ -54,5 +54,14 @@ do																			\
 	}																		\
 }while(0);
 
+#define CHECK_HAL_STATUS_OK(status) 							\
+do															\
+{															\
+	if (HAL_OK != (status))									\
+	{														\
+		printf("HAL error, status=0x%x\r\n", (status));		\
+	}														\
+}while(0);
+
 
 #endif /* GLOVE_STATUS_CODES_H_ */

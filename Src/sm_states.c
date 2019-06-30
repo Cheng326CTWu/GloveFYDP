@@ -3,8 +3,10 @@
  */
 
 #include "glove_status_codes.h"
+#include "scheduler.h"
 #include "sm.h"
 #include "sm_states.h"
+#include "tasks.h"
 
 // DataTransfer state
 glove_status_t DataTransferStateEntry();
@@ -99,6 +101,7 @@ sm_state_t * InitStateHandler(sm_event_t event)
 glove_status_t DataTransferStateEntry()
 {
     printf("%s\r\n", __FUNCTION__);
+    Scheduler_AddTask(&IMU_Task);
     return GLOVE_STATUS_OK;
 }
 

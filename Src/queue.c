@@ -8,15 +8,6 @@
 #include "glove_status_codes.h"
 #include "queue.h"
 
-#define QUEUE_CHECK_INIT(q)                         \
-do                                                  \
-{                                                   \
-    if (!( (q)->fInit ) )                           \
-    {                                               \
-        return GLOVE_STATUS_MODULE_NOT_INIT;        \
-    }                                               \
-}while(0);
-
 glove_status_t Queue_Init(queue_t * queue, uint8_t size)
 {
     if (!queue)
@@ -45,7 +36,10 @@ glove_status_t Queue_Enqueue(queue_t * queue, void * item)
         return GLOVE_STATUS_NULL_PTR;
     }
 
-    QUEUE_CHECK_INIT(queue);
+    if (!queue->fInit)
+    {
+        return GLOVE_STATUS_MODULE_NOT_INIT;
+    }
 
     queue->tail = (queue->tail + 1) % queue->maxSize;
     queue->items[queue->tail] = item;
@@ -82,7 +76,11 @@ void * Queue_Dequeue(queue_t * queue)
         return item;
     }
 
-    QUEUE_CHECK_INIT(queue);
+    if (!queue->fInit)
+    {
+        printf("%s:%d: queue not init!\r\n", __FUNCTION__, __LINE__);
+        return item;
+    }
 
     // dequeue item if there is one available, otherwise leave it as null
     if (queue->size > 0)

@@ -4,6 +4,7 @@
 #include "glove_status_codes.h"
 #include "scheduler.h"
 #include "queue.h"
+#include "tasks.h"
 
 #define SCHEDULER_CHECK_INIT()                  \
 do                                              \
@@ -34,7 +35,7 @@ glove_status_t Scheduler_Init()
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t Scheduler_AddTask(task_t task)
+glove_status_t Scheduler_AddTask(task_t * task)
 {
     SCHEDULER_CHECK_INIT();
 
@@ -45,17 +46,21 @@ glove_status_t Scheduler_Tick()
 {
     uint32_t i = 0;
     glove_status_t status = GLOVE_STATUS_OK;
-    task_t task_to_run = NULL;
+    task_t * task_to_run = NULL;
 
     SCHEDULER_CHECK_INIT();
 
     for (i = 0; i < gContext.tasks.size; ++i)
     {
-        task_to_run = (task_t) Queue_Dequeue(&(gContext.tasks));
+        task_to_run = (task_t *) Queue_Dequeue(&(gContext.tasks));
         CHECK_STATUS_OK_RET(status);
-        if (task_to_run)
+        if (task_to_run && task_to_run->pTaskFn)
         {
-            task_to_run();
+            status = task_to_run->pTaskFn();
+            if (GLOVE_STATUS_OK != status)
+            {
+                printf("Task %s failed!\r\n", task_to_run->name);
+            }
         }
     }
     

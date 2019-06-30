@@ -32,7 +32,10 @@
 #include "LSM9DS1.h"
 #include "queue.h"
 #include "scheduler.h"
+#include "serial.h"
 #include "sm.h"
+#include "tasks.h"
+#include "TCA9548A.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,15 +47,6 @@
 /* USER CODE BEGIN PD */
 #define UART_TIMEOUT 100
 #define I2C_TIMEOUT 1000
-#define CHECK_HAL_STATUS_OK(status) 							\
-	do															\
-	{															\
-		if (HAL_OK != (status))									\
-		{														\
-			printf("HAL error, status=0x%x\r\n", (status));		\
-		}														\
-	}while(0);
-#define TCA_ADDR (0x70 << 1)
 
 /* USER CODE END PD */
 
@@ -69,7 +63,7 @@ I2C_HandleTypeDef hi2c1;
 UART_HandleTypeDef huart2;
 
 /* USER CODE BEGIN PV */
-bool gfEnablePrintf = false;
+bool gfEnablePrintf = true;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,14 +87,7 @@ static void MX_USART2_UART_Init(void);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  HAL_StatusTypeDef hStatus = HAL_OK;
-  uint8_t data = 0;
   glove_status_t status = GLOVE_STATUS_OK;
-  motion_data_t motionData = {0};
-  motion_data_t allMotionData[16] = {0};
-  uint32_t i = 0;
-  uint32_t before = 0;
-  uint32_t after = 0;
 
   /* USER CODE END 1 */
 
@@ -127,19 +114,46 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("Hello world!!\r\n");
 
-  // select the SLAVE1 of the I2C mux
-  data = 1 << 1;
-  hStatus = HAL_I2C_Master_Transmit(&hi2c1, TCA_ADDR, &data, 1, I2C_TIMEOUT);
-  CHECK_HAL_STATUS_OK(hStatus);
+  // initialize the serial interface wrapper
+  if ((status = Serial_Init(&huart2)))
+  {
+    printf("Serial interface init failed, status=%X\r\n", status);
+  }
 
+  // initialize the I2C mux
+  if ( (status = I2CMux_Init(&hi2c1)) )
+  {
+    printf("I2C mux init failed, status=%X\r\n", status);
+  }
+
+  // select the first bus
+  if ( (status = I2CMux_Select(1)) )
+  {
+    printf("I2C mux select failed, status=%X\r\n", status);
+  }
+
+  // initialize IMU 
   if ( (status = IMU_Init(&hi2c1)) )
   {
     printf("IMU init failed, status=%x\r\n", status);
   }
 
+  // dump IMU config registers
   if ((status = IMU_DumpConfigRegisters()))
   {
     printf("IMU reg dump failed\r\n");
+  }
+
+  // state machine
+  if ((status = SM_Init()))
+  {
+    printf("State machine init failed\r\n");
+  }
+
+  // scheduler
+  if ((status == Scheduler_Init()))
+  {
+    printf("Scheduler init failed\r\n");
   }
 
   // status = queue_test();
@@ -174,26 +188,11 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  SM_PostEvent(EVENT_START_TRANSFERRING);
   while (1)
   {
-    if ((status = IMU_ReadAll(&motionData, NULL)))
-    {
-      printf("IMU read all failed\r\n");
-    }
-
-    // pretend we have 16 sensors
-    for (i = 0; i < 16; i++)
-    {
-      memcpy(&(allMotionData[i]), &motionData, sizeof(motion_data_t));
-    }
-    before = HAL_GetTick();
-	  HAL_UART_Transmit(&huart2, (uint8_t *)allMotionData, sizeof(allMotionData), UART_TIMEOUT);
-    after = HAL_GetTick();
-
-    gfEnablePrintf = true;
-    printf("time taken: %lu\r\n", after - before);
-    gfEnablePrintf = false;
-    HAL_Delay(1500);
+    SM_Tick();
+    Scheduler_Tick();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -317,7 +316,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 1152000;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -516,12 +515,27 @@ glove_status_t queue_test()
   return GLOVE_STATUS_OK;
 }
 
-void empty_task(){}
+glove_status_t empty_task()
+{
+  return GLOVE_STATUS_OK;
+}
+task_t emptyTask = 
+{
+  .pTaskFn = &empty_task,
+  .name = "Empty Task"
+};
+
 uint32_t test_counter = 0;
-void test_task()
+glove_status_t test_task()
 {
   ++test_counter;
+  return GLOVE_STATUS_OK;
 }
+task_t testTask = 
+{
+  .pTaskFn = &test_task,
+  .name = "Test task"
+};
 
 glove_status_t scheduler_tests()
 {
@@ -532,24 +546,25 @@ glove_status_t scheduler_tests()
   CHECK_STATUS_OK_RET(status);
 
   // add an empty task and tick once
-  status = Scheduler_AddTask(&empty_task);
+  status = Scheduler_AddTask(&emptyTask);
   CHECK_STATUS_OK_RET(status);
   status = Scheduler_Tick();
 
   // add one of the test_tasks and tick once
-  status = Scheduler_AddTask(&test_task);
+  status = Scheduler_AddTask(&testTask);
   CHECK_STATUS_OK_RET(status);
   status = Scheduler_Tick();
   if (test_counter != 1)
   {
     printf("test fail %s:%d, test_counter = %lu\r\n", __FUNCTION__, __LINE__, test_counter);
+    return GLOVE_STATUS_FAIL;
   }
 
   // add multiple test_tasks and tick until they should all be done
   test_counter = 0;
   for (i = 0; i < SCHEDULER_MAX_NUM_TASKS; ++i)
   {
-    status = Scheduler_AddTask(&test_task);
+    status = Scheduler_AddTask(&testTask);
     CHECK_STATUS_OK_RET(status);
   }
   for (i = 0; i < SCHEDULER_MAX_NUM_TASKS; ++i)
@@ -557,9 +572,10 @@ glove_status_t scheduler_tests()
     Scheduler_Tick();
     CHECK_STATUS_OK_RET(status);
   }
-  if (test_counter != SCHEDULER_MAX_NUM_TASKS - 1)
+  if (test_counter != SCHEDULER_MAX_NUM_TASKS)
   {
     printf("test fail %s:%d, test_counter = %lu\r\n", __FUNCTION__, __LINE__, test_counter);
+    return GLOVE_STATUS_FAIL;
   }
   
   return GLOVE_STATUS_OK;
