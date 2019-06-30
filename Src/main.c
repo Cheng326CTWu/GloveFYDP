@@ -142,7 +142,6 @@ int main(void)
     printf("IMU reg dump failed\r\n");
   }
 
-<<<<<<< HEAD
   // status = queue_test();
   // if (GLOVE_STATUS_OK != status)
   // {
@@ -169,8 +168,6 @@ int main(void)
   //   printf("IMU read all failed\r\n");
   // }
 
-=======
->>>>>>> Change baud rate to 1 MB/s for fast data transfer
   printf("Main pre-loop done\r\n");
 
   /* USER CODE END 2 */
