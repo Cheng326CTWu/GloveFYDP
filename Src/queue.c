@@ -8,6 +8,15 @@
 #include "glove_status_codes.h"
 #include "queue.h"
 
+#define QUEUE_CHECK_INIT(q)                         \
+do                                                  \
+{                                                   \
+    if (!( (q)->fInit ) )                           \
+    {                                               \
+        return GLOVE_STATUS_MODULE_NOT_INIT;        \
+    }                                               \
+}while(0);
+
 glove_status_t Queue_Init(queue_t * queue, uint8_t size)
 {
     if (!queue)
@@ -24,6 +33,7 @@ glove_status_t Queue_Init(queue_t * queue, uint8_t size)
     queue->tail = -1;
     queue->size = 0;
     queue->maxSize = size;
+    queue->fInit = true;
 
     return GLOVE_STATUS_OK;
 }
@@ -34,6 +44,8 @@ glove_status_t Queue_Enqueue(queue_t * queue, void * item)
     {
         return GLOVE_STATUS_NULL_PTR;
     }
+
+    QUEUE_CHECK_INIT(queue);
 
     queue->tail = (queue->tail + 1) % queue->maxSize;
     queue->items[queue->tail] = item;
@@ -50,12 +62,12 @@ glove_status_t Queue_Enqueue(queue_t * queue, void * item)
         ++(queue->size);
     }
     
-    printf("%s head=%d, tail=%d, size=%d *item=%d\r\n", 
-            __FUNCTION__, 
-            queue->head,
-            queue->tail,
-            queue->size,
-            item ? *(uint32_t * )(item) : 999);
+    // printf("%s head=%d, tail=%d, size=%d *item=%d\r\n", 
+    //         __FUNCTION__, 
+    //         queue->head,
+    //         queue->tail,
+    //         queue->size,
+    //         item ? *(uint32_t * )(item) : 999);
 
     return GLOVE_STATUS_OK;
 }
@@ -69,6 +81,8 @@ void * Queue_Dequeue(queue_t * queue)
         printf("%s:%d: null queue!\r\n", __FUNCTION__, __LINE__);
         return item;
     }
+
+    QUEUE_CHECK_INIT(queue);
 
     // dequeue item if there is one available, otherwise leave it as null
     if (queue->size > 0)
@@ -84,12 +98,12 @@ void * Queue_Dequeue(queue_t * queue)
         queue->tail = (queue->tail + 1) % queue->maxSize;
     }
 
-    printf("%s head=%d, tail=%d, size=%d, *head=%d\r\n", 
-        __FUNCTION__,
-        queue->head,
-        queue->tail,
-        queue->size,
-        queue->items[queue->head] ? *(uint32_t *)(queue->items[queue->head]) : 999);
+    // printf("%s head=%d, tail=%d, size=%d, *head=%d\r\n", 
+    //     __FUNCTION__,
+    //     queue->head,
+    //     queue->tail,
+    //     queue->size,
+    //     queue->items[queue->head] ? *(uint32_t *)(queue->items[queue->head]) : 999);
 
     return item;
 }

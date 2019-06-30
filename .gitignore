@@ -29,6 +29,9 @@ Debug/*.elf
 Debug/*.hex
 Debug/*.map
 
+#Circuits
+Circuits/*
+
 
 RemoteSystemsTempFiles/*
 

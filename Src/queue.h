@@ -2,6 +2,7 @@
 #define QUEUE_T
 
 #include "stdlib.h"
+#include "stdbool.h"
 
 #include "glove_status_codes.h"
 
@@ -14,6 +15,7 @@ typedef struct
     int8_t tail;
     uint8_t maxSize;
     uint8_t size;
+    bool fInit;
 } queue_t;
 
 glove_status_t Queue_Init(queue_t * queue, uint8_t size);

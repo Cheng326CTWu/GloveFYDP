@@ -30,6 +30,7 @@
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
 #include "queue.h"
+#include "scheduler.h"
 #include "sm.h"
 /* USER CODE END Includes */
 
@@ -57,6 +58,7 @@
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
 glove_status_t queue_test();
+glove_status_t scheduler_tests();
 
 /* USER CODE END PM */
 
@@ -143,6 +145,16 @@ int main(void)
   // else
   // {
   //   printf("Queue tests passed!\r\n");
+  // }
+
+  // status = scheduler_tests();
+  // if (GLOVE_STATUS_OK != status)
+  // {
+  //   printf("Scheduler tests failed!, status = %X\r\n", status);
+  // }
+  // else
+  // {
+  //   printf("Scheduler tests passed!\r\n");
   // }
   
 
@@ -412,7 +424,7 @@ glove_status_t queue_test()
     CHECK_NULL_RET(item);
     if (i != *item)
     {
-      printf("Test fail: %s:%d, i=%d, *item=%d\r\n", __FUNCTION__, __LINE__, i, *item);
+      printf("Test fail: %s:%d, i=%d, *item=%lu\r\n", __FUNCTION__, __LINE__, i, *item);
       return GLOVE_STATUS_FAIL;
     }
   }
@@ -483,6 +495,55 @@ glove_status_t queue_test()
     printf("Test fail: %s:%d\r\n", __FUNCTION__, __LINE__);
     return GLOVE_STATUS_FAIL;
   }
+  return GLOVE_STATUS_OK;
+}
+
+void empty_task(){}
+uint32_t test_counter = 0;
+void test_task()
+{
+  ++test_counter;
+}
+
+glove_status_t scheduler_tests()
+{
+  glove_status_t status = GLOVE_STATUS_OK;
+  uint32_t i = 0;
+
+  status = Scheduler_Init();
+  CHECK_STATUS_OK_RET(status);
+
+  // add an empty task and tick once
+  status = Scheduler_AddTask(&empty_task);
+  CHECK_STATUS_OK_RET(status);
+  status = Scheduler_Tick();
+
+  // add one of the test_tasks and tick once
+  status = Scheduler_AddTask(&test_task);
+  CHECK_STATUS_OK_RET(status);
+  status = Scheduler_Tick();
+  if (test_counter != 1)
+  {
+    printf("test fail %s:%d, test_counter = %lu\r\n", __FUNCTION__, __LINE__, test_counter);
+  }
+
+  // add multiple test_tasks and tick until they should all be done
+  test_counter = 0;
+  for (i = 0; i < SCHEDULER_MAX_NUM_TASKS; ++i)
+  {
+    status = Scheduler_AddTask(&test_task);
+    CHECK_STATUS_OK_RET(status);
+  }
+  for (i = 0; i < SCHEDULER_MAX_NUM_TASKS; ++i)
+  {
+    Scheduler_Tick();
+    CHECK_STATUS_OK_RET(status);
+  }
+  if (test_counter != SCHEDULER_MAX_NUM_TASKS - 1)
+  {
+    printf("test fail %s:%d, test_counter = %lu\r\n", __FUNCTION__, __LINE__, test_counter);
+  }
+  
   return GLOVE_STATUS_OK;
 }
 

@@ -8,6 +8,7 @@ C_SRCS += \
 ../Src/glove_status_codes.c \
 ../Src/main.c \
 ../Src/queue.c \
+../Src/scheduler.c \
 ../Src/sm.c \
 ../Src/sm_states.c \
 ../Src/stm32l4xx_hal_msp.c \
@@ -20,6 +21,7 @@ OBJS += \
 ./Src/glove_status_codes.o \
 ./Src/main.o \
 ./Src/queue.o \
+./Src/scheduler.o \
 ./Src/sm.o \
 ./Src/sm_states.o \
 ./Src/stm32l4xx_hal_msp.o \
@@ -32,6 +34,7 @@ C_DEPS += \
 ./Src/glove_status_codes.d \
 ./Src/main.d \
 ./Src/queue.d \
+./Src/scheduler.d \
 ./Src/sm.d \
 ./Src/sm_states.d \
 ./Src/stm32l4xx_hal_msp.d \
