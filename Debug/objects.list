@@ -20,6 +20,7 @@
 "Src/LSM9DS1.o"
 "Src/glove_status_codes.o"
 "Src/main.o"
+"Src/queue.o"
 "Src/sm.o"
 "Src/sm_states.o"
 "Src/stm32l4xx_hal_msp.o"

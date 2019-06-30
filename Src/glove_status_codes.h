@@ -44,5 +44,15 @@ do																							\
 	}																						\
 } while (0);
 
+#define CHECK_NULL_RET(item) 												\
+do																			\
+{																			\
+	if (!(item))															\
+	{																		\
+		printf("%s:%d error, null pointer\r\n", __FUNCTION__, __LINE__);	\
+		return GLOVE_STATUS_FAIL;											\
+	}																		\
+}while(0);
+
 
 #endif /* GLOVE_STATUS_CODES_H_ */

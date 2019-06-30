@@ -7,6 +7,7 @@ C_SRCS += \
 ../Src/LSM9DS1.c \
 ../Src/glove_status_codes.c \
 ../Src/main.c \
+../Src/queue.c \
 ../Src/sm.c \
 ../Src/sm_states.c \
 ../Src/stm32l4xx_hal_msp.c \
@@ -18,6 +19,7 @@ OBJS += \
 ./Src/LSM9DS1.o \
 ./Src/glove_status_codes.o \
 ./Src/main.o \
+./Src/queue.o \
 ./Src/sm.o \
 ./Src/sm_states.o \
 ./Src/stm32l4xx_hal_msp.o \
@@ -29,6 +31,7 @@ C_DEPS += \
 ./Src/LSM9DS1.d \
 ./Src/glove_status_codes.d \
 ./Src/main.d \
+./Src/queue.d \
 ./Src/sm.d \
 ./Src/sm_states.d \
 ./Src/stm32l4xx_hal_msp.d \

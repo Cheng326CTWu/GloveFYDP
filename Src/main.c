@@ -29,6 +29,7 @@
 
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
+#include "queue.h"
 #include "sm.h"
 /* USER CODE END Includes */
 
@@ -55,6 +56,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
+glove_status_t queue_test();
 
 /* USER CODE END PM */
 
@@ -133,23 +135,23 @@ int main(void)
     printf("IMU reg dump failed\r\n");
   }
 
+  // status = queue_test();
+  // if (GLOVE_STATUS_OK != status)
+  // {
+  //   printf("Queue tests failed!, status = %X\r\n", status);
+  // }
+  // else
+  // {
+  //   printf("Queue tests passed!\r\n");
+  // }
+  
+
   // if ((status = IMU_ReadAll(&motionData)))
   // {
   //   printf("IMU read all failed\r\n");
   // }
 
   printf("Main pre-loop done\r\n");
-
-  // sm test
-  SM_Init();
-  SM_Tick();
-  SM_PostEvent(EVENT_START_TRANSFERRING);
-  SM_Tick();
-  SM_PostEvent(EVENT_STOP_TRANSFERRING);
-  SM_Tick();
-  SM_Tick();
-  SM_PostEvent(EVENT_NONE);
-  SM_Tick();
 
   /* USER CODE END 2 */
 
@@ -353,10 +355,6 @@ int _read(int file, char *data, int len)
 
 }
 
-/******************************************************************************
- *
- ******************************************************************************/
-
 int _write(int file, char *data, int len)
 {
 
@@ -367,6 +365,125 @@ int _write(int file, char *data, int len)
 
 	return HAL_UART_Transmit(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
 
+}
+
+// ****************** Tests *************************************
+// TODO: find a better place to put these tests
+void sm_test()
+{
+  // sm test
+  SM_Init();
+  SM_Tick();
+  SM_PostEvent(EVENT_START_TRANSFERRING);
+  SM_Tick();
+  SM_PostEvent(EVENT_STOP_TRANSFERRING);
+  SM_Tick();
+  SM_Tick();
+  SM_PostEvent(EVENT_NONE);
+  SM_Tick();
+}
+
+glove_status_t queue_test()
+{
+  queue_t testQueue = {0};
+  glove_status_t status = GLOVE_STATUS_OK;
+  uint8_t i = 0;
+  uint32_t * item = NULL;
+  uint32_t items[16] = {0};
+
+  // initialize to numbers 0 to 15
+  for (uint8_t i = 0; i < 16; ++i)
+  {
+    items[i] = i;
+  }
+
+  // enqueue 4 items and then dequeue them
+  printf("%s simple enqueue dequeue\r\n", __FUNCTION__);
+  status = Queue_Init(&testQueue, 4);
+  CHECK_STATUS_OK_RET(status);
+  for (i = 0; i < 4; ++i)
+  {
+    status = Queue_Enqueue(&testQueue, items + i);
+    CHECK_STATUS_OK_RET(status);
+  }
+  for (i = 0; i < 4; ++i)
+  {
+    item = (uint32_t *)Queue_Dequeue(&testQueue);
+    CHECK_NULL_RET(item);
+    if (i != *item)
+    {
+      printf("Test fail: %s:%d, i=%d, *item=%d\r\n", __FUNCTION__, __LINE__, i, *item);
+      return GLOVE_STATUS_FAIL;
+    }
+  }
+  
+  // enqueue 8 items, dequeing right after enqueue
+  printf("%s enqueue immediate dequeue\r\n", __FUNCTION__);
+  status = Queue_Init(&testQueue, 4);
+  CHECK_STATUS_OK_RET(status);
+  for (i = 0 ; i < 8; ++i)
+  {
+    status = Queue_Enqueue(&testQueue, items + i);
+    CHECK_STATUS_OK_RET(status);
+    item = (uint32_t *)Queue_Dequeue(&testQueue);
+    CHECK_NULL_RET(item);
+    if (i != *item)
+    {
+      printf("Test fail: %s:%d\r\n", __FUNCTION__, __LINE__);
+      return GLOVE_STATUS_FAIL;
+    }
+  }
+
+  // enqueue more 9 items in a queue, and make sure that only the last 8 are dequeued
+  printf("%s enqueue 1 extra \r\n", __FUNCTION__);
+  status = Queue_Init(&testQueue, 8);
+  for (i = 0; i < 9; ++i)
+  {
+    status = Queue_Enqueue(&testQueue, items + i);
+    CHECK_STATUS_OK_RET(status)
+  }
+  for (i = 0; i < 8; ++i)
+  {
+    item = (uint32_t *)Queue_Dequeue(&testQueue);
+    CHECK_NULL_RET(item);
+
+    if (i + 1 != *item)
+    {
+      printf("Test fail: %s:%d\r\n", __FUNCTION__, __LINE__);
+      return GLOVE_STATUS_FAIL;
+    }
+  }
+
+  // enqueue 16 items in a 8-item queue, and make sure that only the last 8 are dequeued
+  printf("%s enqueue 2x extra \r\n", __FUNCTION__);  
+  status = Queue_Init(&testQueue, 8);
+  for (i = 0; i < 16; ++i)
+  {
+    status = Queue_Enqueue(&testQueue, items + i);
+    CHECK_STATUS_OK_RET(status);
+  }
+  for (i = 0; i < 8; ++i)
+  {
+    item = (uint32_t *)Queue_Dequeue(&testQueue);
+    CHECK_NULL_RET(item);
+    if (i + 8 != *item)
+    {
+      printf("Test fail: %s:%d\r\n", __FUNCTION__, __LINE__);
+      return GLOVE_STATUS_FAIL;
+    }
+  }
+
+  // try to dequeue from an empty queue, should be null
+  printf("%s dequeue empty \r\n", __FUNCTION__);
+  status = Queue_Init(&testQueue, 4);
+  CHECK_STATUS_OK_RET(status);
+  item = Queue_Dequeue(&testQueue);
+  if (item)
+  {
+    printf("Test fail: %s:%d\r\n", __FUNCTION__, __LINE__);
+    return GLOVE_STATUS_FAIL;
+  }
+  return GLOVE_STATUS_OK;
 }
 
 /* USER CODE END 4 */
