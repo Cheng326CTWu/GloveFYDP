@@ -30,5 +30,4 @@
 "Src/stm32l4xx_it.o"
 "Src/syscalls.o"
 "Src/system_stm32l4xx.o"
-"Src/tasks.o"
 "startup/startup_stm32l452xx.o"

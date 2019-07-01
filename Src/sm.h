@@ -22,10 +22,10 @@ typedef enum
 // List of possible events
 typedef enum
 {
-    EVENT_NONE = 0,
     EVENT_START_TRANSFERRING = 1,       // start transferring sensor data
     EVENT_STOP_TRANSFERRING = 2,        // stop transferring data (can be sensor or log data)
     EVENT_GET_LOGS = 3,                 // start transferring logs
+    EVENT_NONE = 4,
 } sm_event_t;
 
 // State type
@@ -51,5 +51,6 @@ typedef struct
 glove_status_t SM_Init();
 glove_status_t SM_Tick();
 glove_status_t SM_PostEvent(sm_event_t event);
+glove_status_t SM_PostEventDebug(sm_event_t event, char * commandString);
 
 #endif

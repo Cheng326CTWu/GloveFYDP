@@ -63,17 +63,29 @@ glove_status_t SM_Tick()
             // at entering the idle state
             if (GLOVE_STATUS_OK != status)
             {
-                printf("State entry error. State = %d\r\n", gContext.currentState->name);
+                printf("State entry error. State = %d, status=%d\r\n", gContext.currentState->name, status);
                 nextState = &idleState;
             }
         }
     }
+
     return GLOVE_STATUS_OK;
 }
 
 glove_status_t SM_PostEvent(sm_event_t event)
 {
     printf("%s event=%d\r\n", __FUNCTION__, event);
+    if (!gContext.fInit)
+    {
+        return GLOVE_STATUS_MODULE_NOT_INIT;
+    }
+    gContext.lastEvent = event;
+    return GLOVE_STATUS_OK;
+}
+
+glove_status_t SM_PostEventDebug(sm_event_t event, char * command)
+{
+    printf("%s event=%d, command=%s\r\n", __FUNCTION__, event, command);
     if (!gContext.fInit)
     {
         return GLOVE_STATUS_MODULE_NOT_INIT;

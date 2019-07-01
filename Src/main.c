@@ -34,7 +34,6 @@
 #include "scheduler.h"
 #include "serial.h"
 #include "sm.h"
-#include "tasks.h"
 #include "TCA9548A.h"
 /* USER CODE END Includes */
 
@@ -52,8 +51,6 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* USER CODE BEGIN PM */
-glove_status_t queue_test();
-glove_status_t scheduler_tests();
 
 /* USER CODE END PM */
 
@@ -61,17 +58,22 @@ glove_status_t scheduler_tests();
 I2C_HandleTypeDef hi2c1;
 
 UART_HandleTypeDef huart2;
+DMA_HandleTypeDef hdma_usart2_rx;
+DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
-bool gfEnablePrintf = true;
+bool gfEnablePrintf = false;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
+static void MX_DMA_Init(void);
 static void MX_I2C1_Init(void);
 static void MX_USART2_UART_Init(void);
 /* USER CODE BEGIN PFP */
+glove_status_t queue_test();
+glove_status_t scheduler_tests();
 
 /* USER CODE END PFP */
 
@@ -109,6 +111,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
@@ -151,7 +154,7 @@ int main(void)
   }
 
   // scheduler
-  if ((status == Scheduler_Init()))
+  if ((status = Scheduler_Init()))
   {
     printf("Scheduler init failed\r\n");
   }
@@ -188,7 +191,7 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  SM_PostEvent(EVENT_START_TRANSFERRING);
+  // SM_PostEvent(EVENT_START_TRANSFERRING);
   while (1)
   {
     SM_Tick();
@@ -316,7 +319,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 1152000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -332,6 +335,24 @@ static void MX_USART2_UART_Init(void)
   /* USER CODE BEGIN USART2_Init 2 */
 
   /* USER CODE END USART2_Init 2 */
+
+}
+
+/** 
+  * Enable DMA controller clock
+  */
+static void MX_DMA_Init(void) 
+{
+  /* DMA controller clock enable */
+  __HAL_RCC_DMA1_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* DMA1_Channel6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel6_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+  /* DMA1_Channel7_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA1_Channel7_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(DMA1_Channel7_IRQn);
 
 }
 
@@ -372,16 +393,6 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
-int _read(int file, char *data, int len)
-{
-    if (file != STDIN_FILENO)
-    {
-        return -1;
-    }
-    
-	  return HAL_UART_Receive(&huart2, (uint8_t *)data, len, UART_TIMEOUT);
-}
 
 int _write(int file, char *data, int len)
 {

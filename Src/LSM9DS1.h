@@ -9,21 +9,7 @@
 #define LSM9DS1_H_
 
 #include "glove_status_codes.h"
-
-typedef struct
-{
-    float xAcc;
-    float yAcc;
-    float zAcc;
-
-    float xGryo;
-    float yGryo;
-    float zGryo;
-
-    float xMag;
-    float yMag;
-    float zMag;
-} motion_data_float_t;
+#include "scheduler.h"
 
 typedef struct
 {
@@ -31,9 +17,9 @@ typedef struct
     uint16_t yAcc;
     uint16_t zAcc;
 
-    uint16_t xGryo;
-    uint16_t yGryo;
-    uint16_t zGryo;
+    uint16_t xGyro;
+    uint16_t yGyro;
+    uint16_t zGyro;
 
     uint16_t xMag;
     uint16_t yMag;
@@ -42,7 +28,12 @@ typedef struct
 
 
 glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c);
-glove_status_t IMU_ReadAll(motion_data_t * motionData, motion_data_float_t * motionDataFloat);
+glove_status_t IMU_ReadAll(motion_data_t * motionData);
 glove_status_t IMU_DumpConfigRegisters();
+glove_status_t IMU_StartContinuousRead();
+glove_status_t IMU_StopContinuousRead();
+
+extern task_t Task_IMUSweep;
+extern task_t Task_AckTransferStopped;
 
 #endif /* LSM9DS1_H_ */

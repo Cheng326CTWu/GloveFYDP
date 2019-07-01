@@ -12,10 +12,13 @@
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
 #include "LSM9DS1_Reg.h"
+#include "scheduler.h"
+#include "serial.h"
 
 #define IMU_AG_ADDR (0xD6)
 #define IMU_M_ADDR (0x3C)
 #define IMU_I2C_TIMEOUT 100
+#define NUM_IMUS 16
 
 #define IMU_CHECK_INIT()                            \
 do                                                  \
@@ -29,15 +32,35 @@ do                                                  \
 
 typedef struct {
     bool fInit;
+    bool continuousRead;
     I2C_HandleTypeDef *hi2c;
 } IMU_context_t;
 
 static IMU_context_t gContext = {0};
 
+// for profiling!
+static uint32_t gCount = 0;
+static uint32_t gTotal = 0;
+
 // forward declarations
+static glove_status_t AcknowledgeTransferStopped();
+static glove_status_t ReadAllMotionSensors();
 static glove_status_t IMU_SetRegBits(uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);
 static glove_status_t IMU_ReadReg(uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue);
 static glove_status_t IMU_Reset();
+
+// task definitions
+task_t Task_IMUSweep = 
+{
+    .pTaskFn = &ReadAllMotionSensors,
+    .name = "IMU Task"
+};
+
+task_t Task_AckTransferStopped = {
+    .pTaskFn = &AcknowledgeTransferStopped,
+    .name = "AckStop"
+};
+
 
 glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c)
 {
@@ -71,11 +94,13 @@ glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c)
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t IMU_ReadAll(motion_data_t * motionData, motion_data_float_t * motionDataFloat)
+glove_status_t IMU_ReadAll(motion_data_t * motionData)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
     int16_t gyroAndAccelData[6] = {0};
     int16_t magData[3] = {0};
+
+    IMU_CHECK_INIT();
 
     // read gyro and accel data
     halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_AG_ADDR, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
@@ -85,38 +110,18 @@ glove_status_t IMU_ReadAll(motion_data_t * motionData, motion_data_float_t * mot
     halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_M_ADDR, OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
-    // scale values
-    if (motionDataFloat)
-    {
-        motionDataFloat->xAcc = gyroAndAccelData[0]*ACCEL_SENS;
-        motionDataFloat->yAcc = gyroAndAccelData[1]*ACCEL_SENS;
-        motionDataFloat->zAcc = gyroAndAccelData[2]*ACCEL_SENS;
-        motionDataFloat->xGryo = gyroAndAccelData[3]*GYRO_SENS;
-        motionDataFloat->yGryo = gyroAndAccelData[4]*GYRO_SENS;
-        motionDataFloat->zGryo = gyroAndAccelData[5]*GYRO_SENS;
-        motionDataFloat->xMag = magData[0]*MAG_SENS;
-        motionDataFloat->yMag = magData[1]*MAG_SENS;
-        motionDataFloat->zMag = magData[2]*MAG_SENS;
-    }
-
     if (motionData)
     {
         motionData->xAcc = gyroAndAccelData[0];
         motionData->yAcc = gyroAndAccelData[1];
         motionData->zAcc = gyroAndAccelData[2];
-        motionData->xGryo = gyroAndAccelData[3];
-        motionData->yGryo = gyroAndAccelData[4];
-        motionData->zGryo = gyroAndAccelData[5];
+        motionData->xGyro = gyroAndAccelData[3];
+        motionData->yGyro = gyroAndAccelData[4];
+        motionData->zGyro = gyroAndAccelData[5];
         motionData->xMag = magData[0];
         motionData->yMag = magData[1];
         motionData->zMag = magData[2];
     }
-
-    // dump
-    // printf("accel: %f %f %f\r\n", motionData->xAcc, motionData->yAcc, motionData->zAcc);
-    // printf("gyro: %f %f %f\r\n", motionData->xGryo, motionData->yGryo, motionData->zGryo);
-    // printf("mag: %f %f %f\r\n", motionData->xMag, motionData->yMag, motionData->zMag);
-    // printf("\r\n");
 
     return GLOVE_STATUS_OK;
 }
@@ -145,6 +150,69 @@ glove_status_t IMU_DumpConfigRegisters()
 
     return GLOVE_STATUS_OK;
 }
+
+glove_status_t IMU_StartContinuousRead()
+{
+    glove_status_t status = GLOVE_STATUS_OK;
+
+    IMU_CHECK_INIT();
+
+    gContext.continuousRead = true;
+    status = Scheduler_AddTask(&Task_IMUSweep);
+    CHECK_STATUS_OK_RET(status);
+
+    return GLOVE_STATUS_OK;
+}
+
+glove_status_t IMU_StopContinuousRead()
+{
+    glove_status_t status = GLOVE_STATUS_OK;
+    gContext.continuousRead = false;
+
+    status = Scheduler_RemoveTask(&Task_IMUSweep);
+    CHECK_STATUS_OK_RET(status);
+    return GLOVE_STATUS_OK;
+}
+
+glove_status_t ReadAllMotionSensors()
+{
+    uint8_t i = 0;
+    glove_status_t status = GLOVE_STATUS_OK;
+    motion_data_t allMotionData[16] = {0};
+    uint32_t startTime = HAL_GetTick();
+
+    for (i = 0; i < NUM_IMUS; ++i)
+    {
+        status = IMU_ReadAll(allMotionData + i);
+        CHECK_STATUS_OK_RET(status);
+    }
+
+
+    // transmit the data
+    status = Serial_WriteBlocking((uint8_t *)allMotionData, sizeof(allMotionData));
+    CHECK_STATUS_OK_RET(status);
+    gTotal += HAL_GetTick() - startTime;
+    ++gCount;
+
+    // schedule the next sensor scan if we are still in continuous mode
+    if (gContext.continuousRead)
+    {
+        status = Scheduler_AddTask(&Task_IMUSweep);
+    }
+    return status;
+}
+
+glove_status_t AcknowledgeTransferStopped()
+{
+    // for profiling
+    char msg [50] = {0};
+    sprintf(msg, "average: %d\r\n", gTotal/gCount);
+    Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
+
+    char * message = "ack\r\n";
+    return Serial_WriteBlocking((uint8_t *)message, sizeof(message));
+}
+
 
 static glove_status_t IMU_SetRegBits(uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values)
 {

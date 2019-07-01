@@ -3,10 +3,11 @@
  */
 
 #include "glove_status_codes.h"
+#include "LSM9DS1.h"
 #include "scheduler.h"
 #include "sm.h"
 #include "sm_states.h"
-#include "tasks.h"
+
 
 // DataTransfer state
 glove_status_t DataTransferStateEntry();
@@ -101,13 +102,19 @@ sm_state_t * InitStateHandler(sm_event_t event)
 glove_status_t DataTransferStateEntry()
 {
     printf("%s\r\n", __FUNCTION__);
-    Scheduler_AddTask(&IMU_Task);
-    return GLOVE_STATUS_OK;
+    return IMU_StartContinuousRead();
 }
 
 glove_status_t DataTransferStateExit()
 {
+    glove_status_t status = GLOVE_STATUS_OK;
+
     printf("%s\r\n", __FUNCTION__);
+
+    status = IMU_StopContinuousRead();
+    CHECK_STATUS_OK_RET(status);
+
+    Scheduler_AddTask(&Task_AckTransferStopped);
     return GLOVE_STATUS_OK;
 }
 
