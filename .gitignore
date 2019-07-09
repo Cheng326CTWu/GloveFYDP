@@ -30,7 +30,8 @@ Debug/*.hex
 Debug/*.map
 
 #Circuits
-Circuits/*
+Circuits/*.s\#*
+Circuits/*.lck
 
 
 RemoteSystemsTempFiles/*
