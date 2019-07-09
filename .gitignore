@@ -31,7 +31,7 @@ Debug/*.map
 
 #Circuits
 Circuits/*.s\#*
-Circuits/*.lck
+*.lck
 
 
 RemoteSystemsTempFiles/*
