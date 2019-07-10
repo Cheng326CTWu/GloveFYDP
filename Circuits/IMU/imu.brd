@@ -144,15 +144,12 @@
 </layers>
 <board>
 <plain>
-<wire x1="39.116" y1="28.702" x2="56.058" y2="28.702" width="0" layer="20"/>
-<wire x1="56.058" y1="28.702" x2="56.058" y2="40.884" width="0" layer="20"/>
-<wire x1="56.058" y1="40.884" x2="39.116" y2="40.884" width="0" layer="20"/>
-<wire x1="39.116" y1="40.884" x2="39.116" y2="28.702" width="0" layer="20"/>
-<wire x1="39.37" y1="40.64" x2="55.88" y2="40.64" width="0" layer="20"/>
-<wire x1="55.88" y1="40.64" x2="55.88" y2="28.956" width="0" layer="20"/>
-<wire x1="55.88" y1="28.956" x2="39.37" y2="28.956" width="0" layer="20"/>
-<wire x1="39.37" y1="28.956" x2="39.37" y2="40.64" width="0" layer="20"/>
+<wire x1="39.37" y1="28.956" x2="55.804" y2="28.956" width="0" layer="20"/>
+<wire x1="55.804" y1="28.956" x2="55.804" y2="40.884" width="0" layer="20"/>
+<wire x1="55.804" y1="40.884" x2="39.37" y2="40.884" width="0" layer="20"/>
+<wire x1="39.37" y1="40.884" x2="39.37" y2="28.956" width="0" layer="20"/>
 <text x="48.26" y="30.734" size="0.6096" layer="22" rot="MR0">conn</text>
+<text x="45.72" y="30.226" size="0.4572" layer="21">IMU prot. 1</text>
 </plain>
 <libraries>
 <library name="SparkFun-Capacitors">
