@@ -1148,8 +1148,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <wire x1="7.2" y1="0.2" x2="7.2" y2="-2.2" width="0" layer="51"/>
 <wire x1="7.2" y1="-2.2" x2="-4.2" y2="-2.2" width="0" layer="51"/>
 <wire x1="-4.2" y1="-2.2" x2="-4.2" y2="0.2" width="0" layer="51"/>
-<text x="-7.7" y="0.8" size="1.27" layer="25">&gt;NAME</text>
-<text x="-7.8" y="-3.8" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -1355,9 +1353,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="48.26" y="48.26"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="3"/>
 <wire x1="68.58" y1="104.14" x2="73.66" y2="104.14" width="0.1524" layer="91"/>
 <label x="68.58" y="104.14" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="3"/>
 </segment>
 </net>
 <net name="C1" class="0">
@@ -1413,9 +1411,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="R1" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="4"/>
 <wire x1="68.58" y1="101.6" x2="73.66" y2="101.6" width="0.1524" layer="91"/>
 <label x="68.58" y="101.6" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="4"/>
 </segment>
 </net>
 <net name="SA0" class="0">
@@ -1460,9 +1458,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="83.82" y="78.74" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="2"/>
 <wire x1="68.58" y1="106.68" x2="73.66" y2="106.68" width="0.1524" layer="91"/>
 <label x="68.58" y="106.68" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="2"/>
 </segment>
 </net>
 <net name="SCL" class="0">
@@ -1472,9 +1470,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <label x="83.82" y="76.2" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="1"/>
 <wire x1="68.58" y1="109.22" x2="73.66" y2="109.22" width="0.1524" layer="91"/>
 <label x="68.58" y="109.22" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
