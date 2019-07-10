@@ -353,18 +353,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </library>
 <library name="custom">
 <packages>
-<package name="MOLEX4">
-<smd name="1" x="0" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="2" x="0.5" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="3" x="1" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="4" x="1.5" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="P$5" x="-1.5" y="-2.3" dx="1.5" dy="3" layer="1" rot="R90"/>
-<smd name="P$6" x="3" y="-2.3" dx="1.5" dy="3" layer="1" rot="R90"/>
-<circle x="0" y="0.2" radius="0.1" width="0" layer="21"/>
-<wire x1="-1" y1="0.7" x2="2.6" y2="0.7" width="0.127" layer="51"/>
-<wire x1="2.6" y1="0.7" x2="2.6" y2="-2.9" width="0.127" layer="51"/>
-<wire x1="2.6" y1="-2.9" x2="-1" y2="-2.9" width="0.127" layer="51"/>
-<wire x1="-1" y1="-2.9" x2="-1" y2="0.7" width="0.127" layer="51"/>
+<package name="MOLEX4_1MM">
+<smd name="1" x="0" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="2" x="1" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="3" x="2" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="4" x="3" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="P$5" x="6.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<smd name="P$6" x="-3.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<circle x="0" y="0.1" radius="0.1" width="0" layer="21"/>
+<wire x1="-4.2" y1="0.2" x2="7.2" y2="0.2" width="0" layer="51"/>
+<wire x1="7.2" y1="0.2" x2="7.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="7.2" y1="-2.2" x2="-4.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="-4.2" y1="-2.2" x2="-4.2" y2="0.2" width="0" layer="51"/>
+<text x="-7.7" y="0.8" size="1.27" layer="25">&gt;NAME</text>
+<text x="-7.8" y="-3.8" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 </packages>
 </library>
@@ -611,7 +613,10 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="IC-12536" x="43.688" y="13.462" size="1.778" layer="27" rot="R270" display="off"/>
 <attribute name="VALUE" x="45.72" y="35.052" size="0.6096" layer="27" font="vector" ratio="20" rot="R270" align="top-center"/>
 </element>
-<element name="U$1" library="custom" package="MOLEX4" value="MOLEX_5034800400" x="48.0314" y="32.8168" smashed="yes" rot="MR0"/>
+<element name="U$1" library="custom" package="MOLEX4_1MM" value="MOLEX_522070433" x="49.022" y="32.004" smashed="yes" rot="MR0">
+<attribute name="NAME" x="56.722" y="32.804" size="1.27" layer="26" rot="MR0"/>
+<attribute name="VALUE" x="56.822" y="28.204" size="1.27" layer="26" rot="MR0"/>
+</element>
 </elements>
 <signals>
 <signal name="CAP">
@@ -642,12 +647,6 @@ design rules under a new name.</description>
 <vertex x="55.372" y="29.464"/>
 <vertex x="39.878" y="29.464"/>
 </polygon>
-<contactref element="U$1" pad="3"/>
-<wire x1="47.0314" y1="34.3168" x2="46.99" y2="34.3582" width="0.1524" layer="16"/>
-<wire x1="46.99" y1="34.3582" x2="46.99" y2="37.592" width="0.1524" layer="16"/>
-<wire x1="46.99" y1="37.592" x2="46.482" y2="38.1" width="0.1524" layer="16"/>
-<wire x1="46.482" y1="38.1" x2="44.958" y2="38.1" width="0.1524" layer="16"/>
-<via x="44.958" y="38.1" extent="1-16" drill="0.35"/>
 <wire x1="46.853" y1="33.577" x2="46.853" y2="32.903" width="0.1524" layer="1"/>
 <wire x1="46.853" y1="32.903" x2="46.99" y2="32.766" width="0.1524" layer="1"/>
 <wire x1="46.99" y1="32.766" x2="47.244" y2="32.766" width="0.1524" layer="1"/>
@@ -667,6 +666,10 @@ design rules under a new name.</description>
 <wire x1="48.742" y1="33.528" x2="48.723" y2="33.547" width="0.1524" layer="1"/>
 <wire x1="48.723" y1="33.977" x2="48.782" y2="34.036" width="0.1524" layer="1"/>
 <wire x1="48.782" y1="34.036" x2="49.53" y2="34.036" width="0.1524" layer="1"/>
+<contactref element="U$1" pad="3"/>
+<wire x1="47.022" y1="33.204" x2="47.022" y2="35.782" width="0.1524" layer="16"/>
+<wire x1="47.022" y1="35.782" x2="44.958" y2="37.846" width="0.1524" layer="16"/>
+<via x="44.958" y="37.846" extent="1-16" drill="0.35"/>
 </signal>
 <signal name="C1">
 <contactref element="U1" pad="24"/>
@@ -694,7 +697,6 @@ design rules under a new name.</description>
 <vertex x="55.372" y="29.464"/>
 <vertex x="39.878" y="29.464"/>
 </polygon>
-<contactref element="U$1" pad="4"/>
 <wire x1="52.49" y1="39.116" x2="50.546" y2="39.116" width="0.1524" layer="1"/>
 <via x="50.546" y="39.116" extent="1-16" drill="0.35"/>
 <wire x1="48.7894" y1="35.2006" x2="48.723" y2="35.267" width="0.1524" layer="1"/>
@@ -719,6 +721,7 @@ design rules under a new name.</description>
 <wire x1="47.713" y1="36.527" x2="47.713" y2="38.061" width="0.1524" layer="1"/>
 <wire x1="47.713" y1="38.061" x2="48.768" y2="39.116" width="0.1524" layer="1"/>
 <wire x1="48.768" y1="39.116" x2="50.546" y2="39.116" width="0.1524" layer="1"/>
+<contactref element="U$1" pad="4"/>
 </signal>
 <signal name="SA0">
 <contactref element="U1" pad="5"/>
@@ -754,21 +757,20 @@ design rules under a new name.</description>
 </signal>
 <signal name="SDA">
 <contactref element="U1" pad="4"/>
-<contactref element="U$1" pad="2"/>
-<wire x1="47.5314" y1="34.3168" x2="47.5314" y2="38.5746" width="0.1524" layer="16"/>
-<wire x1="47.5314" y1="38.5746" x2="46.99" y2="39.116" width="0.1524" layer="16"/>
 <via x="46.99" y="39.116" extent="1-16" drill="0.35"/>
 <wire x1="47.283" y1="36.527" x2="47.283" y2="38.823" width="0.1524" layer="1"/>
 <wire x1="47.283" y1="38.823" x2="46.99" y2="39.116" width="0.1524" layer="1"/>
+<contactref element="U$1" pad="2"/>
+<wire x1="48.022" y1="33.204" x2="48.022" y2="38.084" width="0.1524" layer="16"/>
+<wire x1="48.022" y1="38.084" x2="46.99" y2="39.116" width="0.1524" layer="16"/>
 </signal>
 <signal name="SCL">
 <contactref element="U1" pad="2"/>
-<contactref element="U$1" pad="1"/>
-<wire x1="48.0314" y1="34.3168" x2="48.0314" y2="37.1094" width="0.1524" layer="16"/>
-<wire x1="48.0314" y1="37.1094" x2="49.022" y2="38.1" width="0.1524" layer="16"/>
 <via x="49.022" y="38.1" extent="1-16" drill="0.35"/>
 <wire x1="48.143" y1="36.527" x2="48.143" y2="37.221" width="0.1524" layer="1"/>
 <wire x1="48.143" y1="37.221" x2="49.022" y2="38.1" width="0.1524" layer="1"/>
+<contactref element="U$1" pad="1"/>
+<wire x1="49.022" y1="33.204" x2="49.022" y2="38.1" width="0.1524" layer="16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

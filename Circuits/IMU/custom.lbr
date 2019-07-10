@@ -72,6 +72,21 @@
 <wire x1="2.6" y1="-2.9" x2="-1" y2="-2.9" width="0.127" layer="51"/>
 <wire x1="-1" y1="-2.9" x2="-1" y2="0.7" width="0.127" layer="51"/>
 </package>
+<package name="MOLEX4_1MM">
+<smd name="1" x="0" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="2" x="1" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="3" x="2" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="4" x="3" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="P$5" x="6.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<smd name="P$6" x="-3.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<circle x="0" y="0.1" radius="0.1" width="0" layer="21"/>
+<wire x1="-4.2" y1="0.2" x2="7.2" y2="0.2" width="0" layer="51"/>
+<wire x1="7.2" y1="0.2" x2="7.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="7.2" y1="-2.2" x2="-4.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="-4.2" y1="-2.2" x2="-4.2" y2="0.2" width="0" layer="51"/>
+<text x="-7.7" y="0.8" size="1.27" layer="25">&gt;NAME</text>
+<text x="-7.8" y="-3.8" size="1.27" layer="25">&gt;VALUE</text>
+</package>
 </packages>
 <symbols>
 <symbol name="503480-0400">
@@ -94,6 +109,24 @@
 </gates>
 <devices>
 <device name="" package="MOLEX4">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+<connect gate="G$1" pin="3" pad="3"/>
+<connect gate="G$1" pin="4" pad="4"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="MOLEX_522070433">
+<gates>
+<gate name="G$1" symbol="503480-0400" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="MOLEX4_1MM">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>

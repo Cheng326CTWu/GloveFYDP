@@ -1136,18 +1136,20 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </library>
 <library name="custom">
 <packages>
-<package name="MOLEX4">
-<smd name="1" x="0" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="2" x="0.5" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="3" x="1" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="4" x="1.5" y="1.5" dx="3" dy="0.3" layer="1" rot="R90"/>
-<smd name="P$5" x="-1.5" y="-2.3" dx="1.5" dy="3" layer="1" rot="R90"/>
-<smd name="P$6" x="3" y="-2.3" dx="1.5" dy="3" layer="1" rot="R90"/>
-<circle x="0" y="0.2" radius="0.1" width="0" layer="21"/>
-<wire x1="-1" y1="0.7" x2="2.6" y2="0.7" width="0.127" layer="51"/>
-<wire x1="2.6" y1="0.7" x2="2.6" y2="-2.9" width="0.127" layer="51"/>
-<wire x1="2.6" y1="-2.9" x2="-1" y2="-2.9" width="0.127" layer="51"/>
-<wire x1="-1" y1="-2.9" x2="-1" y2="0.7" width="0.127" layer="51"/>
+<package name="MOLEX4_1MM">
+<smd name="1" x="0" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="2" x="1" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="3" x="2" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="4" x="3" y="1.2" dx="2.5" dy="0.32" layer="1" rot="R90"/>
+<smd name="P$5" x="6.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<smd name="P$6" x="-3.25" y="-1.05" dx="1.5" dy="2" layer="1"/>
+<circle x="0" y="0.1" radius="0.1" width="0" layer="21"/>
+<wire x1="-4.2" y1="0.2" x2="7.2" y2="0.2" width="0" layer="51"/>
+<wire x1="7.2" y1="0.2" x2="7.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="7.2" y1="-2.2" x2="-4.2" y2="-2.2" width="0" layer="51"/>
+<wire x1="-4.2" y1="-2.2" x2="-4.2" y2="0.2" width="0" layer="51"/>
+<text x="-7.7" y="0.8" size="1.27" layer="25">&gt;NAME</text>
+<text x="-7.8" y="-3.8" size="1.27" layer="25">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
@@ -1165,12 +1167,12 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="MOLEX_5034800400">
+<deviceset name="MOLEX_522070433">
 <gates>
-<gate name="G$1" symbol="503480-0400" x="2.54" y="0"/>
+<gate name="G$1" symbol="503480-0400" x="0" y="0"/>
 </gates>
 <devices>
-<device name="" package="MOLEX4">
+<device name="" package="MOLEX4_1MM">
 <connects>
 <connect gate="G$1" pin="1" pad="1"/>
 <connect gate="G$1" pin="2" pad="2"/>
@@ -1217,7 +1219,7 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R2" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R3" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R4" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
-<part name="U$1" library="custom" deviceset="MOLEX_5034800400" device=""/>
+<part name="U$1" library="custom" deviceset="MOLEX_522070433" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1300,9 +1302,9 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="NAME" x="128.016" y="81.28" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="131.064" y="81.28" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="U$1" gate="G$1" x="53.34" y="106.68" smashed="yes">
-<attribute name="NAME" x="48.249140625" y="115.334459375" size="1.781809375" layer="95"/>
-<attribute name="VALUE" x="48.25661875" y="99.0516" size="1.779190625" layer="96"/>
+<instance part="U$1" gate="G$1" x="58.42" y="104.14" smashed="yes">
+<attribute name="NAME" x="53.329140625" y="112.794459375" size="1.781809375" layer="95"/>
+<attribute name="VALUE" x="53.33661875" y="96.5116" size="1.779190625" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1354,8 +1356,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3"/>
-<wire x1="63.5" y1="106.68" x2="68.58" y2="106.68" width="0.1524" layer="91"/>
-<label x="63.5" y="106.68" size="1.778" layer="95"/>
+<wire x1="68.58" y1="104.14" x2="73.66" y2="104.14" width="0.1524" layer="91"/>
+<label x="68.58" y="104.14" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="C1" class="0">
@@ -1412,8 +1414,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="4"/>
-<wire x1="63.5" y1="104.14" x2="68.58" y2="104.14" width="0.1524" layer="91"/>
-<label x="63.5" y="104.14" size="1.778" layer="95"/>
+<wire x1="68.58" y1="101.6" x2="73.66" y2="101.6" width="0.1524" layer="91"/>
+<label x="68.58" y="101.6" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SA0" class="0">
@@ -1459,8 +1461,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="2"/>
-<wire x1="63.5" y1="109.22" x2="68.58" y2="109.22" width="0.1524" layer="91"/>
-<label x="63.5" y="109.22" size="1.778" layer="95"/>
+<wire x1="68.58" y1="106.68" x2="73.66" y2="106.68" width="0.1524" layer="91"/>
+<label x="68.58" y="106.68" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCL" class="0">
@@ -1471,8 +1473,8 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="1"/>
-<wire x1="63.5" y1="111.76" x2="68.58" y2="111.76" width="0.1524" layer="91"/>
-<label x="63.5" y="111.76" size="1.778" layer="95"/>
+<wire x1="68.58" y1="109.22" x2="73.66" y2="109.22" width="0.1524" layer="91"/>
+<label x="68.58" y="109.22" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
