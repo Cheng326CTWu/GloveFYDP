@@ -123,17 +123,17 @@ int main(void)
     printf("Serial interface init failed, status=%X\r\n", status);
   }
 
-  // initialize the I2C mux
-  if ( (status = I2CMux_Init(&hi2c1)) )
-  {
-    printf("I2C mux init failed, status=%X\r\n", status);
-  }
+  // // initialize the I2C mux
+  // if ( (status = I2CMux_Init(&hi2c1)) )
+  // {
+  //   printf("I2C mux init failed, status=%X\r\n", status);
+  // }
 
-  // select the first bus
-  if ( (status = I2CMux_Select(1)) )
-  {
-    printf("I2C mux select failed, status=%X\r\n", status);
-  }
+  // // select the first bus
+  // if ( (status = I2CMux_Select(1)) )
+  // {
+  //   printf("I2C mux select failed, status=%X\r\n", status);
+  // }
 
   // initialize IMU 
   if ( (status = IMU_Init(&hi2c1)) )

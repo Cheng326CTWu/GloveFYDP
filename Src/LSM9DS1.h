@@ -13,17 +13,17 @@
 
 typedef struct
 {
-    uint16_t xAcc;
-    uint16_t yAcc;
-    uint16_t zAcc;
+    int16_t xAcc;
+    int16_t yAcc;
+    int16_t zAcc;
 
-    uint16_t xGyro;
-    uint16_t yGyro;
-    uint16_t zGyro;
+    int16_t xGyro;
+    int16_t yGyro;
+    int16_t zGyro;
 
-    uint16_t xMag;
-    uint16_t yMag;
-    uint16_t zMag;
+    int16_t xMag;
+    int16_t yMag;
+    int16_t zMag;
 } motion_data_t;
 
 

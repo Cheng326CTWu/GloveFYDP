@@ -991,23 +991,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Owner\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "/Users/tejasvi/.nuget/packages/": {},
+    "/usr/local/share/dotnet/sdk/NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Owner\\Desktop\\FYDP\\GloveFYDP\\USB\\USB.csproj",
+      "projectUniqueName": "/Users/tejasvi/FydpProto/USB/USB.csproj",
       "projectName": "USB",
-      "projectPath": "C:\\Users\\Owner\\Desktop\\FYDP\\GloveFYDP\\USB\\USB.csproj",
-      "packagesPath": "C:\\Users\\Owner\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Owner\\Desktop\\FYDP\\GloveFYDP\\USB\\obj\\",
+      "projectPath": "/Users/tejasvi/FydpProto/USB/USB.csproj",
+      "packagesPath": "/Users/tejasvi/.nuget/packages/",
+      "outputPath": "/Users/tejasvi/FydpProto/USB/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Owner\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/tejasvi/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.2"

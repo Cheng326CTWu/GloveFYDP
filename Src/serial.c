@@ -6,6 +6,7 @@
 #include "stm32l4xx_hal.h"
 
 #include "glove_status_codes.h"
+#include "scheduler.h"
 #include "serial.h"
 #include "sm.h"
 
@@ -37,6 +38,17 @@ static serial_context_t gContext = {0};
 static uint8_t gEventData[COMMAND_STRING_LENGTH] = {0};
 
 static glove_status_t Serial_ReceiveAsync(uint8_t * buffer, uint32_t len);
+
+glove_status_t Serial_ReceiveTask()
+{
+    return Serial_ReceiveAsync(gEventData, sizeof(gEventData));
+}
+
+task_t Task_Receive = 
+{
+    .pTaskFn = &Serial_ReceiveTask,
+    .name = "Receive Task"
+};
 
 
 glove_status_t Serial_Init(UART_HandleTypeDef * huart)
@@ -73,6 +85,18 @@ glove_status_t Serial_WriteAsync(uint8_t * data, uint32_t len, serial_tx_callbac
     return HALstatusToGlove(HAL_UART_Transmit_DMA(gContext.huart, data, len));
 }
 
+glove_status_t OtherTask()
+{
+    printf("SERIAL RECEIVE ASYNC\r\n");
+    return GLOVE_STATUS_OK;
+}
+
+task_t Task_Other = 
+{
+    .pTaskFn = &OtherTask,
+    .name = "Other Task"
+};
+
 glove_status_t Serial_ReceiveAsync(uint8_t * buffer, uint32_t len)
 {
     SERIAL_CHECK_INIT();
@@ -81,7 +105,7 @@ glove_status_t Serial_ReceiveAsync(uint8_t * buffer, uint32_t len)
     {
         return GLOVE_STATUS_NULL_PTR;
     }
-
+    Scheduler_AddTask(&Task_Other);
     return HALstatusToGlove(HAL_UART_Receive_DMA(gContext.huart, buffer, len));
 }
 
@@ -101,8 +125,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     sm_event_t event = EVENT_NONE;
-    char commandStr[5] = "";
-
+    char commandStr[COMMAND_STRING_LENGTH] = {0};
     if (huart == gContext.huart)
     {
         if (!strncmp((char *)gEventData, COMMAND_DATA, COMMAND_STRING_LENGTH))
@@ -119,9 +142,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
         }
         memcpy(commandStr, gEventData, sizeof(gEventData));
         SM_PostEventDebug(event, commandStr);
+        Scheduler_AddTask(&Task_Receive);
     }
-
-    // keep listening for commands
-    // TODO: check status here and log error
-    Serial_ReceiveAsync(gEventData, sizeof(gEventData));
 }

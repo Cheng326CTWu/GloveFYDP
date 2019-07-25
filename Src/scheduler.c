@@ -68,9 +68,27 @@ glove_status_t Scheduler_RemoveTask(task_t * task)
 
     return GLOVE_STATUS_OK;
 }
+bool gDebug = false;
+uint32_t gStart = 0;
+void Scheduler_EnableDebug()
+{
+    gDebug = true;
+    gStart = HAL_GetTick();
+}
+
+void Scheduler_DisableDebug()
+{
+    gDebug = false;
+}
 
 glove_status_t Scheduler_Tick()
 {
+    if (gDebug && HAL_GetTick() - gStart > 500)
+    {
+        printf("%s %d\r\n", __FUNCTION__, gContext.tasks.size);
+        gStart = HAL_GetTick();
+    }
+
     uint32_t i = 0;
     glove_status_t status = GLOVE_STATUS_OK;
     task_t * task_to_run = NULL;

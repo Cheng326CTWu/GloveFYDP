@@ -15,6 +15,8 @@ typedef struct
     char * name;
 } task_t;
 
+void Scheduler_EnableDebug();
+void Scheduler_DisableDebug();
 glove_status_t Scheduler_Init();
 glove_status_t Scheduler_AddTask(task_t * task);
 glove_status_t Scheduler_RemoveTask(task_t * task);

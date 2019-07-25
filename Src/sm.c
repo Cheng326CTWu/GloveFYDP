@@ -85,7 +85,7 @@ glove_status_t SM_PostEvent(sm_event_t event)
 
 glove_status_t SM_PostEventDebug(sm_event_t event, char * command)
 {
-    printf("%s event=%d, command=%s\r\n", __FUNCTION__, event, command);
+    // printf("%s event=%d, command=%s\r\n", __FUNCTION__, event, command);
     if (!gContext.fInit)
     {
         return GLOVE_STATUS_MODULE_NOT_INIT;

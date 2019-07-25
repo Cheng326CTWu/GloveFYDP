@@ -34,6 +34,11 @@ Debug/*.map
 *.lck
 *.l*
 *.b*
+*CAMOutputs*
+*Gerbers.zip*
+
+# python
+*.pyc
 
 
 RemoteSystemsTempFiles/*

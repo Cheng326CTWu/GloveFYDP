@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Management;
 using System.Linq;
 using System.IO.Ports;
@@ -11,6 +12,21 @@ namespace USB
     {
         // member variables for the struct
     }
+
+    public struct MotionData
+    {
+        public ushort xAcc;
+        public ushort yAcc;
+        public ushort zAcc;
+
+        public ushort xGyro;
+        public ushort yGyro;
+        public ushort zGyro;
+
+        public ushort xMag;
+        public ushort yMag;
+        public ushort zMag;
+    };
 
     class USB
     {
@@ -60,32 +76,40 @@ namespace USB
             return serialPortList;
         }
 
-        public static string Read()
+        public MotionData Read()
         {
-            string message = "";
+            byte[] bytes = {};
+            MotionData data;
             try
             {
-                message = _serialPort.ReadLine();
-                // need to deserialize the information
+                _serialPort.Read(bytes, 0, System.Runtime.InteropServices.Marshal.SizeOf(typeof(MotionData)));
             }
             catch (TimeoutException)
             {
-
+                Console.WriteLine("Read timeout exception");
             }
 
-            return message;
+            GCHandle handle = GCHandle.Alloc(bytes, GCHandleType.Pinned);
+            try
+            {
+                data = (MotionData)Marshal.PtrToStructure(handle.AddrOfPinnedObject(), typeof(MotionData));
+            }
+            finally
+            {
+                handle.Free();
+            }
+            return data;
         }
 
-        public static void Write()
+        public void Write(string data)
         {
             try
             {
-                string serialized;
-                // write to serial port here
+                _serialPort.Write(data);
             }
             catch (TimeoutException)
             {
-
+                Console.WriteLine("Write timeout exception");
             }
         }
     }
