@@ -23,6 +23,7 @@ local.properties
 # *.ld
 *.o
 *.d
+USB/bin/*
 
 #build
 Debug/*.elf
@@ -30,10 +31,10 @@ Debug/*.hex
 Debug/*.map
 
 #Circuits
-*.s*
+*.s\#*
 *.lck
-*.l*
-*.b*
+*.l\#*
+*.b\#*
 *CAMOutputs*
 *Gerbers.zip*
 
