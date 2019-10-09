@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -92,8 +92,15 @@
 <smd name="P$4" x="3" y="1.2" dx="0.32" dy="2.5" layer="1"/>
 <smd name="P$5" x="4" y="1.2" dx="0.32" dy="2.5" layer="1"/>
 <smd name="P$6" x="5" y="1.2" dx="0.32" dy="2.5" layer="1"/>
-<smd name="P$7" x="-2.05" y="-1.7" dx="2.1" dy="2.8" layer="1"/>
-<smd name="P$8" x="7.6" y="-1.4" dx="2.1" dy="2.8" layer="1"/>
+<smd name="P$7" x="-2.95" y="-1.45" dx="2.1" dy="2.8" layer="1"/>
+<smd name="P$8" x="7.95" y="-1.45" dx="2.1" dy="2.8" layer="1"/>
+<circle x="0" y="0.1" radius="0.1" width="0" layer="21"/>
+<wire x1="-3.7" y1="0.35" x2="8.7" y2="0.35" width="0.127" layer="51"/>
+<wire x1="8.7" y1="0.35" x2="8.7" y2="-2.55" width="0.127" layer="51"/>
+<wire x1="8.7" y1="-2.55" x2="-3.7" y2="-2.55" width="0.127" layer="51"/>
+<wire x1="-3.7" y1="0.35" x2="-3.7" y2="-2.55" width="0.127" layer="51"/>
+<text x="-0.75" y="3.25" size="1.27" layer="25">&gt;NAME</text>
+<text x="-0.85" y="-5.1" size="1.27" layer="27">&gt;VALUE</text>
 </package>
 </packages>
 <symbols>
