@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -81,10 +81,7 @@
 <layer number="114" name="Badge_Outline" color="7" fill="1" visible="no" active="no"/>
 <layer number="115" name="ReferenceISLANDS" color="7" fill="1" visible="no" active="no"/>
 <layer number="116" name="Patch_BOT" color="9" fill="4" visible="no" active="yes"/>
-<layer number="117" name="PM_Ref" color="7" fill="1" visible="no" active="no"/>
 <layer number="118" name="Rect_Pads" color="7" fill="1" visible="no" active="no"/>
-<layer number="119" name="PF_Ref" color="7" fill="1" visible="no" active="no"/>
-<layer number="120" name="WFL_Ref" color="7" fill="1" visible="no" active="no"/>
 <layer number="121" name="_tsilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="122" name="_bsilk" color="7" fill="1" visible="no" active="yes"/>
 <layer number="123" name="tTestmark" color="7" fill="1" visible="no" active="yes"/>
@@ -517,6 +514,75 @@ up to 1MB Flash, 128 KB SRAM, USB OTG FS, LCD, analog, audio
 <attribute name="PARTNO" value="" constant="no"/>
 <attribute name="STATUS" value=""/>
 <attribute name="TEMP" value=""/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="LD39050PU33R">
+<packages>
+<package name="SON95P300X300X100-7N">
+<text x="-2.34541875" y="2.052259375" size="1.016" layer="25">&gt;NAME</text>
+<text x="-2.32373125" y="-2.788490625" size="1.016" layer="27">&gt;VALUE</text>
+<wire x1="-2.1" y1="1.75" x2="2.1" y2="1.75" width="0.05" layer="39"/>
+<wire x1="2.1" y1="1.75" x2="2.1" y2="-1.75" width="0.05" layer="39"/>
+<wire x1="2.1" y1="-1.75" x2="-2.1" y2="-1.75" width="0.05" layer="39"/>
+<wire x1="-2.1" y1="-1.75" x2="-2.1" y2="1.75" width="0.05" layer="39"/>
+<circle x="-2.45" y="0.9" radius="0.1" width="0.2" layer="21"/>
+<wire x1="-1.5" y1="1.5" x2="1.5" y2="1.5" width="0.127" layer="21"/>
+<wire x1="1.5" y1="1.5" x2="1.5" y2="-1.5" width="0.127" layer="51"/>
+<wire x1="1.5" y1="-1.5" x2="-1.5" y2="-1.5" width="0.127" layer="21"/>
+<wire x1="-1.5" y1="-1.5" x2="-1.5" y2="1.5" width="0.127" layer="51"/>
+<rectangle x1="-0.57" y1="-0.83" x2="0.57" y2="0.83" layer="31"/>
+<smd name="1" x="-1.435" y="0.95" dx="0.84" dy="0.4" layer="1" roundness="50"/>
+<smd name="2" x="-1.435" y="0" dx="0.84" dy="0.4" layer="1" roundness="50"/>
+<smd name="3" x="-1.435" y="-0.95" dx="0.84" dy="0.4" layer="1" roundness="50"/>
+<smd name="4" x="1.435" y="-0.95" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
+<smd name="5" x="1.435" y="0" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
+<smd name="6" x="1.435" y="0.95" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
+<smd name="7" x="0" y="0" dx="1.625" dy="2.365" layer="1" rot="R180" cream="no"/>
+</package>
+</packages>
+<symbols>
+<symbol name="LD39050PU33R">
+<wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.41" layer="94"/>
+<wire x1="10.16" y1="7.62" x2="10.16" y2="-7.62" width="0.41" layer="94"/>
+<wire x1="10.16" y1="-7.62" x2="-10.16" y2="-7.62" width="0.41" layer="94"/>
+<wire x1="-10.16" y1="-7.62" x2="-10.16" y2="7.62" width="0.41" layer="94"/>
+<text x="-10.16" y="8.62" size="1.778" layer="95" ratio="10" rot="SR0">&gt;NAME</text>
+<text x="-10.16" y="-11.62" size="1.778" layer="96" ratio="10" rot="SR0">&gt;VALUE</text>
+<pin name="EN" x="-15.24" y="0" length="middle" direction="in"/>
+<pin name="PG" x="15.24" y="0" length="middle" rot="R180"/>
+<pin name="VIN" x="-15.24" y="5.08" length="middle" direction="pwr"/>
+<pin name="VOUT" x="15.24" y="5.08" length="middle" direction="out" rot="R180"/>
+<pin name="GND" x="15.24" y="-5.08" length="middle" direction="pwr" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="LD39050PU33R" prefix="U">
+<description>LD39050 Series 500 mA 3.3 V Fixed Low Noise LDO Voltage Regulator - DFN-6</description>
+<gates>
+<gate name="G$1" symbol="LD39050PU33R" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SON95P300X300X100-7N">
+<connects>
+<connect gate="G$1" pin="EN" pad="1"/>
+<connect gate="G$1" pin="GND" pad="2 7"/>
+<connect gate="G$1" pin="PG" pad="3"/>
+<connect gate="G$1" pin="VIN" pad="6"/>
+<connect gate="G$1" pin="VOUT" pad="4"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="AVAILABILITY" value="Unavailable"/>
+<attribute name="DESCRIPTION" value=" LD39050 Series 500 mA 3.3 V Fixed Low Noise LDO Voltage Regulator - DFN-6 "/>
+<attribute name="MF" value="STMicroelectronics"/>
+<attribute name="MP" value="LD39050PU33R"/>
+<attribute name="PACKAGE" value="DFN-6 STMicroelectronics"/>
+<attribute name="PRICE" value="None"/>
 </technology>
 </technologies>
 </device>
@@ -1739,89 +1805,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-IC-Power">
-<description>&lt;h3&gt;SparkFun Power Driver and Management ICs&lt;/h3&gt;
-In this library you'll find anything that has to do with power delivery, or making power supplies.
-&lt;p&gt;Contents:
-&lt;ul&gt;&lt;li&gt;LDOs&lt;/li&gt;
-&lt;li&gt;Boost/Buck controllers&lt;/li&gt;
-&lt;li&gt;Charge pump controllers&lt;/li&gt;
-&lt;li&gt;Power sequencers&lt;/li&gt;
-&lt;li&gt;Power switches&lt;/li&gt;
-&lt;/ul&gt;&lt;/p&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="SOT223">
-<description>&lt;b&gt;SOT-223&lt;/b&gt;</description>
-<wire x1="3.2766" y1="1.651" x2="3.2766" y2="-1.651" width="0.2032" layer="21"/>
-<wire x1="3.2766" y1="-1.651" x2="-3.2766" y2="-1.651" width="0.2032" layer="21"/>
-<wire x1="-3.2766" y1="-1.651" x2="-3.2766" y2="1.651" width="0.2032" layer="21"/>
-<wire x1="-3.2766" y1="1.651" x2="3.2766" y2="1.651" width="0.2032" layer="21"/>
-<smd name="1" x="-2.3114" y="-3.0988" dx="1.2192" dy="2.2352" layer="1"/>
-<smd name="2" x="0" y="-3.0988" dx="1.2192" dy="2.2352" layer="1"/>
-<smd name="3" x="2.3114" y="-3.0988" dx="1.2192" dy="2.2352" layer="1"/>
-<smd name="4" x="0" y="3.099" dx="3.6" dy="2.2" layer="1"/>
-<text x="-0.8255" y="4.5085" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-1.0795" y="-0.1905" size="0.4064" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.6002" y1="1.8034" x2="1.6002" y2="3.6576" layer="51"/>
-<rectangle x1="-0.4318" y1="-3.6576" x2="0.4318" y2="-1.8034" layer="51"/>
-<rectangle x1="-2.7432" y1="-3.6576" x2="-1.8796" y2="-1.8034" layer="51"/>
-<rectangle x1="1.8796" y1="-3.6576" x2="2.7432" y2="-1.8034" layer="51"/>
-<rectangle x1="-1.6002" y1="1.8034" x2="1.6002" y2="3.6576" layer="51"/>
-<rectangle x1="-0.4318" y1="-3.6576" x2="0.4318" y2="-1.8034" layer="51"/>
-<rectangle x1="-2.7432" y1="-3.6576" x2="-1.8796" y2="-1.8034" layer="51"/>
-<rectangle x1="1.8796" y1="-3.6576" x2="2.7432" y2="-1.8034" layer="51"/>
-</package>
-</packages>
-<symbols>
-<symbol name="78ADJ-2">
-<wire x1="-5.08" y1="-5.08" x2="5.08" y2="-5.08" width="0.4064" layer="94"/>
-<wire x1="5.08" y1="-5.08" x2="5.08" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="5.08" y1="2.54" x2="-5.08" y2="2.54" width="0.4064" layer="94"/>
-<wire x1="-5.08" y1="2.54" x2="-5.08" y2="-5.08" width="0.4064" layer="94"/>
-<text x="2.54" y="-7.62" size="1.778" layer="95">&gt;NAME</text>
-<text x="2.54" y="-10.16" size="1.778" layer="96">&gt;VALUE</text>
-<text x="-1.778" y="-4.572" size="1.524" layer="95">ADJ</text>
-<text x="-4.318" y="-0.762" size="1.524" layer="95">IN</text>
-<text x="0.762" y="-0.762" size="1.524" layer="95">OUT</text>
-<pin name="IN" x="-7.62" y="0" visible="off" length="short" direction="in"/>
-<pin name="ADJ" x="0" y="-7.62" visible="off" length="short" direction="in" rot="R90"/>
-<pin name="OUT" x="7.62" y="0" visible="off" length="short" direction="out" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="V_REG_LM1117" prefix="U" uservalue="yes">
-<description>&lt;b&gt;Voltage Regulator LM1117&lt;/b&gt;
-Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU : COM-00595</description>
-<gates>
-<gate name="G$1" symbol="78ADJ-2" x="0" y="0"/>
-</gates>
-<devices>
-<device name="SOT223" package="SOT223">
-<connects>
-<connect gate="G$1" pin="ADJ" pad="1"/>
-<connect gate="G$1" pin="IN" pad="3"/>
-<connect gate="G$1" pin="OUT" pad="2 4"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="VREG-08170" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1833,6 +1816,7 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 </classes>
 <parts>
 <part name="U5" library="STM32" deviceset="STM32L452RE" device="T6" technology="C"/>
+<part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="C13" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
 <part name="C14" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
 <part name="C15" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
@@ -1867,12 +1851,13 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="U3" library="LD39050PU33R" deviceset="LD39050PU33R" device=""/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="C3" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0402-16V-10%" value="100uF"/>
-<part name="C5" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0402-16V-10%" value="10uF"/>
+<part name="SUPPLY6" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="C3" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0402-16V-10%" value="1.0uF"/>
+<part name="C5" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0402-16V-10%" value="1.0uF"/>
 <part name="GND8" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND9" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="U3" library="SparkFun-IC-Power" deviceset="V_REG_LM1117" device="SOT223"/>
 </parts>
 <sheets>
 <sheet>
@@ -1883,6 +1868,7 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <attribute name="NAME" x="55.88" y="121.92" size="2.54" layer="95" font="vector" ratio="12"/>
 <attribute name="VALUE" x="73.66" y="86.36" size="1.778" layer="96" font="vector" ratio="10"/>
 </instance>
+<instance part="P+4" gate="VCC" x="231.14" y="147.32" smashed="yes"/>
 <instance part="C13" gate="G$1" x="73.66" y="35.56" smashed="yes">
 <attribute name="NAME" x="75.184" y="38.481" size="1.778" layer="95"/>
 <attribute name="VALUE" x="75.184" y="33.401" size="1.778" layer="96"/>
@@ -1999,26 +1985,29 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <instance part="GND4" gate="1" x="215.9" y="50.8" smashed="yes">
 <attribute name="VALUE" x="213.36" y="48.26" size="1.778" layer="96"/>
 </instance>
-<instance part="GND7" gate="1" x="200.66" y="104.14" smashed="yes">
-<attribute name="VALUE" x="200.66" y="101.6" size="1.778" layer="96"/>
+<instance part="U3" gate="G$1" x="208.28" y="111.76" smashed="yes" rot="MR0">
+<attribute name="NAME" x="218.44" y="120.38" size="1.778" layer="95" ratio="10" rot="SMR0"/>
+<attribute name="VALUE" x="218.44" y="100.14" size="1.778" layer="96" ratio="10" rot="SMR0"/>
+</instance>
+<instance part="GND7" gate="1" x="190.5" y="101.6" smashed="yes">
+<attribute name="VALUE" x="187.96" y="99.06" size="1.778" layer="96"/>
+</instance>
+<instance part="SUPPLY6" gate="VDD" x="180.34" y="121.92" smashed="yes">
+<attribute name="VALUE" x="180.34" y="124.714" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="C3" gate="G$1" x="175.26" y="104.14" smashed="yes">
 <attribute name="NAME" x="176.784" y="107.061" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="176.784" y="101.981" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="C5" gate="G$1" x="215.9" y="106.68" smashed="yes">
-<attribute name="NAME" x="217.424" y="109.601" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="217.424" y="104.521" size="1.778" layer="96" font="vector"/>
+<instance part="C5" gate="G$1" x="213.36" y="134.62" smashed="yes">
+<attribute name="NAME" x="214.884" y="137.541" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="214.884" y="132.461" size="1.778" layer="96" font="vector"/>
 </instance>
 <instance part="GND8" gate="1" x="175.26" y="96.52" smashed="yes">
 <attribute name="VALUE" x="175.26" y="96.266" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND9" gate="1" x="215.9" y="99.06" smashed="yes">
-<attribute name="VALUE" x="215.9" y="98.806" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="U3" gate="G$1" x="200.66" y="116.84" smashed="yes" rot="MR0">
-<attribute name="NAME" x="198.12" y="109.22" size="1.778" layer="95" rot="MR0"/>
-<attribute name="VALUE" x="198.12" y="106.68" size="1.778" layer="96" rot="MR0"/>
+<instance part="GND9" gate="1" x="213.36" y="127" smashed="yes">
+<attribute name="VALUE" x="213.36" y="126.746" size="1.778" layer="96" align="top-center"/>
 </instance>
 </instances>
 <busses>
@@ -2030,6 +2019,12 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <wire x1="203.2" y1="88.9" x2="203.2" y2="63.5" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="VBUS"/>
 <wire x1="203.2" y1="63.5" x2="198.12" y2="63.5" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<wire x1="231.14" y1="144.78" x2="231.14" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="EN"/>
+<wire x1="231.14" y1="111.76" x2="223.52" y2="111.76" width="0.1524" layer="91"/>
+<pinref part="P+4" gate="VCC" pin="VCC"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -2124,19 +2119,20 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <junction x="215.9" y="58.42"/>
 </segment>
 <segment>
+<pinref part="GND7" gate="1" pin="GND"/>
+<pinref part="U3" gate="G$1" pin="GND"/>
+<wire x1="190.5" y1="104.14" x2="190.5" y2="106.68" width="0.1524" layer="91"/>
+<wire x1="190.5" y1="106.68" x2="193.04" y2="106.68" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND9" gate="1" pin="GND"/>
+<pinref part="C5" gate="G$1" pin="2"/>
+<wire x1="213.36" y1="129.54" x2="213.36" y2="132.08" width="0.1524" layer="91"/>
+</segment>
+<segment>
 <pinref part="GND8" gate="1" pin="GND"/>
 <pinref part="C3" gate="G$1" pin="2"/>
 <wire x1="175.26" y1="99.06" x2="175.26" y2="101.6" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="U3" gate="G$1" pin="ADJ"/>
-<pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="200.66" y1="109.22" x2="200.66" y2="106.68" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C5" gate="G$1" pin="2"/>
-<pinref part="GND9" gate="1" pin="GND"/>
-<wire x1="215.9" y1="101.6" x2="215.9" y2="104.14" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$21" class="0">
@@ -2253,6 +2249,16 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 <wire x1="-17.78" y1="106.68" x2="-20.32" y2="106.68" width="0.1524" layer="91"/>
 <junction x="-17.78" y="106.68"/>
 </segment>
+<segment>
+<pinref part="SUPPLY6" gate="VDD" pin="VDD"/>
+<wire x1="180.34" y1="121.92" x2="180.34" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="U3" gate="G$1" pin="VOUT"/>
+<wire x1="180.34" y1="116.84" x2="193.04" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="C3" gate="G$1" pin="1"/>
+<wire x1="175.26" y1="109.22" x2="175.26" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="175.26" y1="116.84" x2="180.34" y2="116.84" width="0.1524" layer="91"/>
+<junction x="180.34" y="116.84"/>
+</segment>
 </net>
 <net name="USB_D-" class="0">
 <segment>
@@ -2323,25 +2329,18 @@ Standard adjustable voltage regulator but in SMD form. Spark Fun Electronics SKU
 </net>
 <net name="N$3" class="0">
 <segment>
+<pinref part="U3" gate="G$1" pin="VIN"/>
+<wire x1="248.92" y1="116.84" x2="223.52" y2="116.84" width="0.1524" layer="91"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="213.36" y1="139.7" x2="213.36" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="213.36" y1="142.24" x2="223.52" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="223.52" y1="142.24" x2="223.52" y2="116.84" width="0.1524" layer="91"/>
+<junction x="223.52" y="116.84"/>
 <wire x1="248.92" y1="116.84" x2="248.92" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="248.92" y1="76.2" x2="215.9" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="76.2" x2="215.9" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="CN1" gate="G$1" pin="VBUS"/>
 <wire x1="215.9" y1="68.58" x2="218.44" y2="68.58" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="IN"/>
-<wire x1="208.28" y1="116.84" x2="215.9" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="C5" gate="G$1" pin="1"/>
-<wire x1="215.9" y1="116.84" x2="248.92" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="215.9" y1="111.76" x2="215.9" y2="116.84" width="0.1524" layer="91"/>
-<junction x="215.9" y="116.84"/>
-</segment>
-</net>
-<net name="N$4" class="0">
-<segment>
-<pinref part="C3" gate="G$1" pin="1"/>
-<wire x1="175.26" y1="109.22" x2="175.26" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="OUT"/>
-<wire x1="175.26" y1="116.84" x2="193.04" y2="116.84" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
