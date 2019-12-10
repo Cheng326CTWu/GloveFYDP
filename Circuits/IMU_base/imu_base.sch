@@ -2306,8 +2306,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="R1" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="SUPPLY3" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="U$2" library="custom" deviceset="MOLEX_522070633" device="" value="MOLEX_522070633"/>
-<part name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 <part name="GND7" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="TP2" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -2398,12 +2398,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <attribute name="NAME" x="53.34" y="33.02" size="1.778" layer="95"/>
 <attribute name="VALUE" x="53.34" y="12.7" size="1.778" layer="96"/>
 </instance>
-<instance part="TP1" gate="G$1" x="101.6" y="48.26" smashed="yes">
-<attribute name="NAME" x="100.33" y="49.53" size="1.778" layer="95"/>
-<attribute name="TP_SIGNAL_NAME" x="102.87" y="46.99" size="1.778" layer="97"/>
+<instance part="GND7" gate="1" x="111.76" y="38.1" smashed="yes">
+<attribute name="VALUE" x="111.76" y="37.846" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND7" gate="1" x="101.6" y="38.1" smashed="yes">
-<attribute name="VALUE" x="101.6" y="37.846" size="1.778" layer="96" align="top-center"/>
+<instance part="TP2" gate="G$1" x="111.76" y="48.26" smashed="yes">
+<attribute name="NAME" x="110.49" y="49.53" size="1.778" layer="95"/>
+<attribute name="TP_SIGNAL_NAME" x="113.03" y="46.99" size="1.778" layer="97"/>
 </instance>
 </instances>
 <busses>
@@ -2464,9 +2464,9 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <label x="68.58" y="25.4" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="TP1" gate="G$1" pin="TP"/>
+<pinref part="TP2" gate="G$1" pin="TP"/>
 <pinref part="GND7" gate="1" pin="GND"/>
-<wire x1="101.6" y1="45.72" x2="101.6" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="111.76" y1="45.72" x2="111.76" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="C1" class="0">
