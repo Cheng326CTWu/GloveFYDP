@@ -4293,7 +4293,7 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="U5" gate="G$1" pin="VSS@18"/>
 <wire x1="71.12" y1="50.8" x2="71.12" y2="40.64" width="0.1524" layer="91"/>
-<label x="66.04" y="40.64" size="1.778" layer="95"/>
+<label x="71.12" y="35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="3"/>
@@ -4440,7 +4440,7 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <segment>
 <pinref part="U5" gate="G$1" pin="VDD@19"/>
 <wire x1="73.66" y1="50.8" x2="73.66" y2="40.64" width="0.1524" layer="91"/>
-<label x="73.66" y="40.64" size="1.778" layer="95"/>
+<label x="73.66" y="35.56" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="4"/>
@@ -4837,6 +4837,18 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <pinref part="U5" gate="G$1" pin="NRST"/>
 <wire x1="27.94" y1="91.44" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
 <junction x="27.94" y="91.44"/>
+</segment>
+</net>
+<net name="I2C_MUX_RST" class="0">
+<segment>
+<pinref part="U5" gate="G$1" pin="PA6"/>
+<wire x1="81.28" y1="50.8" x2="81.28" y2="40.64" width="0.1524" layer="91"/>
+<label x="81.28" y="25.4" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="#RESET"/>
+<wire x1="-20.32" y1="66.04" x2="-10.16" y2="66.04" width="0.1524" layer="91"/>
+<label x="-10.16" y="66.04" size="1.778" layer="95"/>
 </segment>
 </net>
 </nets>
