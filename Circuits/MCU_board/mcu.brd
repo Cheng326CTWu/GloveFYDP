@@ -1500,23 +1500,23 @@ design rules under a new name.</description>
 </signal>
 <signal name="SCL7">
 <contactref element="U1" pad="20"/>
-<contactref element="U4" pad="2"/>
-<wire x1="-45.925" y1="-3.165" x2="34.585" y2="57.5278" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SDA7">
 <contactref element="U1" pad="19"/>
-<contactref element="U4" pad="4"/>
-<wire x1="-45.925" y1="-4.025" x2="35.235" y2="57.5278" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SCL6">
 <contactref element="U1" pad="18"/>
 <contactref element="U$5" pad="1"/>
-<wire x1="35.885" y1="57.5278" x2="-41.91" y2="-80.08" width="0" layer="19" extent="1-1"/>
+<contactref element="U4" pad="2"/>
+<wire x1="-45.925" y1="-3.165" x2="-41.91" y2="-80.08" width="0" layer="19" extent="1-1"/>
+<wire x1="35.885" y1="57.5278" x2="-45.925" y2="-3.165" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SDA6">
 <contactref element="U1" pad="17"/>
 <contactref element="U$5" pad="2"/>
-<wire x1="36.535" y1="57.5278" x2="-40.91" y2="-80.08" width="0" layer="19" extent="1-1"/>
+<contactref element="U4" pad="4"/>
+<wire x1="-45.925" y1="-4.025" x2="-40.91" y2="-80.08" width="0" layer="19" extent="1-1"/>
+<wire x1="36.535" y1="57.5278" x2="-45.925" y2="-4.025" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="SCL5">
 <contactref element="U1" pad="16"/>
