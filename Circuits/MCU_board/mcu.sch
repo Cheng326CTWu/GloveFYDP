@@ -1302,102 +1302,6 @@ stringently characterized ESD strikes</description>
 </deviceset>
 </devicesets>
 </library>
-<library name="SparkFun-Retired">
-<description>&lt;h3&gt;SparkFun Electronics' Retired foot prints&lt;/h3&gt;
-In this library you'll find all manner of retired footprints for resistors, capacitors, board names, ICs, etc., that are &lt;b&gt; no longer used&lt;/b&gt; in our catalog.
-&lt;br&gt;
-&lt;br&gt;
-We've spent an enormous amount of time creating and checking these footprints and parts, but it is &lt;b&gt; the end user's responsibility&lt;/b&gt; to ensure correctness and suitablity for a given componet or application. 
-&lt;br&gt;
-&lt;br&gt;If you enjoy using this library, please buy one of our products at &lt;a href=" www.sparkfun.com"&gt;SparkFun.com&lt;/a&gt;.
-&lt;br&gt;
-&lt;br&gt;
-&lt;b&gt;Licensing:&lt;/b&gt; Creative Commons ShareAlike 4.0 International - https://creativecommons.org/licenses/by-sa/4.0/ 
-&lt;br&gt;
-&lt;br&gt;
-You are welcome to use this library for commercial purposes. For attribution, we ask that when you begin to sell your device using our footprint, you email us with a link to the product being sold. We want bragging rights that we helped (in a very small part) to create your 8th world wonder. We would like the opportunity to feature your device on our homepage.</description>
-<packages>
-<package name="0402-CAP">
-<description>&lt;b&gt;CAPACITOR&lt;/b&gt;&lt;p&gt;
-chip</description>
-<wire x1="-0.245" y1="0.224" x2="0.245" y2="0.224" width="0.1524" layer="51"/>
-<wire x1="0.245" y1="-0.224" x2="-0.245" y2="-0.224" width="0.1524" layer="51"/>
-<wire x1="-1.473" y1="0.483" x2="1.473" y2="0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="0.483" x2="1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="1.473" y1="-0.483" x2="-1.473" y2="-0.483" width="0.0508" layer="39"/>
-<wire x1="-1.473" y1="-0.483" x2="-1.473" y2="0.483" width="0.0508" layer="39"/>
-<wire x1="0" y1="0.0305" x2="0" y2="-0.0305" width="0.4064" layer="21"/>
-<smd name="1" x="-0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<smd name="2" x="0.65" y="0" dx="0.7" dy="0.9" layer="1"/>
-<text x="-0.889" y="0.6985" size="0.4064" layer="25">&gt;NAME</text>
-<text x="-1.0795" y="-1.143" size="0.4064" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.554" y1="-0.3048" x2="-0.254" y2="0.2951" layer="51"/>
-<rectangle x1="0.2588" y1="-0.3048" x2="0.5588" y2="0.2951" layer="51"/>
-<rectangle x1="-0.1999" y1="-0.3" x2="0.1999" y2="0.3" layer="35"/>
-</package>
-</packages>
-<symbols>
-<symbol name="CAP">
-<wire x1="0" y1="2.54" x2="0" y2="2.032" width="0.1524" layer="94"/>
-<wire x1="0" y1="0" x2="0" y2="0.508" width="0.1524" layer="94"/>
-<text x="1.524" y="2.921" size="1.778" layer="95">&gt;NAME</text>
-<text x="1.524" y="-2.159" size="1.778" layer="96">&gt;VALUE</text>
-<rectangle x1="-2.032" y1="0.508" x2="2.032" y2="1.016" layer="94"/>
-<rectangle x1="-2.032" y1="1.524" x2="2.032" y2="2.032" layer="94"/>
-<pin name="1" x="0" y="5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
-<pin name="2" x="0" y="-2.54" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name=".1UF-CER" prefix="C">
-<description>.1uF ceramic SMT&lt;br&gt;
-CAP-00810- 25V +80%/-20% (0603)&lt;br&gt;
-CAP-08390- 100V 10% (0603)&lt;br&gt;
-CAP-08604- 25V 5% (0603)&lt;br&gt;</description>
-<gates>
-<gate name="G$1" symbol="CAP" x="0" y="-2.54"/>
-</gates>
-<devices>
-<device name="" package="0402-CAP">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-00810"/>
-<attribute name="VALUE" value="0.1uF" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="CAP-08604" package="0402-CAP">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-08604"/>
-<attribute name="VALUE" value="0.1uF" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="CAP-08390" package="0402-CAP">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-08390"/>
-<attribute name="VALUE" value="0.1uF" constant="no"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="SparkFun-PowerSymbols">
 <description>&lt;h3&gt;SparkFun Power Symbols&lt;/h3&gt;
 This library contains power, ground, and voltage-supply symbols.
@@ -1655,63 +1559,6 @@ Commonly used for small ceramic capacitors. Like our 0.1uF (http://www.sparkfun.
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="2.2UF" prefix="C">
-<description>&lt;h3&gt;2.2µF ceramic capacitors&lt;/h3&gt;
-&lt;p&gt;A capacitor is a passive two-terminal electrical component used to store electrical energy temporarily in an electric field.&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="CAP" x="0" y="0"/>
-</gates>
-<devices>
-<device name="-0603-10V-20%" package="0603">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-07888" constant="no"/>
-<attribute name="VALUE" value="2.2uF" constant="no"/>
-</technology>
-</technologies>
-</device>
-<device name="-0805-25V-(+80/-20%)" package="0805">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-11624"/>
-<attribute name="VALUE" value="2.2uF"/>
-</technology>
-</technologies>
-</device>
-<device name="-1206-50V-10%" package="1206">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-10009"/>
-<attribute name="VALUE" value="2.2uF"/>
-</technology>
-</technologies>
-</device>
-<device name="-0402_TIGHT-10V-10%-X5R" package="0402-TIGHT">
-<connects>
-<connect gate="G$1" pin="1" pad="1"/>
-<connect gate="G$1" pin="2" pad="2"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="PROD_ID" value="CAP-14232"/>
-<attribute name="VALUE" value="2.2uF"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="1.0UF" prefix="C">
 <description>&lt;h3&gt;1µF ceramic capacitors&lt;/h3&gt;
 &lt;p&gt;A capacitor is a passive two-terminal electrical component used to store electrical energy temporarily in an electric field.&lt;/p&gt;</description>
@@ -2630,30 +2477,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <parts>
 <part name="U5" library="STM32" deviceset="STM32L452RE" device="T6" technology="C"/>
 <part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
-<part name="C13" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="C14" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="C15" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="C16" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="GND17" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND18" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND19" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND20" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="C17" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="GND21" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND22" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="C18" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
-<part name="C19" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
-<part name="C20" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
-<part name="C21" library="SparkFun-Capacitors" deviceset="2.2UF" device="-0402_TIGHT-10V-10%-X5R" value="2.2uF"/>
-<part name="GND23" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND24" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND25" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND26" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="C22" library="SparkFun-Retired" deviceset=".1UF-CER" device="" value="0.1uF"/>
-<part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
-<part name="SUPPLY3" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
-<part name="SUPPLY4" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
-<part name="SUPPLY5" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 <part name="U1" library="microbuilder" deviceset="TCA9548A" device="" value=" TCA9548APWR"/>
 <part name="GND5" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY7" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
@@ -2709,88 +2532,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <attribute name="VALUE" x="73.66" y="86.36" size="1.778" layer="96" font="vector" ratio="10"/>
 </instance>
 <instance part="P+4" gate="VCC" x="231.14" y="147.32" smashed="yes"/>
-<instance part="C13" gate="G$1" x="73.66" y="35.56" smashed="yes">
-<attribute name="NAME" x="75.184" y="38.481" size="1.778" layer="95"/>
-<attribute name="VALUE" x="75.184" y="33.401" size="1.778" layer="96"/>
-</instance>
-<instance part="C14" gate="G$1" x="106.68" y="35.56" smashed="yes">
-<attribute name="NAME" x="108.204" y="38.481" size="1.778" layer="95"/>
-<attribute name="VALUE" x="108.204" y="33.401" size="1.778" layer="96"/>
-</instance>
-<instance part="C15" gate="G$1" x="162.56" y="99.06" smashed="yes">
-<attribute name="NAME" x="164.084" y="101.981" size="1.778" layer="95"/>
-<attribute name="VALUE" x="164.084" y="96.901" size="1.778" layer="96"/>
-</instance>
-<instance part="C16" gate="G$1" x="35.56" y="66.04" smashed="yes">
-<attribute name="NAME" x="37.084" y="68.961" size="1.778" layer="95"/>
-<attribute name="VALUE" x="37.084" y="63.881" size="1.778" layer="96"/>
-</instance>
-<instance part="GND17" gate="1" x="73.66" y="27.94" smashed="yes">
-<attribute name="VALUE" x="71.12" y="25.4" size="1.778" layer="96"/>
-</instance>
-<instance part="GND18" gate="1" x="106.68" y="27.94" smashed="yes">
-<attribute name="VALUE" x="106.68" y="27.686" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND19" gate="1" x="35.56" y="58.42" smashed="yes">
-<attribute name="VALUE" x="33.02" y="55.88" size="1.778" layer="96"/>
-</instance>
-<instance part="GND20" gate="1" x="162.56" y="91.44" smashed="yes">
-<attribute name="VALUE" x="162.56" y="91.186" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="C17" gate="G$1" x="58.42" y="139.7" smashed="yes">
-<attribute name="NAME" x="59.944" y="142.621" size="1.778" layer="95"/>
-<attribute name="VALUE" x="59.944" y="137.541" size="1.778" layer="96"/>
-</instance>
-<instance part="GND21" gate="1" x="58.42" y="132.08" smashed="yes">
-<attribute name="VALUE" x="58.42" y="131.826" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND22" gate="1" x="48.26" y="132.08" smashed="yes">
-<attribute name="VALUE" x="48.26" y="131.826" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="C18" gate="G$1" x="48.26" y="139.7" smashed="yes">
-<attribute name="NAME" x="49.784" y="142.621" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="49.784" y="137.541" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="C19" gate="G$1" x="154.94" y="99.06" smashed="yes">
-<attribute name="NAME" x="156.464" y="101.981" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="156.464" y="96.901" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="C20" gate="G$1" x="22.86" y="66.04" smashed="yes">
-<attribute name="NAME" x="24.384" y="68.961" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="24.384" y="63.881" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="C21" gate="G$1" x="66.04" y="35.56" smashed="yes">
-<attribute name="NAME" x="67.564" y="38.481" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="67.564" y="33.401" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="GND23" gate="1" x="154.94" y="91.44" smashed="yes">
-<attribute name="VALUE" x="154.94" y="91.186" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND24" gate="1" x="22.86" y="58.42" smashed="yes">
-<attribute name="VALUE" x="22.86" y="58.166" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND25" gate="1" x="66.04" y="27.94" smashed="yes">
-<attribute name="VALUE" x="66.04" y="27.686" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND26" gate="1" x="99.06" y="27.94" smashed="yes">
-<attribute name="VALUE" x="99.06" y="27.686" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="C22" gate="G$1" x="99.06" y="35.56" smashed="yes">
-<attribute name="NAME" x="100.584" y="38.481" size="1.778" layer="95"/>
-<attribute name="VALUE" x="100.584" y="33.401" size="1.778" layer="96"/>
-</instance>
-<instance part="SUPPLY2" gate="VDD" x="25.4" y="86.36" smashed="yes">
-<attribute name="VALUE" x="25.4" y="89.154" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="SUPPLY3" gate="VDD" x="40.64" y="86.36" smashed="yes">
-<attribute name="VALUE" x="40.64" y="89.154" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="SUPPLY4" gate="VDD" x="86.36" y="45.72" smashed="yes">
-<attribute name="VALUE" x="86.36" y="48.514" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="SUPPLY5" gate="VDD" x="121.92" y="48.26" smashed="yes">
-<attribute name="VALUE" x="121.92" y="51.054" size="1.778" layer="96" align="bottom-center"/>
-</instance>
 <instance part="U1" gate="G$1" x="-35.56" y="86.36" smashed="yes" rot="R180">
 <attribute name="NAME" x="-22.86" y="48.26" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-22.86" y="124.46" size="1.27" layer="96" rot="R180"/>
@@ -3032,56 +2773,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </net>
 <net name="GND" class="0">
 <segment>
-<pinref part="C14" gate="G$1" pin="2"/>
-<pinref part="GND18" gate="1" pin="GND"/>
-<wire x1="106.68" y1="33.02" x2="106.68" y2="30.48" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND17" gate="1" pin="GND"/>
-<pinref part="C13" gate="G$1" pin="2"/>
-<wire x1="73.66" y1="30.48" x2="73.66" y2="33.02" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND19" gate="1" pin="GND"/>
-<pinref part="C16" gate="G$1" pin="2"/>
-<wire x1="35.56" y1="60.96" x2="35.56" y2="63.5" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND20" gate="1" pin="GND"/>
-<pinref part="C15" gate="G$1" pin="2"/>
-<wire x1="162.56" y1="93.98" x2="162.56" y2="96.52" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C17" gate="G$1" pin="2"/>
-<pinref part="GND21" gate="1" pin="GND"/>
-<wire x1="58.42" y1="137.16" x2="58.42" y2="134.62" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND22" gate="1" pin="GND"/>
-<wire x1="48.26" y1="137.16" x2="48.26" y2="134.62" width="0.1524" layer="91"/>
-<pinref part="C18" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="C22" gate="G$1" pin="2"/>
-<pinref part="GND26" gate="1" pin="GND"/>
-<wire x1="99.06" y1="33.02" x2="99.06" y2="30.48" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C21" gate="G$1" pin="2"/>
-<pinref part="GND25" gate="1" pin="GND"/>
-<wire x1="66.04" y1="33.02" x2="66.04" y2="30.48" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C20" gate="G$1" pin="2"/>
-<pinref part="GND24" gate="1" pin="GND"/>
-<wire x1="22.86" y1="63.5" x2="22.86" y2="60.96" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="C19" gate="G$1" pin="2"/>
-<pinref part="GND23" gate="1" pin="GND"/>
-<wire x1="154.94" y1="96.52" x2="154.94" y2="93.98" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="U1" gate="G$1" pin="GND"/>
 <wire x1="-20.32" y1="114.3" x2="-17.78" y2="114.3" width="0.1524" layer="91"/>
 <wire x1="-17.78" y1="114.3" x2="-17.78" y2="127" width="0.1524" layer="91"/>
@@ -3198,62 +2889,11 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="73.66" y="-45.72"/>
 </segment>
 </net>
-<net name="N$21" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VDDUSB"/>
-<wire x1="124.46" y1="106.68" x2="162.56" y2="106.68" width="0.1524" layer="91"/>
-<pinref part="C15" gate="G$1" pin="1"/>
-<wire x1="162.56" y1="106.68" x2="162.56" y2="104.14" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$22" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VSS@47"/>
-<pinref part="C19" gate="G$1" pin="1"/>
-<wire x1="124.46" y1="104.14" x2="154.94" y2="104.14" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="SWDIO" class="0">
 <segment>
 <pinref part="U5" gate="G$1" pin="SWDIO"/>
 <wire x1="124.46" y1="101.6" x2="134.62" y2="101.6" width="0.1524" layer="91"/>
 <label x="134.62" y="101.6" size="1.778" layer="95"/>
-</segment>
-</net>
-<net name="N$26" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VSS@18"/>
-<wire x1="71.12" y1="50.8" x2="71.12" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="43.18" x2="66.04" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="C21" gate="G$1" pin="1"/>
-<wire x1="66.04" y1="43.18" x2="66.04" y2="40.64" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$29" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VDD@64"/>
-<wire x1="68.58" y1="124.46" x2="68.58" y2="152.4" width="0.1524" layer="91"/>
-<pinref part="C17" gate="G$1" pin="1"/>
-<wire x1="68.58" y1="152.4" x2="58.42" y2="152.4" width="0.1524" layer="91"/>
-<wire x1="58.42" y1="152.4" x2="58.42" y2="144.78" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$30" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VSS@63"/>
-<wire x1="71.12" y1="124.46" x2="71.12" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="71.12" y1="154.94" x2="48.26" y2="154.94" width="0.1524" layer="91"/>
-<wire x1="48.26" y1="154.94" x2="48.26" y2="144.78" width="0.1524" layer="91"/>
-<pinref part="C18" gate="G$1" pin="1"/>
-</segment>
-</net>
-<net name="N$31" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VSS@31"/>
-<wire x1="104.14" y1="50.8" x2="104.14" y2="43.18" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="43.18" x2="99.06" y2="43.18" width="0.1524" layer="91"/>
-<pinref part="C22" gate="G$1" pin="1"/>
-<wire x1="99.06" y1="43.18" x2="99.06" y2="40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="SWCLK" class="0">
@@ -3264,45 +2904,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </segment>
 </net>
 <net name="VDD" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="VSSA/VREF-"/>
-<wire x1="50.8" y1="78.74" x2="25.4" y2="78.74" width="0.1524" layer="91"/>
-<pinref part="C20" gate="G$1" pin="1"/>
-<wire x1="25.4" y1="78.74" x2="22.86" y2="78.74" width="0.1524" layer="91"/>
-<wire x1="22.86" y1="78.74" x2="22.86" y2="71.12" width="0.1524" layer="91"/>
-<pinref part="SUPPLY2" gate="VDD" pin="VDD"/>
-<wire x1="25.4" y1="86.36" x2="25.4" y2="78.74" width="0.1524" layer="91"/>
-<junction x="25.4" y="78.74"/>
-</segment>
-<segment>
-<pinref part="U5" gate="G$1" pin="VDDA/VREF+"/>
-<pinref part="C16" gate="G$1" pin="1"/>
-<wire x1="35.56" y1="71.12" x2="35.56" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="76.2" x2="40.64" y2="76.2" width="0.1524" layer="91"/>
-<pinref part="SUPPLY3" gate="VDD" pin="VDD"/>
-<wire x1="40.64" y1="76.2" x2="50.8" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="40.64" y1="86.36" x2="40.64" y2="76.2" width="0.1524" layer="91"/>
-<junction x="40.64" y="76.2"/>
-</segment>
-<segment>
-<pinref part="U5" gate="G$1" pin="VDD@19"/>
-<wire x1="73.66" y1="50.8" x2="73.66" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="C13" gate="G$1" pin="1"/>
-<pinref part="SUPPLY4" gate="VDD" pin="VDD"/>
-<wire x1="73.66" y1="45.72" x2="73.66" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="86.36" y1="45.72" x2="73.66" y2="45.72" width="0.1524" layer="91"/>
-<junction x="73.66" y="45.72"/>
-</segment>
-<segment>
-<pinref part="SUPPLY5" gate="VDD" pin="VDD"/>
-<wire x1="121.92" y1="48.26" x2="121.92" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="U5" gate="G$1" pin="VDD@32"/>
-<wire x1="106.68" y1="50.8" x2="106.68" y2="45.72" width="0.1524" layer="91"/>
-<pinref part="C14" gate="G$1" pin="1"/>
-<wire x1="106.68" y1="45.72" x2="106.68" y2="40.64" width="0.1524" layer="91"/>
-<wire x1="121.92" y1="45.72" x2="106.68" y2="45.72" width="0.1524" layer="91"/>
-<junction x="106.68" y="45.72"/>
-</segment>
 <segment>
 <pinref part="SUPPLY7" gate="VDD" pin="VDD"/>
 <wire x1="-2.54" y1="121.92" x2="-2.54" y2="106.68" width="0.1524" layer="91"/>
