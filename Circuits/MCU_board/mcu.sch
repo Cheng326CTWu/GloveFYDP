@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3725,6 +3725,84 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 </deviceset>
 </devicesets>
 </library>
+<library name="SamacSys_Parts">
+<description>&lt;b&gt;https://componentsearchengine.com&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
+<packages>
+<package name="SOT95P280X120-5N">
+<description>&lt;b&gt;SOT-23-5&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="-1.4" y="0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="2" x="-1.4" y="0" dx="1" dy="0.6" layer="1"/>
+<smd name="3" x="-1.4" y="-0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="4" x="1.4" y="-0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="5" x="1.4" y="0.95" dx="1" dy="0.6" layer="1"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-2.15" y1="1.8" x2="2.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="2.15" y1="1.8" x2="2.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="2.15" y1="-1.8" x2="-2.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="-2.15" y1="-1.8" x2="-2.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="-0.825" y1="1.45" x2="0.825" y2="1.45" width="0.1" layer="51"/>
+<wire x1="0.825" y1="1.45" x2="0.825" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="0.825" y1="-1.45" x2="-0.825" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="-0.825" y1="-1.45" x2="-0.825" y2="1.45" width="0.1" layer="51"/>
+<wire x1="-0.825" y1="0.5" x2="0.125" y2="1.45" width="0.1" layer="51"/>
+<wire x1="-0.55" y1="1.45" x2="0.55" y2="1.45" width="0.2" layer="21"/>
+<wire x1="0.55" y1="1.45" x2="0.55" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="0.55" y1="-1.45" x2="-0.55" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="-0.55" y1="-1.45" x2="-0.55" y2="1.45" width="0.2" layer="21"/>
+<wire x1="-1.9" y1="1.5" x2="-0.9" y2="1.5" width="0.2" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="RP111N331B-TR-FE">
+<wire x1="5.08" y1="2.54" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-7.62" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-7.62" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-7.62" width="0.254" layer="94"/>
+<text x="24.13" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="24.13" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="VDD" x="0" y="0" length="middle"/>
+<pin name="GND" x="0" y="-2.54" length="middle"/>
+<pin name="CE" x="0" y="-5.08" length="middle"/>
+<pin name="VFB" x="27.94" y="0" length="middle" rot="R180"/>
+<pin name="VOUT" x="27.94" y="-2.54" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="RP111N331B-TR-FE" prefix="IC">
+<description>&lt;b&gt;LDO Voltage Regulators Low voltage Fast response Regulator&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR-FE.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="RP111N331B-TR-FE" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOT95P280X120-5N">
+<connects>
+<connect gate="G$1" pin="CE" pad="3"/>
+<connect gate="G$1" pin="GND" pad="2"/>
+<connect gate="G$1" pin="VDD" pad="1"/>
+<connect gate="G$1" pin="VFB" pad="4"/>
+<connect gate="G$1" pin="VOUT" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="LDO Voltage Regulators Low voltage Fast response Regulator" constant="no"/>
+<attribute name="HEIGHT" value="1.2mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Ricoh Electronic Devices Company" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="RP111N331B-TR-FE" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="" constant="no"/>
+<attribute name="RS_PART_NUMBER" value="" constant="no"/>
+<attribute name="RS_PRICE-STOCK" value="" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -3810,6 +3888,7 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <part name="GND24" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="C17" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="100nF"/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="1 uF"/>
+<part name="IC1" library="SamacSys_Parts" deviceset="RP111N331B-TR-FE" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4077,6 +4156,10 @@ SparkFun BigTime Watch Kit&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
 <instance part="C3" gate="G$1" x="175.26" y="104.14" smashed="yes">
 <attribute name="NAME" x="176.784" y="107.061" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="176.784" y="101.981" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="IC1" gate="G$1" x="198.12" y="25.4" smashed="yes">
+<attribute name="NAME" x="222.25" y="33.02" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="222.25" y="30.48" size="1.778" layer="96" align="center-left"/>
 </instance>
 </instances>
 <busses>

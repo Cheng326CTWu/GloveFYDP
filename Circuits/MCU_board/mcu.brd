@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -881,6 +881,37 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </package>
 </packages>
 </library>
+<library name="SamacSys_Parts">
+<description>&lt;b&gt;https://componentsearchengine.com&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by SamacSys&lt;/author&gt;</description>
+<packages>
+<package name="SOT95P280X120-5N">
+<description>&lt;b&gt;SOT-23-5&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="-1.4" y="0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="2" x="-1.4" y="0" dx="1" dy="0.6" layer="1"/>
+<smd name="3" x="-1.4" y="-0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="4" x="1.4" y="-0.95" dx="1" dy="0.6" layer="1"/>
+<smd name="5" x="1.4" y="0.95" dx="1" dy="0.6" layer="1"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-2.15" y1="1.8" x2="2.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="2.15" y1="1.8" x2="2.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="2.15" y1="-1.8" x2="-2.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="-2.15" y1="-1.8" x2="-2.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="-0.825" y1="1.45" x2="0.825" y2="1.45" width="0.1" layer="51"/>
+<wire x1="0.825" y1="1.45" x2="0.825" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="0.825" y1="-1.45" x2="-0.825" y2="-1.45" width="0.1" layer="51"/>
+<wire x1="-0.825" y1="-1.45" x2="-0.825" y2="1.45" width="0.1" layer="51"/>
+<wire x1="-0.825" y1="0.5" x2="0.125" y2="1.45" width="0.1" layer="51"/>
+<wire x1="-0.55" y1="1.45" x2="0.55" y2="1.45" width="0.2" layer="21"/>
+<wire x1="0.55" y1="1.45" x2="0.55" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="0.55" y1="-1.45" x2="-0.55" y2="-1.45" width="0.2" layer="21"/>
+<wire x1="-0.55" y1="-1.45" x2="-0.55" y2="1.45" width="0.2" layer="21"/>
+<wire x1="-1.9" y1="1.5" x2="-0.9" y2="1.5" width="0.2" layer="21"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1122,8 +1153,8 @@ design rules under a new name.</description>
 <attribute name="MANF" value="" x="0" y="0" size="1.778" layer="27" display="off"/>
 <attribute name="MEM" value="" x="0" y="0" size="1.778" layer="27" display="off"/>
 <attribute name="MFPN" value="STM32L476RCT6" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-20.32" y="7.62" size="2" layer="151" ratio="10" align="center"/>
 <attribute name="NAME" x="-24.52" y="13.12" size="1.016" layer="25" font="vector" ratio="18" align="bottom-right"/>
+<attribute name="NAME" x="-20.32" y="7.62" size="2" layer="151" ratio="10" align="center"/>
 <attribute name="PARTNO" value="" x="0" y="0" size="1.778" layer="27" display="off"/>
 <attribute name="STATUS" value="" x="0" y="0" size="1.778" layer="27" display="off"/>
 <attribute name="TEMP" value="" x="0" y="0" size="1.778" layer="27" display="off"/>
@@ -1276,6 +1307,18 @@ design rules under a new name.</description>
 <attribute name="NAME" x="-48.26" y="-126.238" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="CAP-12380" x="-48.26" y="-127" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-48.26" y="-127.762" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
+</element>
+<element name="IC1" library="SamacSys_Parts" package="SOT95P280X120-5N" value="RP111N331B-TR-FE" x="-45.72" y="-130.81" smashed="yes">
+<attribute name="DESCRIPTION" value="LDO Voltage Regulators Low voltage Fast response Regulator" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="HEIGHT" value="1.2mm" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_NAME" value="Ricoh Electronic Devices Company" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="RP111N331B-TR-FE" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PART_NUMBER" value="" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="MOUSER_PRICE-STOCK" value="" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-45.72" y="-130.81" size="1.27" layer="25" align="center"/>
+<attribute name="RS_PART_NUMBER" value="" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="RS_PRICE-STOCK" value="" x="-45.72" y="-130.81" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-44.45" y="-130.81" size="1.27" layer="27" align="center"/>
 </element>
 </elements>
 <signals>
