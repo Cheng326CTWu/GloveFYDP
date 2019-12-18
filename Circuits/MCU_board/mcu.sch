@@ -521,75 +521,6 @@ up to 1MB Flash, 128 KB SRAM, USB OTG FS, LCD, analog, audio
 </deviceset>
 </devicesets>
 </library>
-<library name="LD39050PU33R">
-<packages>
-<package name="SON95P300X300X100-7N">
-<text x="-2.34541875" y="2.052259375" size="1.016" layer="25">&gt;NAME</text>
-<text x="-2.32373125" y="-2.788490625" size="1.016" layer="27">&gt;VALUE</text>
-<wire x1="-2.1" y1="1.75" x2="2.1" y2="1.75" width="0.05" layer="39"/>
-<wire x1="2.1" y1="1.75" x2="2.1" y2="-1.75" width="0.05" layer="39"/>
-<wire x1="2.1" y1="-1.75" x2="-2.1" y2="-1.75" width="0.05" layer="39"/>
-<wire x1="-2.1" y1="-1.75" x2="-2.1" y2="1.75" width="0.05" layer="39"/>
-<circle x="-2.45" y="0.9" radius="0.1" width="0.2" layer="21"/>
-<wire x1="-1.5" y1="1.5" x2="1.5" y2="1.5" width="0.127" layer="21"/>
-<wire x1="1.5" y1="1.5" x2="1.5" y2="-1.5" width="0.127" layer="51"/>
-<wire x1="1.5" y1="-1.5" x2="-1.5" y2="-1.5" width="0.127" layer="21"/>
-<wire x1="-1.5" y1="-1.5" x2="-1.5" y2="1.5" width="0.127" layer="51"/>
-<rectangle x1="-0.57" y1="-0.83" x2="0.57" y2="0.83" layer="31"/>
-<smd name="1" x="-1.435" y="0.95" dx="0.84" dy="0.4" layer="1" roundness="50"/>
-<smd name="2" x="-1.435" y="0" dx="0.84" dy="0.4" layer="1" roundness="50"/>
-<smd name="3" x="-1.435" y="-0.95" dx="0.84" dy="0.4" layer="1" roundness="50"/>
-<smd name="4" x="1.435" y="-0.95" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
-<smd name="5" x="1.435" y="0" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
-<smd name="6" x="1.435" y="0.95" dx="0.84" dy="0.4" layer="1" roundness="50" rot="R180"/>
-<smd name="7" x="0" y="0" dx="1.625" dy="2.365" layer="1" rot="R180" cream="no"/>
-</package>
-</packages>
-<symbols>
-<symbol name="LD39050PU33R">
-<wire x1="-10.16" y1="7.62" x2="10.16" y2="7.62" width="0.41" layer="94"/>
-<wire x1="10.16" y1="7.62" x2="10.16" y2="-7.62" width="0.41" layer="94"/>
-<wire x1="10.16" y1="-7.62" x2="-10.16" y2="-7.62" width="0.41" layer="94"/>
-<wire x1="-10.16" y1="-7.62" x2="-10.16" y2="7.62" width="0.41" layer="94"/>
-<text x="-10.16" y="8.62" size="1.778" layer="95" ratio="10" rot="SR0">&gt;NAME</text>
-<text x="-10.16" y="-11.62" size="1.778" layer="96" ratio="10" rot="SR0">&gt;VALUE</text>
-<pin name="EN" x="-15.24" y="0" length="middle" direction="in"/>
-<pin name="PG" x="15.24" y="0" length="middle" rot="R180"/>
-<pin name="VIN" x="-15.24" y="5.08" length="middle" direction="pwr"/>
-<pin name="VOUT" x="15.24" y="5.08" length="middle" direction="out" rot="R180"/>
-<pin name="GND" x="15.24" y="-5.08" length="middle" direction="pwr" rot="R180"/>
-</symbol>
-</symbols>
-<devicesets>
-<deviceset name="LD39050PU33R" prefix="U">
-<description>LD39050 Series 500 mA 3.3 V Fixed Low Noise LDO Voltage Regulator - DFN-6</description>
-<gates>
-<gate name="G$1" symbol="LD39050PU33R" x="0" y="0"/>
-</gates>
-<devices>
-<device name="" package="SON95P300X300X100-7N">
-<connects>
-<connect gate="G$1" pin="EN" pad="1"/>
-<connect gate="G$1" pin="GND" pad="2 7"/>
-<connect gate="G$1" pin="PG" pad="3"/>
-<connect gate="G$1" pin="VIN" pad="6"/>
-<connect gate="G$1" pin="VOUT" pad="4"/>
-</connects>
-<technologies>
-<technology name="">
-<attribute name="AVAILABILITY" value="Unavailable"/>
-<attribute name="DESCRIPTION" value=" LD39050 Series 500 mA 3.3 V Fixed Low Noise LDO Voltage Regulator - DFN-6 "/>
-<attribute name="MF" value="STMicroelectronics"/>
-<attribute name="MP" value="LD39050PU33R"/>
-<attribute name="PACKAGE" value="DFN-6 STMicroelectronics"/>
-<attribute name="PRICE" value="None"/>
-</technology>
-</technologies>
-</device>
-</devices>
-</deviceset>
-</devicesets>
-</library>
 <library name="adafruit">
 <packages>
 <package name="USB-MINIB">
@@ -1261,12 +1192,6 @@ stringently characterized ESD strikes</description>
 <packages>
 </packages>
 <symbols>
-<symbol name="VCC" urn="urn:adsk.eagle:symbol:26928/1" library_version="1">
-<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
-<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
-<text x="-2.54" y="-2.54" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
-<pin name="VCC" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
-</symbol>
 <symbol name="GND" urn="urn:adsk.eagle:symbol:26925/1" library_version="1">
 <wire x1="-1.905" y1="0" x2="1.905" y2="0" width="0.254" layer="94"/>
 <text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
@@ -1274,19 +1199,6 @@ stringently characterized ESD strikes</description>
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="VCC" urn="urn:adsk.eagle:component:26957/1" prefix="P+" library_version="1">
-<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
-<gates>
-<gate name="VCC" symbol="VCC" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
 <deviceset name="GND" urn="urn:adsk.eagle:component:26954/1" prefix="GND" library_version="1">
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
@@ -3814,7 +3726,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 </classes>
 <parts>
 <part name="U5" library="STM32" deviceset="STM32L452RE" device="T6" technology="C"/>
-<part name="P+4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
 <part name="U1" library="microbuilder" deviceset="TCA9548A" device="" value=" TCA9548APWR"/>
 <part name="GND5" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY7" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
@@ -3822,15 +3733,10 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <part name="GND6" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="CN1" library="adafruit" deviceset="USB" device="MINIB"/>
 <part name="U2" library="USBLC6-2P6" deviceset="USBLC6-2P6" device=""/>
-<part name="P+1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
-<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="U3" library="LD39050PU33R" deviceset="LD39050PU33R" device=""/>
 <part name="GND7" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="SUPPLY6" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 <part name="C5" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0402-16V-10%" value="1.0uF"/>
 <part name="GND8" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND9" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="U$1" library="custom" deviceset="MOLEX_522070633" device=""/>
 <part name="U4" library="SparkFun-Sensors" deviceset="LSM9DS1" device=""/>
 <part name="GND1" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -3889,6 +3795,8 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <part name="C17" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="100nF"/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="1 uF"/>
 <part name="IC1" library="SamacSys_Parts" deviceset="RP111N331B-TR-FE" device=""/>
+<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="C18" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -3899,7 +3807,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <attribute name="NAME" x="55.88" y="121.92" size="2.54" layer="95" font="vector" ratio="12"/>
 <attribute name="VALUE" x="73.66" y="86.36" size="1.778" layer="96" font="vector" ratio="10"/>
 </instance>
-<instance part="P+4" gate="VCC" x="231.14" y="147.32" smashed="yes"/>
 <instance part="U1" gate="G$1" x="-35.56" y="86.36" smashed="yes" rot="R180">
 <attribute name="NAME" x="-22.86" y="48.26" size="1.27" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-22.86" y="124.46" size="1.27" layer="96" rot="R180"/>
@@ -3925,34 +3832,18 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <attribute name="NAME" x="185.41516875" y="71.127240625" size="1.779690625" layer="95"/>
 <attribute name="VALUE" x="185.41873125" y="53.3375" size="1.778440625" layer="96"/>
 </instance>
-<instance part="P+1" gate="VCC" x="203.2" y="91.44" smashed="yes">
-<attribute name="VALUE" x="200.66" y="88.9" size="1.778" layer="96" rot="R90"/>
-</instance>
-<instance part="GND3" gate="1" x="180.34" y="48.26" smashed="yes">
-<attribute name="VALUE" x="177.8" y="45.72" size="1.778" layer="96"/>
-</instance>
 <instance part="GND4" gate="1" x="215.9" y="50.8" smashed="yes">
 <attribute name="VALUE" x="213.36" y="48.26" size="1.778" layer="96"/>
 </instance>
-<instance part="U3" gate="G$1" x="208.28" y="111.76" smashed="yes" rot="MR0">
-<attribute name="NAME" x="218.44" y="120.38" size="1.778" layer="95" ratio="10" rot="SMR0"/>
-<attribute name="VALUE" x="218.44" y="100.14" size="1.778" layer="96" ratio="10" rot="SMR0"/>
+<instance part="GND7" gate="1" x="248.92" y="96.52" smashed="yes">
+<attribute name="VALUE" x="246.38" y="93.98" size="1.778" layer="96"/>
 </instance>
-<instance part="GND7" gate="1" x="190.5" y="101.6" smashed="yes">
-<attribute name="VALUE" x="187.96" y="99.06" size="1.778" layer="96"/>
+<instance part="C5" gate="G$1" x="248.92" y="104.14" smashed="yes">
+<attribute name="NAME" x="250.444" y="107.061" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="250.444" y="101.981" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="SUPPLY6" gate="VDD" x="180.34" y="121.92" smashed="yes">
-<attribute name="VALUE" x="180.34" y="124.714" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="C5" gate="G$1" x="213.36" y="134.62" smashed="yes">
-<attribute name="NAME" x="214.884" y="137.541" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="214.884" y="132.461" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="GND8" gate="1" x="175.26" y="96.52" smashed="yes">
-<attribute name="VALUE" x="175.26" y="96.266" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND9" gate="1" x="213.36" y="127" smashed="yes">
-<attribute name="VALUE" x="213.36" y="126.746" size="1.778" layer="96" align="top-center"/>
+<instance part="GND8" gate="1" x="187.96" y="91.44" smashed="yes">
+<attribute name="VALUE" x="187.96" y="91.186" size="1.778" layer="96" align="top-center"/>
 </instance>
 <instance part="U$1" gate="G$1" x="-106.68" y="165.1" smashed="yes" rot="R270">
 <attribute name="NAME" x="-96.52" y="170.18" size="1.778" layer="95" rot="R270"/>
@@ -4153,31 +4044,26 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <attribute name="NAME" x="29.464" y="89.281" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="29.464" y="84.201" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="C3" gate="G$1" x="175.26" y="104.14" smashed="yes">
-<attribute name="NAME" x="176.784" y="107.061" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="176.784" y="101.981" size="1.778" layer="96" font="vector"/>
+<instance part="C3" gate="G$1" x="187.96" y="104.14" smashed="yes">
+<attribute name="NAME" x="189.484" y="107.061" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="189.484" y="101.981" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="IC1" gate="G$1" x="198.12" y="25.4" smashed="yes">
-<attribute name="NAME" x="222.25" y="33.02" size="1.778" layer="95" align="center-left"/>
-<attribute name="VALUE" x="222.25" y="30.48" size="1.778" layer="96" align="center-left"/>
+<instance part="IC1" gate="G$1" x="226.06" y="116.84" smashed="yes" rot="MR0">
+<attribute name="NAME" x="199.39" y="104.14" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="199.39" y="106.68" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="GND3" gate="1" x="203.2" y="35.56" smashed="yes">
+<attribute name="VALUE" x="200.66" y="33.02" size="1.778" layer="96"/>
+</instance>
+<instance part="C18" gate="G$1" x="203.2" y="43.18" smashed="yes">
+<attribute name="NAME" x="204.724" y="46.101" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="204.724" y="41.021" size="1.778" layer="96" font="vector"/>
 </instance>
 </instances>
 <busses>
 </busses>
 <nets>
 <net name="VCC" class="0">
-<segment>
-<pinref part="P+1" gate="VCC" pin="VCC"/>
-<wire x1="203.2" y1="88.9" x2="203.2" y2="63.5" width="0.1524" layer="91"/>
-<pinref part="U2" gate="G$1" pin="VBUS"/>
-<wire x1="203.2" y1="63.5" x2="198.12" y2="63.5" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<wire x1="231.14" y1="144.78" x2="231.14" y2="111.76" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="EN"/>
-<wire x1="231.14" y1="111.76" x2="223.52" y2="111.76" width="0.1524" layer="91"/>
-<pinref part="P+4" gate="VCC" pin="VCC"/>
-</segment>
 <segment>
 <pinref part="U4" gate="G$1" pin="VDD"/>
 <wire x1="88.9" y1="0" x2="35.56" y2="0" width="0.1524" layer="91"/>
@@ -4252,12 +4138,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <junction x="-15.24" y="83.82"/>
 </segment>
 <segment>
-<pinref part="GND3" gate="1" pin="GND"/>
-<wire x1="180.34" y1="50.8" x2="180.34" y2="63.5" width="0.1524" layer="91"/>
-<pinref part="U2" gate="G$1" pin="GND"/>
-<wire x1="180.34" y1="63.5" x2="182.88" y2="63.5" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="CN1" gate="G$1" pin="GND"/>
 <wire x1="218.44" y1="58.42" x2="215.9" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="GND4" gate="1" pin="GND"/>
@@ -4268,19 +4148,8 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <junction x="215.9" y="58.42"/>
 </segment>
 <segment>
-<pinref part="GND7" gate="1" pin="GND"/>
-<pinref part="U3" gate="G$1" pin="GND"/>
-<wire x1="190.5" y1="104.14" x2="190.5" y2="106.68" width="0.1524" layer="91"/>
-<wire x1="190.5" y1="106.68" x2="193.04" y2="106.68" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="GND9" gate="1" pin="GND"/>
-<pinref part="C5" gate="G$1" pin="2"/>
-<wire x1="213.36" y1="129.54" x2="213.36" y2="132.08" width="0.1524" layer="91"/>
-</segment>
-<segment>
 <pinref part="GND8" gate="1" pin="GND"/>
-<wire x1="175.26" y1="99.06" x2="175.26" y2="101.6" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="93.98" x2="187.96" y2="101.6" width="0.1524" layer="91"/>
 <pinref part="C3" gate="G$1" pin="2"/>
 </segment>
 <segment>
@@ -4423,6 +4292,26 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="27.94" y1="83.82" x2="27.94" y2="81.28" width="0.1524" layer="91"/>
 <pinref part="C17" gate="G$1" pin="2"/>
 </segment>
+<segment>
+<pinref part="C5" gate="G$1" pin="2"/>
+<pinref part="GND7" gate="1" pin="GND"/>
+<wire x1="248.92" y1="101.6" x2="248.92" y2="99.06" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="GND"/>
+<wire x1="226.06" y1="114.3" x2="236.22" y2="114.3" width="0.1524" layer="91"/>
+<label x="228.6" y="114.3" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="GND"/>
+<wire x1="172.72" y1="63.5" x2="182.88" y2="63.5" width="0.1524" layer="91"/>
+<label x="172.72" y="63.5" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="GND3" gate="1" pin="GND"/>
+<wire x1="203.2" y1="40.64" x2="203.2" y2="38.1" width="0.1524" layer="91"/>
+<pinref part="C18" gate="G$1" pin="2"/>
+</segment>
 </net>
 <net name="SWDIO" class="0">
 <segment>
@@ -4459,16 +4348,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <pinref part="C4" gate="G$1" pin="2"/>
 <wire x1="-17.78" y1="106.68" x2="-20.32" y2="106.68" width="0.1524" layer="91"/>
 <junction x="-17.78" y="106.68"/>
-</segment>
-<segment>
-<pinref part="SUPPLY6" gate="VDD" pin="VDD"/>
-<wire x1="180.34" y1="121.92" x2="180.34" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="U3" gate="G$1" pin="VOUT"/>
-<wire x1="180.34" y1="116.84" x2="193.04" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="109.22" x2="175.26" y2="116.84" width="0.1524" layer="91"/>
-<wire x1="175.26" y1="116.84" x2="180.34" y2="116.84" width="0.1524" layer="91"/>
-<junction x="180.34" y="116.84"/>
-<pinref part="C3" gate="G$1" pin="1"/>
 </segment>
 <segment>
 <pinref part="C10" gate="G$1" pin="1"/>
@@ -4555,6 +4434,18 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <label x="-48.26" y="-5.08" size="1.778" layer="95"/>
 <pinref part="PAD3" gate="G$1" pin="P"/>
 </segment>
+<segment>
+<pinref part="C3" gate="G$1" pin="1"/>
+<pinref part="IC1" gate="G$1" pin="VOUT"/>
+<wire x1="187.96" y1="109.22" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="114.3" x2="198.12" y2="114.3" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="114.3" x2="177.8" y2="114.3" width="0.1524" layer="91"/>
+<junction x="187.96" y="114.3"/>
+<pinref part="IC1" gate="G$1" pin="VFB"/>
+<wire x1="198.12" y1="116.84" x2="187.96" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="187.96" y1="116.84" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
+<label x="177.8" y="114.3" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="USB_D-" class="0">
 <segment>
@@ -4565,7 +4456,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <segment>
 <pinref part="U2" gate="G$1" pin="I/O2_1"/>
 <wire x1="182.88" y1="58.42" x2="172.72" y2="58.42" width="0.1524" layer="91"/>
-<label x="170.18" y="58.42" size="1.778" layer="95"/>
+<label x="172.72" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="USB_D+" class="0">
@@ -4576,9 +4467,8 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 </segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="I/O1_1"/>
-<wire x1="182.88" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="172.72" y1="68.58" x2="175.26" y2="68.58" width="0.1524" layer="91"/>
-<label x="170.18" y="68.58" size="1.778" layer="95"/>
+<wire x1="182.88" y1="68.58" x2="172.72" y2="68.58" width="0.1524" layer="91"/>
+<label x="172.72" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="I2C_SDA" class="0">
@@ -4623,20 +4513,31 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="208.28" y1="58.42" x2="198.12" y2="58.42" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$3" class="0">
+<net name="VBUS" class="0">
 <segment>
-<pinref part="U3" gate="G$1" pin="VIN"/>
-<wire x1="248.92" y1="116.84" x2="223.52" y2="116.84" width="0.1524" layer="91"/>
-<pinref part="C5" gate="G$1" pin="1"/>
-<wire x1="213.36" y1="139.7" x2="213.36" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="213.36" y1="142.24" x2="223.52" y2="142.24" width="0.1524" layer="91"/>
-<wire x1="223.52" y1="142.24" x2="223.52" y2="116.84" width="0.1524" layer="91"/>
-<junction x="223.52" y="116.84"/>
-<wire x1="248.92" y1="116.84" x2="248.92" y2="76.2" width="0.1524" layer="91"/>
-<wire x1="248.92" y1="76.2" x2="215.9" y2="76.2" width="0.1524" layer="91"/>
 <wire x1="215.9" y1="76.2" x2="215.9" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="CN1" gate="G$1" pin="VBUS"/>
 <wire x1="215.9" y1="68.58" x2="218.44" y2="68.58" width="0.1524" layer="91"/>
+<label x="215.9" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="VDD"/>
+<label x="228.6" y="116.84" size="1.778" layer="95"/>
+<pinref part="C5" gate="G$1" pin="1"/>
+<wire x1="248.92" y1="109.22" x2="248.92" y2="116.84" width="0.1524" layer="91"/>
+<wire x1="248.92" y1="116.84" x2="226.06" y2="116.84" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="CE"/>
+<wire x1="226.06" y1="111.76" x2="236.22" y2="111.76" width="0.1524" layer="91"/>
+<label x="228.6" y="111.76" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U2" gate="G$1" pin="VBUS"/>
+<wire x1="203.2" y1="63.5" x2="198.12" y2="63.5" width="0.1524" layer="91"/>
+<wire x1="203.2" y1="63.5" x2="203.2" y2="48.26" width="0.1524" layer="91"/>
+<label x="198.12" y="63.5" size="1.778" layer="95"/>
+<pinref part="C18" gate="G$1" pin="1"/>
 </segment>
 </net>
 <net name="SCL7" class="0">
