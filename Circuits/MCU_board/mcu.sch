@@ -1244,13 +1244,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pin name="VDD" x="0" y="0" visible="off" length="short" direction="sup" rot="R90"/>
 <text x="0" y="2.794" size="1.778" layer="96" align="bottom-center">&gt;VALUE</text>
 </symbol>
-<symbol name="VCC">
-<description>&lt;h3&gt;VCC Voltage Supply&lt;/h3&gt;</description>
-<wire x1="0.762" y1="1.27" x2="0" y2="2.54" width="0.254" layer="94"/>
-<wire x1="0" y1="2.54" x2="-0.762" y2="1.27" width="0.254" layer="94"/>
-<pin name="VCC" x="0" y="0" visible="off" length="short" direction="sup" rot="R90"/>
-<text x="0" y="2.794" size="1.778" layer="96" align="bottom-center">&gt;VALUE</text>
-</symbol>
 </symbols>
 <devicesets>
 <deviceset name="GND" prefix="GND">
@@ -1272,20 +1265,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 &lt;p&gt;Positive voltage supply (traditionally for a CMOS device, D=drain).&lt;/p&gt;</description>
 <gates>
 <gate name="VDD" symbol="VDD" x="0" y="0"/>
-</gates>
-<devices>
-<device name="">
-<technologies>
-<technology name=""/>
-</technologies>
-</device>
-</devices>
-</deviceset>
-<deviceset name="VCC" prefix="SUPPLY">
-<description>&lt;h3&gt;VCC Voltage Supply&lt;/h3&gt;
-&lt;p&gt;Positive voltage supply (traditionally for a BJT device, C=collector).&lt;/p&gt;</description>
-<gates>
-<gate name="G$1" symbol="VCC" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -3743,13 +3722,8 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <part name="GND2" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND10" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND11" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="GND12" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="SUPPLY8" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="GND13" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="SUPPLY9" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
-<part name="SUPPLY10" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
-<part name="SUPPLY11" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="C1" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 <part name="C2" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 <part name="C6" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
@@ -3759,7 +3733,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <part name="R3" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R4" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R1" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
-<part name="SUPPLY12" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="C9" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="100nF"/>
 <part name="C10" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="4.7uF"/>
 <part name="GND14" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
@@ -3787,16 +3760,22 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <part name="PAD4" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
 <part name="R5" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R6" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
-<part name="SUPPLY3" library="SparkFun-PowerSymbols" deviceset="VCC" device=""/>
 <part name="GND22" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="S1" library="SparkFun-Switches" deviceset="MOMENTARY-SWITCH-SPST" device="-PTH-6.0MM"/>
 <part name="GND23" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND24" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="C17" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="100nF"/>
 <part name="C3" library="SparkFun-Capacitors" deviceset="0.18UF" device="-0603-10V-10%" value="1 uF"/>
 <part name="IC1" library="SamacSys_Parts" deviceset="RP111N331B-TR-FE" device=""/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="C18" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
+<part name="SUPPLY3" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY1" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY4" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY5" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY6" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY8" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY9" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="C17" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 </parts>
 <sheets>
 <sheet>
@@ -3865,26 +3844,11 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <instance part="GND11" gate="1" x="25.4" y="-20.32" smashed="yes">
 <attribute name="VALUE" x="25.4" y="-20.574" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY1" gate="G$1" x="35.56" y="10.16" smashed="yes">
-<attribute name="VALUE" x="35.56" y="12.954" size="1.778" layer="96" align="bottom-center"/>
-</instance>
 <instance part="GND12" gate="1" x="48.26" y="-20.32" smashed="yes">
 <attribute name="VALUE" x="48.26" y="-20.574" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="SUPPLY8" gate="G$1" x="55.88" y="10.16" smashed="yes">
-<attribute name="VALUE" x="55.88" y="12.954" size="1.778" layer="96" align="bottom-center"/>
-</instance>
 <instance part="GND13" gate="1" x="86.36" y="-35.56" smashed="yes">
 <attribute name="VALUE" x="86.36" y="-35.814" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="SUPPLY9" gate="G$1" x="147.32" y="12.7" smashed="yes">
-<attribute name="VALUE" x="147.32" y="15.494" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="SUPPLY10" gate="G$1" x="157.48" y="12.7" smashed="yes">
-<attribute name="VALUE" x="157.48" y="15.494" size="1.778" layer="96" align="bottom-center"/>
-</instance>
-<instance part="SUPPLY11" gate="G$1" x="167.64" y="12.7" smashed="yes">
-<attribute name="VALUE" x="167.64" y="15.494" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="C1" gate="G$1" x="76.2" y="-17.78" smashed="yes">
 <attribute name="NAME" x="77.724" y="-14.859" size="1.778" layer="95" font="vector"/>
@@ -3921,9 +3885,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <instance part="R1" gate="G$1" x="137.16" y="2.54" smashed="yes" rot="R90">
 <attribute name="NAME" x="135.636" y="2.54" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="138.684" y="2.54" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
-</instance>
-<instance part="SUPPLY12" gate="G$1" x="137.16" y="12.7" smashed="yes">
-<attribute name="VALUE" x="137.16" y="15.494" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 <instance part="C9" gate="G$1" x="33.02" y="162.56" smashed="yes">
 <attribute name="NAME" x="34.544" y="165.481" size="1.778" layer="95" font="vector"/>
@@ -4024,9 +3985,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <attribute name="NAME" x="-29.464" y="20.32" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="-26.416" y="20.32" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
 </instance>
-<instance part="SUPPLY3" gate="G$1" x="-27.94" y="27.94" smashed="yes">
-<attribute name="VALUE" x="-27.94" y="30.734" size="1.778" layer="96" align="bottom-center"/>
-</instance>
 <instance part="GND22" gate="1" x="-27.94" y="-10.16" smashed="yes">
 <attribute name="VALUE" x="-27.94" y="-10.414" size="1.778" layer="96" align="top-center"/>
 </instance>
@@ -4039,10 +3997,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 </instance>
 <instance part="GND24" gate="1" x="27.94" y="78.74" smashed="yes">
 <attribute name="VALUE" x="27.94" y="78.486" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="C17" gate="G$1" x="27.94" y="86.36" smashed="yes">
-<attribute name="NAME" x="29.464" y="89.281" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="29.464" y="84.201" size="1.778" layer="96" font="vector"/>
 </instance>
 <instance part="C3" gate="G$1" x="187.96" y="104.14" smashed="yes">
 <attribute name="NAME" x="189.484" y="107.061" size="1.778" layer="95" font="vector"/>
@@ -4059,59 +4013,35 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <attribute name="NAME" x="204.724" y="46.101" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="204.724" y="41.021" size="1.778" layer="96" font="vector"/>
 </instance>
+<instance part="SUPPLY3" gate="VDD" x="-27.94" y="27.94" smashed="yes">
+<attribute name="VALUE" x="-27.94" y="30.734" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY1" gate="VDD" x="35.56" y="10.16" smashed="yes">
+<attribute name="VALUE" x="35.56" y="12.954" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY4" gate="VDD" x="55.88" y="10.16" smashed="yes">
+<attribute name="VALUE" x="55.88" y="12.954" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY5" gate="VDD" x="137.16" y="12.7" smashed="yes">
+<attribute name="VALUE" x="137.16" y="15.494" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY6" gate="VDD" x="147.32" y="12.7" smashed="yes">
+<attribute name="VALUE" x="147.32" y="15.494" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY8" gate="VDD" x="157.48" y="12.7" smashed="yes">
+<attribute name="VALUE" x="157.48" y="15.494" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY9" gate="VDD" x="167.64" y="12.7" smashed="yes">
+<attribute name="VALUE" x="167.64" y="15.494" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="C17" gate="G$1" x="27.94" y="86.36" smashed="yes">
+<attribute name="NAME" x="29.464" y="89.281" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="29.464" y="84.201" size="1.778" layer="96" font="vector"/>
+</instance>
 </instances>
 <busses>
 </busses>
 <nets>
-<net name="VCC" class="0">
-<segment>
-<pinref part="U4" gate="G$1" pin="VDD"/>
-<wire x1="88.9" y1="0" x2="35.56" y2="0" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="0" x2="35.56" y2="-7.62" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="0" x2="25.4" y2="0" width="0.1524" layer="91"/>
-<junction x="35.56" y="0"/>
-<wire x1="25.4" y1="0" x2="25.4" y2="-7.62" width="0.1524" layer="91"/>
-<pinref part="SUPPLY1" gate="G$1" pin="VCC"/>
-<wire x1="35.56" y1="10.16" x2="35.56" y2="0" width="0.1524" layer="91"/>
-<pinref part="C6" gate="G$1" pin="1"/>
-<pinref part="C8" gate="G$1" pin="1"/>
-</segment>
-<segment>
-<wire x1="48.26" y1="-7.62" x2="48.26" y2="-2.54" width="0.1524" layer="91"/>
-<pinref part="U4" gate="G$1" pin="VDDIO"/>
-<wire x1="48.26" y1="-2.54" x2="55.88" y2="-2.54" width="0.1524" layer="91"/>
-<pinref part="SUPPLY8" gate="G$1" pin="VCC"/>
-<wire x1="55.88" y1="-2.54" x2="88.9" y2="-2.54" width="0.1524" layer="91"/>
-<wire x1="55.88" y1="10.16" x2="55.88" y2="-2.54" width="0.1524" layer="91"/>
-<junction x="55.88" y="-2.54"/>
-<pinref part="C2" gate="G$1" pin="1"/>
-</segment>
-<segment>
-<pinref part="SUPPLY11" gate="G$1" pin="VCC"/>
-<wire x1="167.64" y1="12.7" x2="167.64" y2="7.62" width="0.1524" layer="91"/>
-<pinref part="R4" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="SUPPLY10" gate="G$1" pin="VCC"/>
-<wire x1="157.48" y1="7.62" x2="157.48" y2="12.7" width="0.1524" layer="91"/>
-<pinref part="R3" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="SUPPLY9" gate="G$1" pin="VCC"/>
-<wire x1="147.32" y1="12.7" x2="147.32" y2="7.62" width="0.1524" layer="91"/>
-<pinref part="R2" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="R1" gate="G$1" pin="2"/>
-<pinref part="SUPPLY12" gate="G$1" pin="VCC"/>
-<wire x1="137.16" y1="7.62" x2="137.16" y2="12.7" width="0.1524" layer="91"/>
-</segment>
-<segment>
-<pinref part="SUPPLY3" gate="G$1" pin="VCC"/>
-<pinref part="R6" gate="G$1" pin="2"/>
-<wire x1="-27.94" y1="27.94" x2="-27.94" y2="25.4" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="GND" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="GND"/>
@@ -4446,6 +4376,53 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="187.96" y1="116.84" x2="187.96" y2="114.3" width="0.1524" layer="91"/>
 <label x="177.8" y="114.3" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R6" gate="G$1" pin="2"/>
+<wire x1="-27.94" y1="27.94" x2="-27.94" y2="25.4" width="0.1524" layer="91"/>
+<pinref part="SUPPLY3" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="VDD"/>
+<wire x1="88.9" y1="0" x2="35.56" y2="0" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="0" x2="35.56" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="0" x2="25.4" y2="0" width="0.1524" layer="91"/>
+<junction x="35.56" y="0"/>
+<wire x1="25.4" y1="0" x2="25.4" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="10.16" x2="35.56" y2="0" width="0.1524" layer="91"/>
+<pinref part="C6" gate="G$1" pin="1"/>
+<pinref part="C8" gate="G$1" pin="1"/>
+<pinref part="SUPPLY1" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<wire x1="48.26" y1="-7.62" x2="48.26" y2="-2.54" width="0.1524" layer="91"/>
+<pinref part="U4" gate="G$1" pin="VDDIO"/>
+<wire x1="48.26" y1="-2.54" x2="55.88" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="-2.54" x2="88.9" y2="-2.54" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="10.16" x2="55.88" y2="-2.54" width="0.1524" layer="91"/>
+<junction x="55.88" y="-2.54"/>
+<pinref part="C2" gate="G$1" pin="1"/>
+<pinref part="SUPPLY4" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="137.16" y1="7.62" x2="137.16" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="SUPPLY5" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<wire x1="147.32" y1="12.7" x2="147.32" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<pinref part="SUPPLY6" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<wire x1="157.48" y1="7.62" x2="157.48" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<pinref part="SUPPLY8" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<wire x1="167.64" y1="12.7" x2="167.64" y2="7.62" width="0.1524" layer="91"/>
+<pinref part="R4" gate="G$1" pin="2"/>
+<pinref part="SUPPLY9" gate="VDD" pin="VDD"/>
+</segment>
 </net>
 <net name="USB_D-" class="0">
 <segment>
@@ -4546,12 +4523,32 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="-50.8" y1="114.3" x2="-53.34" y2="114.3" width="0.1524" layer="91"/>
 <label x="-58.42" y="114.3" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="U$5" gate="G$1" pin="5"/>
+<wire x1="-86.36" y1="111.76" x2="-86.36" y2="104.14" width="0.1524" layer="91"/>
+<label x="-86.36" y="99.06" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="SCL/SPC"/>
+<wire x1="119.38" y1="-2.54" x2="124.46" y2="-2.54" width="0.1524" layer="91"/>
+<label x="119.38" y="-2.54" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="SDA7" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="SDA7"/>
 <wire x1="-50.8" y1="111.76" x2="-53.34" y2="111.76" width="0.1524" layer="91"/>
 <label x="-58.42" y="111.76" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="U$5" gate="G$1" pin="6"/>
+<wire x1="-88.9" y1="111.76" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
+<label x="-88.9" y="99.06" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="U4" gate="G$1" pin="SDA/SDI/SDO"/>
+<wire x1="119.38" y1="0" x2="124.46" y2="0" width="0.1524" layer="91"/>
+<label x="119.38" y="0" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCL6" class="0">
@@ -4565,11 +4562,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="-76.2" y1="111.76" x2="-76.2" y2="104.14" width="0.1524" layer="91"/>
 <label x="-76.2" y="99.06" size="1.778" layer="95" rot="R90"/>
 </segment>
-<segment>
-<pinref part="U4" gate="G$1" pin="SCL/SPC"/>
-<wire x1="119.38" y1="-2.54" x2="124.46" y2="-2.54" width="0.1524" layer="91"/>
-<label x="119.38" y="-2.54" size="1.778" layer="95"/>
-</segment>
 </net>
 <net name="SDA6" class="0">
 <segment>
@@ -4581,11 +4573,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <pinref part="U$5" gate="G$1" pin="2"/>
 <wire x1="-78.74" y1="111.76" x2="-78.74" y2="104.14" width="0.1524" layer="91"/>
 <label x="-78.74" y="99.06" size="1.778" layer="95" rot="R90"/>
-</segment>
-<segment>
-<pinref part="U4" gate="G$1" pin="SDA/SDI/SDO"/>
-<wire x1="119.38" y1="0" x2="124.46" y2="0" width="0.1524" layer="91"/>
-<label x="119.38" y="0" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="SCL5" class="0">
@@ -4599,11 +4586,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <wire x1="-111.76" y1="111.76" x2="-111.76" y2="104.14" width="0.1524" layer="91"/>
 <label x="-111.76" y="99.06" size="1.778" layer="95" rot="R90"/>
 </segment>
-<segment>
-<pinref part="U$5" gate="G$1" pin="5"/>
-<wire x1="-86.36" y1="111.76" x2="-86.36" y2="104.14" width="0.1524" layer="91"/>
-<label x="-86.36" y="99.06" size="1.778" layer="95" rot="R90"/>
-</segment>
 </net>
 <net name="SDA5" class="0">
 <segment>
@@ -4615,11 +4597,6 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <pinref part="U$4" gate="G$1" pin="2"/>
 <wire x1="-114.3" y1="111.76" x2="-114.3" y2="104.14" width="0.1524" layer="91"/>
 <label x="-114.3" y="99.06" size="1.778" layer="95" rot="R90"/>
-</segment>
-<segment>
-<pinref part="U$5" gate="G$1" pin="6"/>
-<wire x1="-88.9" y1="111.76" x2="-88.9" y2="104.14" width="0.1524" layer="91"/>
-<label x="-88.9" y="99.06" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="SCL4" class="0">
@@ -4754,6 +4731,7 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <segment>
 <pinref part="U1" gate="G$1" pin="SDA0"/>
 <wire x1="-50.8" y1="58.42" x2="-53.34" y2="58.42" width="0.1524" layer="91"/>
+<label x="-58.42" y="58.42" size="1.778" layer="95"/>
 </segment>
 <segment>
 <pinref part="U$1" gate="G$1" pin="2"/>
@@ -4816,9 +4794,9 @@ Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/RP111N331B-TR
 <net name="N$4" class="0">
 <segment>
 <pinref part="S1" gate="G$1" pin="2"/>
+<pinref part="U5" gate="G$1" pin="NRST"/>
 <wire x1="22.86" y1="91.44" x2="27.94" y2="91.44" width="0.1524" layer="91"/>
 <pinref part="C17" gate="G$1" pin="1"/>
-<pinref part="U5" gate="G$1" pin="NRST"/>
 <wire x1="27.94" y1="91.44" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
 <junction x="27.94" y="91.44"/>
 </segment>
