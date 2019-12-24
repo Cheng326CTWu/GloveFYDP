@@ -1488,12 +1488,12 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="NDUC-13805" x="-50.8" y="-334.01" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-50.8" y="-334.772" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R21" library="SparkFun-Resistors" package="0603" value="4.7k" x="-0.85" y="-665.48" smashed="yes">
+<element name="R21" library="SparkFun-Resistors" package="0603" value="27R" x="-0.85" y="-665.48" smashed="yes">
 <attribute name="NAME" x="-0.85" y="-664.718" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-07857" x="-0.85" y="-665.48" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-0.85" y="-666.242" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R22" library="SparkFun-Resistors" package="0603" value="4.7k" x="-0.85" y="-678.18" smashed="yes">
+<element name="R22" library="SparkFun-Resistors" package="0603" value="27R" x="-0.85" y="-678.18" smashed="yes">
 <attribute name="NAME" x="-0.85" y="-677.418" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-07857" x="-0.85" y="-678.18" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-0.85" y="-678.942" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
@@ -1528,7 +1528,7 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="CAP-08913" x="-52.07" y="-364.49" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-52.07" y="-365.252" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R27" library="SparkFun-Resistors" package="0603" value="4.7k" x="-0.85" y="-690.88" smashed="yes">
+<element name="R27" library="SparkFun-Resistors" package="0603" value="270R" x="-0.85" y="-690.88" smashed="yes">
 <attribute name="NAME" x="-0.85" y="-690.118" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-07857" x="-0.85" y="-690.88" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-0.85" y="-691.642" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
@@ -1543,7 +1543,7 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="DIO-00821" x="-52.07" y="-394.97" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-52.07" y="-399.415" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="R28" library="SparkFun-Resistors" package="0603" value="4.7k" x="-0.85" y="-703.58" smashed="yes">
+<element name="R28" library="SparkFun-Resistors" package="0603" value="270R" x="-0.85" y="-703.58" smashed="yes">
 <attribute name="NAME" x="-0.85" y="-702.818" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="RES-07857" x="-0.85" y="-707.39" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="-0.85" y="-704.342" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
