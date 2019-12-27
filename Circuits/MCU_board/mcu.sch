@@ -5455,11 +5455,6 @@ with hardware flow control (RS232)</text>
 </net>
 <net name="USB_D-" class="0">
 <segment>
-<pinref part="U5" gate="G$1" pin="PA11"/>
-<wire x1="124.46" y1="96.52" x2="134.62" y2="96.52" width="0.1524" layer="91"/>
-<label x="134.62" y="96.52" size="1.778" layer="95"/>
-</segment>
-<segment>
 <pinref part="U2" gate="G$1" pin="I/O2_1"/>
 <wire x1="180.34" y1="58.42" x2="170.18" y2="58.42" width="0.1524" layer="91"/>
 <label x="170.18" y="58.42" size="1.778" layer="95"/>
@@ -5475,11 +5470,6 @@ with hardware flow control (RS232)</text>
 </segment>
 </net>
 <net name="USB_D+" class="0">
-<segment>
-<pinref part="U5" gate="G$1" pin="PA12"/>
-<wire x1="124.46" y1="99.06" x2="134.62" y2="99.06" width="0.1524" layer="91"/>
-<label x="134.62" y="99.06" size="1.778" layer="95"/>
-</segment>
 <segment>
 <pinref part="U2" gate="G$1" pin="I/O1_1"/>
 <wire x1="180.34" y1="68.58" x2="170.18" y2="68.58" width="0.1524" layer="91"/>
