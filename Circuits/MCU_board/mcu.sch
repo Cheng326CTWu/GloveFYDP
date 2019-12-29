@@ -5509,22 +5509,24 @@ with hardware flow control (RS232)</text>
 <label x="-35.56" y="78.74" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$1" class="0">
+<net name="D+" class="0">
 <segment>
 <pinref part="CN1" gate="G$1" pin="D+"/>
 <wire x1="215.9" y1="66.04" x2="205.74" y2="66.04" width="0.1524" layer="91"/>
 <wire x1="205.74" y1="66.04" x2="205.74" y2="68.58" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="I/O1_2"/>
 <wire x1="205.74" y1="68.58" x2="195.58" y2="68.58" width="0.1524" layer="91"/>
+<label x="203.2" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
-<net name="N$2" class="0">
+<net name="D-" class="0">
 <segment>
 <pinref part="CN1" gate="G$1" pin="D-"/>
 <wire x1="215.9" y1="63.5" x2="205.74" y2="63.5" width="0.1524" layer="91"/>
 <wire x1="205.74" y1="63.5" x2="205.74" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="U2" gate="G$1" pin="I/O2_2"/>
 <wire x1="205.74" y1="58.42" x2="195.58" y2="58.42" width="0.1524" layer="91"/>
+<label x="203.2" y="58.42" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="VBUS" class="0">
