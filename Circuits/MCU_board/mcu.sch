@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4470,6 +4470,10 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="R24" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R25" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="R26" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
+<part name="R29" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
+<part name="R30" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
+<part name="SUPPLY26" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="SUPPLY27" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -4929,6 +4933,20 @@ with hardware flow control (RS232)</text>
 <instance part="R26" gate="G$1" x="106.68" y="7.62" smashed="yes" rot="R90">
 <attribute name="NAME" x="105.156" y="7.62" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
 <attribute name="VALUE" x="108.204" y="7.62" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+</instance>
+<instance part="R29" gate="G$1" x="-215.9" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="-217.424" y="119.38" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="-214.376" y="119.38" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+</instance>
+<instance part="R30" gate="G$1" x="-223.52" y="119.38" smashed="yes" rot="R90">
+<attribute name="NAME" x="-225.044" y="119.38" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="-221.996" y="119.38" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+</instance>
+<instance part="SUPPLY26" gate="VDD" x="-215.9" y="129.54" smashed="yes">
+<attribute name="VALUE" x="-215.9" y="132.334" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="SUPPLY27" gate="VDD" x="-223.52" y="129.54" smashed="yes">
+<attribute name="VALUE" x="-223.52" y="132.334" size="1.778" layer="96" align="bottom-center"/>
 </instance>
 </instances>
 <busses>
@@ -5452,6 +5470,16 @@ with hardware flow control (RS232)</text>
 <wire x1="-96.52" y1="81.28" x2="-96.52" y2="63.5" width="0.1524" layer="91"/>
 <label x="-96.52" y="63.5" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="R29" gate="G$1" pin="2"/>
+<wire x1="-215.9" y1="124.46" x2="-215.9" y2="129.54" width="0.1524" layer="91"/>
+<pinref part="SUPPLY26" gate="VDD" pin="VDD"/>
+</segment>
+<segment>
+<pinref part="R30" gate="G$1" pin="2"/>
+<wire x1="-223.52" y1="124.46" x2="-223.52" y2="129.54" width="0.1524" layer="91"/>
+<pinref part="SUPPLY27" gate="VDD" pin="VDD"/>
+</segment>
 </net>
 <net name="USB_D-" class="0">
 <segment>
@@ -5496,6 +5524,11 @@ with hardware flow control (RS232)</text>
 <wire x1="-38.1" y1="76.2" x2="-27.94" y2="76.2" width="0.1524" layer="91"/>
 <label x="-35.56" y="76.2" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R30" gate="G$1" pin="1"/>
+<wire x1="-223.52" y1="114.3" x2="-223.52" y2="106.68" width="0.1524" layer="91"/>
+<label x="-223.52" y="101.6" size="1.778" layer="95" rot="R90"/>
+</segment>
 </net>
 <net name="I2C_SCLK" class="0">
 <segment>
@@ -5507,6 +5540,11 @@ with hardware flow control (RS232)</text>
 <pinref part="U1" gate="G$1" pin="SCL"/>
 <wire x1="-38.1" y1="78.74" x2="-27.94" y2="78.74" width="0.1524" layer="91"/>
 <label x="-35.56" y="78.74" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R29" gate="G$1" pin="1"/>
+<wire x1="-215.9" y1="114.3" x2="-215.9" y2="106.68" width="0.1524" layer="91"/>
+<label x="-215.9" y="101.6" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="D+" class="0">
