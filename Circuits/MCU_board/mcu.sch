@@ -5508,10 +5508,10 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="R30" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="SUPPLY26" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 <part name="SUPPLY27" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
-<part name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
-<part name="TP2" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
-<part name="TP3" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
-<part name="TP4" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
+<part name="GND" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
+<part name="VDD" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
+<part name="VCCIO" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
+<part name="VBUS" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -5980,19 +5980,19 @@ with hardware flow control (RS232)</text>
 <instance part="SUPPLY27" gate="VDD" x="-223.52" y="129.54" smashed="yes">
 <attribute name="VALUE" x="-223.52" y="132.334" size="1.778" layer="96" align="bottom-center"/>
 </instance>
-<instance part="TP1" gate="G$1" x="175.26" y="20.32" smashed="yes">
+<instance part="GND" gate="G$1" x="175.26" y="20.32" smashed="yes">
 <attribute name="NAME" x="173.99" y="21.59" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="176.53" y="19.05" size="1.778" layer="97"/>
 </instance>
-<instance part="TP2" gate="G$1" x="187.96" y="20.32" smashed="yes">
+<instance part="VDD" gate="G$1" x="187.96" y="20.32" smashed="yes">
 <attribute name="NAME" x="186.69" y="21.59" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="189.23" y="19.05" size="1.778" layer="97"/>
 </instance>
-<instance part="TP3" gate="G$1" x="200.66" y="20.32" smashed="yes">
+<instance part="VCCIO" gate="G$1" x="200.66" y="20.32" smashed="yes">
 <attribute name="NAME" x="199.39" y="21.59" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="201.93" y="19.05" size="1.778" layer="97"/>
 </instance>
-<instance part="TP4" gate="G$1" x="213.36" y="20.32" smashed="yes">
+<instance part="VBUS" gate="G$1" x="213.36" y="20.32" smashed="yes">
 <attribute name="NAME" x="212.09" y="21.59" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="214.63" y="19.05" size="1.778" layer="97"/>
 </instance>
@@ -6259,7 +6259,7 @@ with hardware flow control (RS232)</text>
 <label x="-93.98" y="63.5" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="TP1" gate="G$1" pin="TP"/>
+<pinref part="GND" gate="G$1" pin="TP"/>
 <wire x1="175.26" y1="17.78" x2="175.26" y2="10.16" width="0.1524" layer="91"/>
 <label x="175.26" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
@@ -6524,7 +6524,7 @@ with hardware flow control (RS232)</text>
 <pinref part="SUPPLY27" gate="VDD" pin="VDD"/>
 </segment>
 <segment>
-<pinref part="TP2" gate="G$1" pin="TP"/>
+<pinref part="VDD" gate="G$1" pin="TP"/>
 <wire x1="187.96" y1="17.78" x2="187.96" y2="10.16" width="0.1524" layer="91"/>
 <label x="187.96" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
@@ -6651,7 +6651,7 @@ with hardware flow control (RS232)</text>
 <label x="158.75" y="-25.4" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="TP4" gate="G$1" pin="TP"/>
+<pinref part="VBUS" gate="G$1" pin="TP"/>
 <wire x1="213.36" y1="17.78" x2="213.36" y2="10.16" width="0.1524" layer="91"/>
 <label x="213.36" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
@@ -7136,7 +7136,7 @@ with hardware flow control (RS232)</text>
 <label x="127" y="12.7" size="1.778" layer="95" rot="R90"/>
 </segment>
 <segment>
-<pinref part="TP3" gate="G$1" pin="TP"/>
+<pinref part="VCCIO" gate="G$1" pin="TP"/>
 <wire x1="200.66" y1="17.78" x2="200.66" y2="10.16" width="0.1524" layer="91"/>
 <label x="200.66" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>

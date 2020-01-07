@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1262,8 +1262,8 @@ design rules under a new name.</description>
 <attribute name="MANF" value="" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
 <attribute name="MEM" value="" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
 <attribute name="MFPN" value="STM32L476RCT6" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="41.0822" y="44.5462" size="0.8128" layer="151" ratio="10" align="center"/>
 <attribute name="NAME" x="36.8822" y="48.1462" size="1.016" layer="25" font="vector" ratio="18" align="bottom-right"/>
+<attribute name="NAME" x="41.0822" y="44.5462" size="0.8128" layer="151" ratio="10" align="center"/>
 <attribute name="PARTNO" value="" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
 <attribute name="STATUS" value="" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
 <attribute name="TEMP" value="" x="61.4022" y="35.0262" size="1.778" layer="27" display="off"/>
@@ -1602,23 +1602,23 @@ design rules under a new name.</description>
 <attribute name="PROD_ID" value="RES-00824" x="55.8292" y="43.7896" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="55.8292" y="43.0276" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.588" y="18.1102" smashed="yes">
-<attribute name="NAME" x="4.318" y="19.7612" size="1.27" layer="25" ratio="10"/>
+<element name="GND" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.588" y="18.1102" smashed="yes">
+<attribute name="NAME" x="3.81" y="19.7612" size="1.27" layer="25" ratio="10"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="5.588" y="18.1102" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="4.318" y="16.7132" size="0.0254" layer="27"/>
 </element>
-<element name="TP2" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.7658" y="37.2618" smashed="yes">
-<attribute name="NAME" x="4.4958" y="38.9128" size="1.27" layer="25" ratio="10"/>
+<element name="VDD" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.7658" y="37.2618" smashed="yes">
+<attribute name="NAME" x="3.8354" y="38.9128" size="1.27" layer="25" ratio="10"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="5.7658" y="37.2618" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="4.4958" y="35.8648" size="0.0254" layer="27"/>
 </element>
-<element name="TP3" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.6896" y="27.7876" smashed="yes">
-<attribute name="NAME" x="4.4196" y="29.4386" size="1.27" layer="25" ratio="10"/>
+<element name="VCCIO" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="5.6896" y="27.7876" smashed="yes">
+<attribute name="NAME" x="3.175" y="29.5402" size="1.27" layer="25" ratio="10"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="5.6896" y="27.7876" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="4.4196" y="26.3906" size="0.0254" layer="27"/>
 </element>
-<element name="TP4" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="27.2288" y="15.2146" smashed="yes">
-<attribute name="NAME" x="25.9588" y="16.8656" size="1.27" layer="25" ratio="10"/>
+<element name="VBUS" library="testpad" library_urn="urn:adsk.eagle:library:385" package="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1" value="TPB2,54" x="27.2288" y="15.2146" smashed="yes">
+<attribute name="NAME" x="25.1968" y="16.8402" size="1.27" layer="25" ratio="10"/>
 <attribute name="TP_SIGNAL_NAME" value="" x="27.2288" y="15.2146" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="25.9588" y="13.8176" size="0.0254" layer="27"/>
 </element>
@@ -1810,7 +1810,7 @@ design rules under a new name.</description>
 <wire x1="19.0521" y1="29.4873" x2="19.05" y2="29.4894" width="0.1524" layer="1"/>
 <wire x1="42.8954" y1="25.3306" x2="42.8752" y2="25.3104" width="0.1524" layer="1"/>
 <wire x1="42.8752" y1="25.3104" x2="42.8752" y2="22.4028" width="0.3048" layer="1"/>
-<contactref element="TP1" pad="TP"/>
+<contactref element="GND" pad="TP"/>
 <via x="5.588" y="15.0114" extent="1-16" drill="0.35"/>
 <wire x1="5.588" y1="15.0114" x2="5.588" y2="18.1102" width="0.3048" layer="1"/>
 <wire x1="26.8402" y1="30.1223" x2="28.7507" y2="30.1223" width="0.3048" layer="1"/>
@@ -1945,23 +1945,21 @@ design rules under a new name.</description>
 <wire x1="58.3692" y1="39.1668" x2="58.5584" y2="38.9776" width="0.3048" layer="1"/>
 <contactref element="R29" pad="2"/>
 <contactref element="R30" pad="2"/>
-<contactref element="TP2" pad="TP"/>
+<contactref element="VDD" pad="TP"/>
 <polygon width="0.1524" layer="1">
 <vertex x="2.159" y="78.9686"/>
 <vertex x="77.2414" y="78.9686"/>
 <vertex x="78.6384" y="77.5716"/>
 <vertex x="78.6384" y="12.6238"/>
 <vertex x="77.4954" y="11.4808"/>
-<vertex x="49.1744" y="11.4808"/>
-<vertex x="47.879" y="12.7762"/>
+<vertex x="47.879" y="11.4808"/>
 <vertex x="47.879" y="28.7274"/>
 <vertex x="43.6372" y="32.9692"/>
 <vertex x="35.8902" y="32.9692"/>
 <vertex x="28.1686" y="40.6908"/>
 <vertex x="15.3924" y="40.6908"/>
-<vertex x="9.017" y="34.3154"/>
-<vertex x="2.6162" y="34.3154"/>
-<vertex x="1.1684" y="35.7632"/>
+<vertex x="9.1186" y="34.417"/>
+<vertex x="1.1684" y="34.417"/>
 <vertex x="1.1684" y="77.978"/>
 </polygon>
 </signal>
@@ -2085,20 +2083,17 @@ design rules under a new name.</description>
 <wire x1="37.6174" y1="32.1564" x2="41.4274" y2="32.1564" width="0.3048" layer="16"/>
 <wire x1="41.4274" y1="32.1564" x2="42.7482" y2="30.8356" width="0.3048" layer="16"/>
 <wire x1="42.7482" y1="30.8356" x2="42.7482" y2="29.083" width="0.3048" layer="16"/>
-<contactref element="TP4" pad="TP"/>
+<contactref element="VBUS" pad="TP"/>
 <polygon width="0.1524" layer="1">
 <vertex x="43.1546" y="32.2072"/>
 <vertex x="46.8122" y="28.5496"/>
-<vertex x="46.8122" y="12.8016"/>
-<vertex x="45.4914" y="11.4808"/>
-<vertex x="26.6954" y="11.4808"/>
-<vertex x="24.384" y="13.7922"/>
+<vertex x="46.8122" y="11.4808"/>
+<vertex x="24.384" y="11.4808"/>
 <vertex x="24.384" y="17.8816"/>
 <vertex x="27.5082" y="21.0058"/>
 <vertex x="30.734" y="21.0058"/>
 <vertex x="33.4772" y="23.749"/>
-<vertex x="33.4772" y="30.8864"/>
-<vertex x="34.798" y="32.2072"/>
+<vertex x="33.4772" y="32.2072"/>
 </polygon>
 </signal>
 <signal name="SCL7">
@@ -2594,18 +2589,20 @@ design rules under a new name.</description>
 <via x="24.7904" y="33.528" extent="1-16" drill="0.35"/>
 <wire x1="21.6918" y1="31.5406" x2="23.6792" y2="33.528" width="0.3048" layer="16"/>
 <wire x1="23.6792" y1="33.528" x2="24.7904" y2="33.528" width="0.3048" layer="16"/>
-<contactref element="TP3" pad="TP"/>
+<contactref element="VCCIO" pad="TP"/>
 <polygon width="0.1524" layer="1">
-<vertex x="9.652" y="33.4772"/>
-<vertex x="14.605" y="38.4302"/>
-<vertex x="29.4894" y="38.4302"/>
-<vertex x="32.9438" y="34.9758"/>
-<vertex x="32.9438" y="24.8666"/>
-<vertex x="30.1498" y="22.0726"/>
-<vertex x="4.3942" y="22.0726"/>
-<vertex x="1.143" y="25.3238"/>
-<vertex x="1.143" y="31.5722"/>
-<vertex x="3.048" y="33.4772"/>
+<vertex x="1.143" y="33.3756"/>
+<vertex x="9.4996" y="33.3756"/>
+<vertex x="15.621" y="39.497"/>
+<vertex x="28.1686" y="39.497"/>
+<vertex x="32.8676" y="34.798"/>
+<vertex x="32.8676" y="24.384"/>
+<vertex x="30.4038" y="21.9202"/>
+<vertex x="27.1272" y="21.9202"/>
+<vertex x="23.4696" y="18.2626"/>
+<vertex x="23.4696" y="11.4808"/>
+<vertex x="2.286" y="11.4808"/>
+<vertex x="1.143" y="12.6238"/>
 </polygon>
 </signal>
 <signal name="TXD">
