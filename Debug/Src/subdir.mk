@@ -7,6 +7,7 @@ C_SRCS += \
 ../Src/LSM9DS1.c \
 ../Src/TCA9548A.c \
 ../Src/glove_status_codes.c \
+../Src/hand.c \
 ../Src/main.c \
 ../Src/queue.c \
 ../Src/scheduler.c \
@@ -22,6 +23,7 @@ OBJS += \
 ./Src/LSM9DS1.o \
 ./Src/TCA9548A.o \
 ./Src/glove_status_codes.o \
+./Src/hand.o \
 ./Src/main.o \
 ./Src/queue.o \
 ./Src/scheduler.o \
@@ -37,6 +39,7 @@ C_DEPS += \
 ./Src/LSM9DS1.d \
 ./Src/TCA9548A.d \
 ./Src/glove_status_codes.d \
+./Src/hand.d \
 ./Src/main.d \
 ./Src/queue.d \
 ./Src/scheduler.d \

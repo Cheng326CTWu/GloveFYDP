@@ -8,8 +8,25 @@
 #ifndef LSM9DS1_H_
 #define LSM9DS1_H_
 
+#include "stdbool.h"
+
 #include "glove_status_codes.h"
 #include "scheduler.h"
+
+#define IMU_AG_ADDR_BASE 0xD4
+#define IMU_M_ADDR_BASE 0x38
+#define IMU_GET_AG_ADDR(sad0_pin_value) (IMU_AG_ADDR_BASE | ((sad0_pin_value) << 1))
+#define IMU_GET_M_ADDR(sad1_pin_value) (IMU_M_ADDR_BASE | ((sad1_pin_value) << 2))
+
+typedef struct {
+    bool fInit;
+    I2C_HandleTypeDef *hi2c;
+    uint32_t ag_addr;
+    uint32_t m_addr;
+    int16_t accOffsets[3];
+    int16_t gyroOffsets[3];
+    int16_t magOffsets[3];
+} imu_t;
 
 typedef struct
 {
@@ -27,13 +44,8 @@ typedef struct
 } motion_data_t;
 
 
-glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c);
-glove_status_t IMU_ReadAll(motion_data_t * motionData);
-glove_status_t IMU_DumpConfigRegisters();
-glove_status_t IMU_StartContinuousRead();
-glove_status_t IMU_StopContinuousRead();
-
-extern task_t Task_IMUSweep;
-extern task_t Task_AckTransferStopped;
+glove_status_t IMU_Init(imu_t * imu);
+glove_status_t IMU_ReadAll(imu_t * imu, motion_data_t * motionData);
+glove_status_t IMU_DumpConfigRegisters(imu_t * imu);
 
 #endif /* LSM9DS1_H_ */

@@ -44,6 +44,16 @@ do																							\
 	}																						\
 } while (0);
 
+#define CHECK_STATUS_OK_NO_RET(status)															\
+do																							\
+{																							\
+	if (GLOVE_STATUS_OK != (status))														\
+	{																						\
+		printf("%s:%d error, status=%X\r\n", __FUNCTION__, __LINE__, (status));				\
+	}																						\
+} while (0);
+
+
 #define CHECK_NULL_RET(item) 												\
 do																			\
 {																			\

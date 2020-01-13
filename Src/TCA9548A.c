@@ -42,8 +42,13 @@ glove_status_t I2CMux_Select(uint8_t bus)
         return GLOVE_STATUS_INVALID_ARGUMENT;
     }
 
+    if (bus == gContext.currentBus)
+    {
+        return GLOVE_STATUS_OK;
+    }
+    printf("%s select bus %d\r\n", __FUNCTION__, bus);
     hStatus = HAL_I2C_Master_Transmit(gContext.hi2c, TCA_ADDR, &data, 1, I2C_TIMEOUT);
-    CHECK_HAL_STATUS_OK(hStatus);
+    CHECK_STATUS_OK_RET(HALstatusToGlove(hStatus));
 
     return GLOVE_STATUS_OK;
 }

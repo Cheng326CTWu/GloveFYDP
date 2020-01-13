@@ -20,6 +20,7 @@
 "Src/LSM9DS1.o"
 "Src/TCA9548A.o"
 "Src/glove_status_codes.o"
+"Src/hand.o"
 "Src/main.o"
 "Src/queue.o"
 "Src/scheduler.o"

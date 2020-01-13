@@ -13,7 +13,6 @@
 
 #include "stdint.h"
 #include "stdbool.h"
-#include "string.h"
 
 #include "stm32l4xx_hal.h"
 
@@ -23,122 +22,94 @@
 #include "scheduler.h"
 #include "serial.h"
 
-#define IMU_AG_ADDR (0xD6)
-#define IMU_M_ADDR (0x3C)
 #define IMU_I2C_TIMEOUT 100
 #define NUM_IMUS 16
 
-#define IMU_CHECK_INIT()                            \
+#define IMU_CHECK_INIT(imu)                         \
 do                                                  \
 {                                                   \
-    if (!gContext.fInit)                            \
+    if (!((imu)->fInit))                            \
     {                                               \
         return GLOVE_STATUS_MODULE_NOT_INIT;        \
     }                                               \
 } while (0);
 
-
-typedef struct {
-    bool fInit;
-    bool continuousRead;
-    I2C_HandleTypeDef *hi2c;
-    int16_t accOffsets[3];
-    int16_t gyroOffsets[3];
-    int16_t magOffsets[3];
-} IMU_context_t;
-
-static IMU_context_t gContext = {0};
-
-// for profiling!
-static uint32_t gCount = 0;
-static uint32_t gTotal = 0;
-
 // forward declarations
-static glove_status_t IMU_SelfTest();
-static glove_status_t IMU_Calibrate(int16_t * caliAcc, int16_t * caliGyro, int16_t * caliMag);
-static glove_status_t AcknowledgeTransferStopped();
-static glove_status_t ReadAllMotionSensors();
-static glove_status_t IMU_SetRegBits(uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);
-static glove_status_t IMU_ReadReg(uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue);
-static glove_status_t IMU_WriteReg(uint8_t baseAddress, uint8_t regAddress, uint8_t value);
-static glove_status_t IMU_Reset();
+static glove_status_t IMU_SelfTest(imu_t * imu);
+static glove_status_t IMU_Calibrate(imu_t * imu, int16_t * caliAcc, int16_t * caliGyro, int16_t * caliMag);
+static glove_status_t IMU_SetRegBits(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);
+static glove_status_t IMU_ReadReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue);
+static glove_status_t IMU_WriteReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t value);
+static glove_status_t IMU_Reset(imu_t * imu);
+static bool are_addresses_valid(imu_t * imu);
 
-// task definitions
-task_t Task_IMUSweep = 
-{
-    .pTaskFn = &ReadAllMotionSensors,
-    .name = "IMU Task"
-};
-
-task_t Task_AckTransferStopped = {
-    .pTaskFn = &AcknowledgeTransferStopped,
-    .name = "AckStop"
-};
-
-
-glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c)
+glove_status_t IMU_Init(imu_t * imu)
 {
     glove_status_t status = GLOVE_STATUS_OK;
 
-    if (!hi2c)
+    if (!imu)
     {
+        return GLOVE_STATUS_NULL_PTR;
+    }
+
+    // check that address is valid
+    if (!are_addresses_valid(imu))
+    {
+        // TODO: use a different status code here
         return GLOVE_STATUS_INVALID_ARGUMENT;
     }
 
-    // global I2C handle
-    gContext.hi2c = hi2c;
-
     // // reset device
-    // status = IMU_Reset();
+    // status = IMU_Reset(imu);
     // CHECK_STATUS_OK_RET(status);
 
     // enable the 3-axes of the gyroscope
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG4, 0x38);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG4, 0x38);
     CHECK_STATUS_OK_RET(status);
 
     // configure the gyroscope
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG1_G, 2 << 5 | 0 << 3 | 0);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG1_G, 2 << 5 | 0 << 3 | 0);
     CHECK_STATUS_OK_RET(status);
     HAL_Delay(200);
 
     // enable the three axes of the accelerometer 
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG5_XL, 0x38);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG5_XL, 0x38);
     CHECK_STATUS_OK_RET(status);
 
     // configure the accelerometer-specify bandwidth selection with Abw
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG6_XL, 2 << 5 | 0 << 3);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG6_XL, 2 << 5 | 0 << 3);
     CHECK_STATUS_OK_RET(status);
 
     HAL_Delay(200);
 
     // // set accel ODR to 50 Hz
-    // status = IMU_SetRegBits(IMU_AG_ADDR, CTRL_REG6_XL, CTRL_REG6_XL_ODR_MASK, CTRL_REG6_XL_ODR_50);
+    // status = IMU_SetRegBits(imu, imu->ag_addr, CTRL_REG6_XL, CTRL_REG6_XL_ODR_MASK, CTRL_REG6_XL_ODR_50);
     // CHECK_STATUS_OK_RET(status);
 
     // // set accel anti-aliasing filter bandwidth to 105 Hz
-    // status = IMU_SetRegBits(IMU_AG_ADDR, CTRL_REG6_XL, CTRL_REG6_XL_AA_BW_MASK, CTRL_REG6_XL_AA_BW_105);
+    // status = IMU_SetRegBits(imu, imu->ag_addr, CTRL_REG6_XL, CTRL_REG6_XL_AA_BW_MASK, CTRL_REG6_XL_AA_BW_105);
     // CHECK_STATUS_OK_RET(status);
 
     // // set gyro ODR to 59.5 Hz
-    // status = IMU_SetRegBits(IMU_AG_ADDR, CTRL_REG1_G, CTRL_REG1_G_ODR_MASK, CTRL_REG1_G_ODR_59p5);
+    // status = IMU_SetRegBits(imu, imu->ag_addr, CTRL_REG1_G, CTRL_REG1_G_ODR_MASK, CTRL_REG1_G_ODR_59p5);
     // CHECK_STATUS_OK_RET(status);
 
     // configure the magnetometer, copied from:
     // https://github.com/kriswiner/LSM9DS1/blob/master/LSM9DS1_MS5611_BasicAHRS_t3.ino
-    status = IMU_WriteReg(IMU_M_ADDR, CTRL_REG1_M, 0x80 | 2 << 5 | 4 << 2); // select x,y-axis mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG1_M, 0x80 | 2 << 5 | 4 << 2); // select x,y-axis mode
     CHECK_STATUS_OK_RET(status);
 
-    status = IMU_WriteReg(IMU_M_ADDR, CTRL_REG2_M, 0 << 5 ); // select mag full scale
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG2_M, 0 << 5 ); // select mag full scale
     CHECK_STATUS_OK_RET(status);
 
-    status = IMU_WriteReg(IMU_M_ADDR, CTRL_REG3_M, 0x00 ); // continuous conversion mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG3_M, 0x00 ); // continuous conversion mode
     CHECK_STATUS_OK_RET(status);
     
-    status = IMU_WriteReg(IMU_M_ADDR, CTRL_REG4_M, 2 << 2 ); // select z-axis mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG4_M, 2 << 2 ); // select z-axis mode
     CHECK_STATUS_OK_RET(status);
 
     // // set magnetometer ODR to 40 Hz
-    // status = IMU_SetRegBits(IMU_M_ADDR, CTRL_REG1_M, CTRL_REG1_M_ODR_MASK, CTRL_REG1_M_ODR_40);
+    // status = IMU_SetRegBits(imu, imu->m_addr, CTRL_REG1_M, CTRL_REG1_M_ODR_MASK, CTRL_REG1_M_ODR_40);
     // CHECK_STATUS_OK_RET(status);
     
     // // self test
@@ -147,14 +118,15 @@ glove_status_t IMU_Init(I2C_HandleTypeDef * hi2c)
 
     // calibrate - for some reason this delay helps get steadier numbers
     // HAL_Delay(2000);
-    // status = IMU_Calibrate(gContext.accOffsets, gContext.gyroOffsets, gContext.magOffsets);
+    // status = IMU_Calibrate(imu->accOffsets, imu->gyroOffsets, imu->magOffsets);
     // CHECK_STATUS_OK_RET(status);
 
-    gContext.fInit = true;
+    imu->fInit = true;
+
     return GLOVE_STATUS_OK;
 }
 
-static glove_status_t IMU_SelfTest()
+static glove_status_t IMU_SelfTest(imu_t * imu)
 {
     glove_status_t status = GLOVE_STATUS_OK;
     int16_t acc[3] = {0};
@@ -164,24 +136,29 @@ static glove_status_t IMU_SelfTest()
     int16_t gyroNoTest[3] = {0};
     int16_t magNoTest[3] = {0};
 
+    if (!imu)
+    {
+        return GLOVE_STATUS_NULL_PTR;
+    }
+
     // disable self-test
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG10, CTRL_REG10_DISABLE_SELF_TEST);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG10, CTRL_REG10_DISABLE_SELF_TEST);
     CHECK_STATUS_OK_RET(status);
 
     // get the calibration values without self-test
-    status = IMU_Calibrate(accNoTest, gyroNoTest, magNoTest);
+    status = IMU_Calibrate(imu, accNoTest, gyroNoTest, magNoTest);
     CHECK_STATUS_OK_RET(status);
 
     // enable self-test
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG10, CTRL_REG10_ENABLE_SELF_TEST);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG10, CTRL_REG10_ENABLE_SELF_TEST);
     CHECK_STATUS_OK_RET(status);
 
     // get the calibration values, they are printed out in the calibration function
-    status = IMU_Calibrate(acc, gyro, mag);
+    status = IMU_Calibrate(imu, acc, gyro, mag);
     CHECK_STATUS_OK_RET(status);
 
     // disable self-test
-    status = IMU_WriteReg(IMU_AG_ADDR, CTRL_REG10, CTRL_REG10_DISABLE_SELF_TEST);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG10, CTRL_REG10_DISABLE_SELF_TEST);
     CHECK_STATUS_OK_RET(status);
 
     // print the difference in values, copying from 
@@ -203,7 +180,7 @@ static glove_status_t IMU_SelfTest()
     return GLOVE_STATUS_OK;
 }
 
-static glove_status_t IMU_Calibrate(int16_t * caliAcc, int16_t * caliGyro, int16_t * caliMag)
+static glove_status_t IMU_Calibrate(imu_t * imu, int16_t * caliAcc, int16_t * caliGyro, int16_t * caliMag)
 {
     // read each sensor for one second and average the data 
     uint32_t start = HAL_GetTick();
@@ -214,9 +191,14 @@ static glove_status_t IMU_Calibrate(int16_t * caliAcc, int16_t * caliGyro, int16
     int32_t magSums[3] = {0};
     uint32_t count = 0;
 
+    if (!imu)
+    {
+        return GLOVE_STATUS_NULL_PTR;
+    }
+
     while (HAL_GetTick() - start < 1000)
     {
-        status = IMU_ReadAll(&data);
+        status = IMU_ReadAll(imu, &data);
         CHECK_STATUS_OK_RET(status);
 
         accSums[0] += data.xAcc;
@@ -250,212 +232,163 @@ static glove_status_t IMU_Calibrate(int16_t * caliAcc, int16_t * caliGyro, int16
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t IMU_ReadAll(motion_data_t * motionData)
+glove_status_t IMU_ReadAll(imu_t * imu, motion_data_t * motionData)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
     int16_t gyroAndAccelData[6] = {0};
     int16_t magData[3] = {0};
 
     // read gyro and accel data
-    halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_AG_ADDR, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->ag_addr, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     // read magnetometer data
-    halStatus = HAL_I2C_Mem_Read(gContext.hi2c, IMU_M_ADDR, 0xFF & OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->m_addr, 0xFF & OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     if (motionData)
     {
-        motionData->xGyro = gyroAndAccelData[0] - gContext.gyroOffsets[0];
-        motionData->yGyro = gyroAndAccelData[1] - gContext.gyroOffsets[1];
-        motionData->zGyro = gyroAndAccelData[2] - gContext.gyroOffsets[2];
+        motionData->xGyro = gyroAndAccelData[0] - imu->gyroOffsets[0];
+        motionData->yGyro = gyroAndAccelData[1] - imu->gyroOffsets[1];
+        motionData->zGyro = gyroAndAccelData[2] - imu->gyroOffsets[2];
 
-        motionData->xAcc = gyroAndAccelData[3] - gContext.accOffsets[0];
-        motionData->yAcc = gyroAndAccelData[4] - gContext.accOffsets[1];
-        motionData->zAcc = gyroAndAccelData[5] - gContext.accOffsets[2];
+        motionData->xAcc = gyroAndAccelData[3] - imu->accOffsets[0];
+        motionData->yAcc = gyroAndAccelData[4] - imu->accOffsets[1];
+        motionData->zAcc = gyroAndAccelData[5] - imu->accOffsets[2];
 
-        motionData->xMag = -(magData[0]);// - gContext.magOffsets[0]);
-        motionData->yMag = magData[1];// - gContext.magOffsets[1];
-        motionData->zMag = magData[2];// - gContext.magOffsets[2];
+        motionData->xMag = -(magData[0]);// - imu->magOffsets[0]);
+        motionData->yMag = magData[1];// - imu->magOffsets[1];
+        motionData->zMag = magData[2];// - imu->magOffsets[2];
     }
 
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t IMU_DumpConfigRegisters()
+glove_status_t IMU_DumpConfigRegisters(imu_t * imu)
 {
     uint8_t readValue = 0;
     glove_status_t status = GLOVE_STATUS_OK;
 
-    IMU_CHECK_INIT();
+    if (!imu)
+    {
+        return GLOVE_STATUS_NULL_PTR;
+    }
+
+    IMU_CHECK_INIT(imu);
 
     // accelerometer config reg
-    status = IMU_ReadReg(IMU_AG_ADDR, CTRL_REG6_XL, &readValue);
+    status = IMU_ReadReg(imu, imu->ag_addr, CTRL_REG6_XL, &readValue);
     CHECK_STATUS_OK_RET(status);
     printf("CTRL_REG6_XL: 0x%X\r\n", readValue);
 
     // gyro config reg
-    status = IMU_ReadReg(IMU_AG_ADDR, CTRL_REG1_G, &readValue);
+    status = IMU_ReadReg(imu, imu->ag_addr, CTRL_REG1_G, &readValue);
     CHECK_STATUS_OK_RET(status);
     printf("CTRL_REG1_G: 0x%X\r\n", readValue);
 
     // magnetometer config reg
-    status = IMU_ReadReg(IMU_M_ADDR, CTRL_REG1_M, &readValue);
+    status = IMU_ReadReg(imu, imu->m_addr, CTRL_REG1_M, &readValue);
     CHECK_STATUS_OK_RET(status);
     printf("CTRL_REG1_M: 0x%X\r\n", readValue);
 
     return GLOVE_STATUS_OK;
 }
 
-glove_status_t IMU_StartContinuousRead()
-{
-    glove_status_t status = GLOVE_STATUS_OK;
 
-    IMU_CHECK_INIT();
-
-    gContext.continuousRead = true;
-    status = Scheduler_AddTask(&Task_IMUSweep);
-    CHECK_STATUS_OK_RET(status);
-
-    Scheduler_DisableDebug();
-
-    return GLOVE_STATUS_OK;
-}
-
-glove_status_t IMU_StopContinuousRead()
-{
-    glove_status_t status = GLOVE_STATUS_OK;
-    gContext.continuousRead = false;
-
-    status = Scheduler_RemoveTask(&Task_IMUSweep);
-    CHECK_STATUS_OK_RET(status);
-    return GLOVE_STATUS_OK;
-}
-
-glove_status_t ReadAllMotionSensors()
-{
-    uint8_t i = 0;
-    glove_status_t status = GLOVE_STATUS_OK;
-    motion_data_t allMotionData[16] = {0};
-    uint32_t startTime = HAL_GetTick();
-
-    // TODO: need to switch I2C bus every 3 reads
-    for (i = 0; i < NUM_IMUS; ++i)
-    {
-        status = IMU_ReadAll(allMotionData + i);
-        CHECK_STATUS_OK_RET(status);
-    }
-
-    // transmit the data
-    // printf("acc: %.3f, %.3f, %.3f\r\n", 
-    //     allMotionData[0].xAcc*SENS_ACCELEROMETER_2, 
-    //     allMotionData[0].yAcc*SENS_ACCELEROMETER_2, 
-    //     allMotionData[0].zAcc*SENS_ACCELEROMETER_2);
-    // printf("gyro: %.3f, %.3f, %.3f\r\n", 
-    //     allMotionData[0].xGyro*SENS_GYROSCOPE_245, 
-    //     allMotionData[0].yGyro*SENS_GYROSCOPE_245, 
-    //     allMotionData[0].zGyro*SENS_GYROSCOPE_245);
-    // printf("mag: %d, %d, %d\r\n",
-    //     allMotionData[0].xMag,
-    //     allMotionData[0].yMag,
-    //     allMotionData[0].zMag);
-    status = Serial_WriteBlocking((uint8_t *)allMotionData, sizeof(allMotionData));
-    CHECK_STATUS_OK_RET(status);
-    gTotal += HAL_GetTick() - startTime;
-    ++gCount;
-
-    // schedule the next sensor scan if we are still in continuous mode
-    if (gContext.continuousRead)
-    {
-        status = Scheduler_AddTask(&Task_IMUSweep);
-    }
-    return status;
-}
-
-glove_status_t AcknowledgeTransferStopped()
-{
-    // for profiling
-    char msg [50] = {0};
-    sprintf(msg, "average: %ld\r\n", gTotal/gCount);
-    Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
-    Scheduler_EnableDebug();
-    char * message = "ack\r\n";
-    return Serial_WriteBlocking((uint8_t *)message, sizeof(message));
-}
-
-
-static glove_status_t IMU_SetRegBits(uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values)
+static glove_status_t IMU_SetRegBits(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
     uint8_t readValue = 0;
     uint8_t writeValue = 0;
 
-    if (!gContext.hi2c)
+    if (!imu->hi2c)
     {
         return GLOVE_STATUS_NULL_PTR;
     }
 
     // read current register value
-    halStatus = HAL_I2C_Mem_Read(gContext.hi2c, baseAddress, regAddress, 1, &readValue, 1, IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Read(imu->hi2c, baseAddress, regAddress, 1, &readValue, 1, IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     // set bits
     writeValue = readValue | (mask & values);
 
     // write back
-    halStatus = HAL_I2C_Mem_Write(gContext.hi2c, baseAddress, regAddress, 1, &writeValue, 1, IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Write(imu->hi2c, baseAddress, regAddress, 1, &writeValue, 1, IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     return GLOVE_STATUS_OK;
 }
 
-static glove_status_t IMU_WriteReg(uint8_t baseAddress, uint8_t regAddress, uint8_t value)
+static glove_status_t IMU_WriteReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t value)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
 
-    // write back
-    halStatus = HAL_I2C_Mem_Write(gContext.hi2c, baseAddress, regAddress, 1, &value, 1, IMU_I2C_TIMEOUT);
-    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
-
-    return GLOVE_STATUS_OK;
-}
-
-static glove_status_t IMU_ReadReg(uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue)
-{
-    HAL_StatusTypeDef halStatus = HAL_OK;
-
-    if (!gContext.hi2c)
+    if (!imu->hi2c)
     {
         return GLOVE_STATUS_NULL_PTR;
     }
 
-    halStatus = HAL_I2C_Mem_Read(gContext.hi2c, baseAddress, regAddress, 1, readvalue, 1, IMU_I2C_TIMEOUT);
+    // write back
+    halStatus = HAL_I2C_Mem_Write(imu->hi2c, baseAddress, regAddress, 1, &value, 1, IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     return GLOVE_STATUS_OK;
 }
 
-static glove_status_t IMU_Reset()
+static glove_status_t IMU_ReadReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue)
+{
+    HAL_StatusTypeDef halStatus = HAL_OK;
+
+    if (!imu->hi2c)
+    {
+        return GLOVE_STATUS_NULL_PTR;
+    }
+
+    halStatus = HAL_I2C_Mem_Read(imu->hi2c, baseAddress, regAddress, 1, readvalue, 1, IMU_I2C_TIMEOUT);
+    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
+
+    return GLOVE_STATUS_OK;
+}
+
+static glove_status_t IMU_Reset(imu_t * imu)
 {
     HAL_StatusTypeDef halStatus = HAL_OK;
     uint8_t data = 0;
 
-    if (!gContext.hi2c)
+    if (!imu->hi2c)
     {
         return GLOVE_STATUS_NULL_PTR;
     }
 
     // reset accel and gyro
     data = CTRL_REG8_RESET_VAL;
-    halStatus = HAL_I2C_Mem_Write(gContext.hi2c, IMU_AG_ADDR, CTRL_REG8, 1, &data, 1, IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Write(imu->hi2c, imu->ag_addr, CTRL_REG8, 1, &data, 1, IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     // reset magnetometer
     data = CTRL_REG2_M_RESET_VAL;
-    halStatus = HAL_I2C_Mem_Write(gContext.hi2c, IMU_M_ADDR, CTRL_REG2_M, 1, &data, 1, IMU_I2C_TIMEOUT);
+    halStatus = HAL_I2C_Mem_Write(imu->hi2c, imu->m_addr, CTRL_REG2_M, 1, &data, 1, IMU_I2C_TIMEOUT);
     CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     HAL_Delay(1);
 
     return GLOVE_STATUS_OK;
+}
+
+static bool are_addresses_valid(imu_t * imu)
+{
+    if (imu)
+    {
+        return 
+        (
+            imu->ag_addr == IMU_GET_AG_ADDR(0) ||
+            imu->ag_addr == IMU_GET_AG_ADDR(1)
+        ) &&
+        (
+            imu->m_addr == IMU_GET_M_ADDR(0) ||
+            imu->m_addr == IMU_GET_M_ADDR(1)
+        );
+    }
+    return false;
 }

@@ -29,7 +29,7 @@
 #include "unistd.h"
 
 #include "glove_status_codes.h"
-#include "LSM9DS1.h"
+#include "hand.h"
 #include "queue.h"
 #include "scheduler.h"
 #include "serial.h"
@@ -62,7 +62,7 @@ DMA_HandleTypeDef hdma_usart2_rx;
 DMA_HandleTypeDef hdma_usart2_tx;
 
 /* USER CODE BEGIN PV */
-bool gfEnablePrintf = false;
+bool gfEnablePrintf = true;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -123,11 +123,11 @@ int main(void)
     printf("Serial interface init failed, status=%X\r\n", status);
   }
 
-  // // initialize the I2C mux
-  // if ( (status = I2CMux_Init(&hi2c1)) )
-  // {
-  //   printf("I2C mux init failed, status=%X\r\n", status);
-  // }
+  // initialize the I2C mux
+  if ( (status = I2CMux_Init(&hi2c1)) )
+  {
+    printf("I2C mux init failed, status=%X\r\n", status);
+  }
 
   // // select the first bus
   // if ( (status = I2CMux_Select(1)) )
@@ -135,16 +135,10 @@ int main(void)
   //   printf("I2C mux select failed, status=%X\r\n", status);
   // }
 
-  // initialize IMU 
-  if ( (status = IMU_Init(&hi2c1)) )
+  // initialize Hand 
+  if ( (status = Hand_Init(&hi2c1)) )
   {
-    printf("IMU init failed, status=%x\r\n", status);
-  }
-
-  // dump IMU config registers
-  if ((status = IMU_DumpConfigRegisters()))
-  {
-    printf("IMU reg dump failed\r\n");
+    printf("Hand init failed, status=%x\r\n", status);
   }
 
   // state machine
@@ -319,7 +313,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 1152000;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

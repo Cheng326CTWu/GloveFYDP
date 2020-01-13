@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -148,10 +148,10 @@
 <wire x1="80" y1="10" x2="80" y2="80" width="0" layer="20"/>
 <wire x1="80" y1="80" x2="0" y2="80" width="0" layer="20"/>
 <wire x1="0" y1="80" x2="0" y2="10" width="0" layer="20"/>
-<dimension x1="0" y1="80" x2="20" y2="80" x3="10" y3="85" textsize="0.8128" layer="1"/>
-<dimension x1="0" y1="80" x2="40" y2="80" x3="20" y3="90" textsize="0.8128" layer="1"/>
-<dimension x1="0" y1="80" x2="60" y2="80" x3="30" y3="95" textsize="0.8128" layer="1"/>
-<dimension x1="0" y1="80" x2="80" y2="80" x3="40" y3="100" textsize="0.8128" layer="1"/>
+<dimension x1="0" y1="80" x2="20" y2="80" x3="10" y3="85" textsize="0.8128" layer="20"/>
+<dimension x1="0" y1="80" x2="40" y2="80" x3="20" y3="90" textsize="0.8128" layer="20"/>
+<dimension x1="0" y1="80" x2="60" y2="80" x3="30" y3="95" textsize="0.8128" layer="20"/>
+<dimension x1="0" y1="80" x2="80" y2="80" x3="40" y3="100" textsize="0.8128" layer="20"/>
 <text x="26.9494" y="36.6522" size="0.8128" layer="21" font="vector" ratio="20">R23</text>
 <text x="10.4394" y="31.5214" size="0.8128" layer="21" font="vector" ratio="20">R24</text>
 <text x="11.7856" y="28.2194" size="0.8128" layer="21" font="vector" ratio="20">R25</text>
@@ -171,7 +171,7 @@
 <text x="58.4454" y="41.2242" size="0.8128" layer="21" font="vector" ratio="20">R29</text>
 <text x="33.0708" y="59.563" size="0.8128" layer="21" font="vector" ratio="20">TCA</text>
 <text x="3.81" y="26.797" size="0.9652" layer="22" font="vector" ratio="20" rot="MR180">MCU BOARD
-V1
+MK1
 BEN WU
 TEJASVI JODHKA
 GAUNTLET</text>
@@ -1262,7 +1262,6 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="36.8088" y="8.8378" size="1.27" layer="27"/>
 </element>
 <element name="U$1" library="custom" package="MOLEX6_1MM" value="" x="11.9984" y="74.6412" smashed="yes" rot="R180">
-<attribute name="NAME" x="11.072" y="76.4458" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="12.8484" y="79.7412" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="U1" library="microbuilder" package="TSSOP24" value=" TCA9548APWR" x="40.895" y="58.9296" smashed="yes" rot="R180">
@@ -1332,19 +1331,15 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="11.598" y="56.8708" size="0.6096" layer="27" font="vector" ratio="20" rot="R180" align="top-center"/>
 </element>
 <element name="U$2" library="custom" package="MOLEX6_1MM" value="" x="32.0788" y="74.7042" smashed="yes" rot="R180">
-<attribute name="NAME" x="31.0442" y="76.429" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="32.9288" y="79.8042" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="U$3" library="custom" package="MOLEX6_1MM" value="" x="52.1106" y="74.8968" smashed="yes" rot="R180">
-<attribute name="NAME" x="51.0572" y="76.676" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="52.9606" y="79.9968" size="1.27" layer="27" rot="R180"/>
 </element>
 <element name="U$4" library="custom" package="MOLEX6_1MM" value="" x="72.02" y="73.9416" smashed="yes" rot="R170">
-<attribute name="NAME" x="71.49608125" y="75.86641875" size="1.27" layer="25" rot="R170"/>
 <attribute name="VALUE" x="73.742690625" y="78.816515625" size="1.27" layer="27" rot="R170"/>
 </element>
 <element name="U$5" library="custom" package="MOLEX6_1MM" value="" x="74.4614" y="16.7406" smashed="yes" rot="R100">
-<attribute name="NAME" x="76.115409375" y="18.1046375" size="1.27" layer="25" rot="R100"/>
 <attribute name="VALUE" x="79.63151875" y="16.78911875" size="1.27" layer="27" rot="R100"/>
 </element>
 <element name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" package="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1" value="WIREPAD2,54/1,0" x="71.0988" y="55.87" smashed="yes">
@@ -1530,7 +1525,6 @@ design rules under a new name.</description>
 <attribute name="VALUE" x="20.6934" y="24.9788" size="1.778" layer="27"/>
 </element>
 <element name="MI0603K300R-10" library="SparkFun-Coils" package="0603" value="30Ω/1.8A" x="32.9216" y="29.5112" smashed="yes">
-<attribute name="NAME" x="32.947" y="28.038" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
 <attribute name="PROD_ID" value="NDUC-13805" x="32.9216" y="29.5112" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="32.9216" y="28.7492" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
