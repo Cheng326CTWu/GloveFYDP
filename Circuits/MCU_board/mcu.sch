@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5544,6 +5544,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="R34" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="GND33" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
+<part name="PAD5" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
+<part name="PAD7" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
 </parts>
 <sheets>
 <sheet>
@@ -6069,6 +6071,14 @@ with hardware flow control (RS232)</text>
 <instance part="TP1" gate="G$1" x="10.16" y="144.78" smashed="yes">
 <attribute name="NAME" x="8.89" y="146.05" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="11.43" y="143.51" size="1.778" layer="97"/>
+</instance>
+<instance part="PAD5" gate="G$1" x="91.44" y="144.78" smashed="yes" rot="R270">
+<attribute name="NAME" x="93.2942" y="145.923" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="88.138" y="145.923" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="PAD7" gate="G$1" x="30.48" y="111.76" smashed="yes" rot="R270">
+<attribute name="NAME" x="32.3342" y="112.903" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="27.178" y="112.903" size="1.778" layer="96" rot="R270"/>
 </instance>
 </instances>
 <busses>
@@ -7105,6 +7115,8 @@ with hardware flow control (RS232)</text>
 <wire x1="30.48" y1="91.44" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
 <wire x1="30.48" y1="86.36" x2="30.48" y2="91.44" width="0.1524" layer="91"/>
 <junction x="30.48" y="91.44"/>
+<pinref part="PAD7" gate="G$1" pin="P"/>
+<wire x1="30.48" y1="109.22" x2="30.48" y2="91.44" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="I2C_MUX_RST" class="0">
@@ -7364,6 +7376,14 @@ with hardware flow control (RS232)</text>
 <pinref part="TP1" gate="G$1" pin="TP"/>
 <pinref part="R34" gate="G$1" pin="2"/>
 <wire x1="10.16" y1="142.24" x2="10.16" y2="137.16" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="SWO" class="0">
+<segment>
+<pinref part="U5" gate="G$1" pin="PB3"/>
+<wire x1="91.44" y1="124.46" x2="91.44" y2="142.24" width="0.1524" layer="91"/>
+<label x="91.44" y="129.54" size="1.778" layer="95" rot="R90"/>
+<pinref part="PAD5" gate="G$1" pin="P"/>
 </segment>
 </net>
 </nets>
