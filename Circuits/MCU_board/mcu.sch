@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.4.2">
+<eagle version="9.3.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -2447,6 +2447,27 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <technology name="">
 <attribute name="PROD_ID" value="RES-07857"/>
 <attribute name="VALUE" value="4.7k"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="1.5KOHM" prefix="R">
+<description>&lt;h3&gt;1.5kΩ resistor&lt;/h3&gt;
+&lt;p&gt;A resistor is a passive two-terminal electrical component that implements electrical resistance as a circuit element. Resistors act to reduce current flow, and, at the same time, act to lower voltage levels within circuits. - Wikipedia&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="-0603-1/10W-1%" package="0603">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="PROD_ID" value="RES-08306"/>
+<attribute name="VALUE" value="1.5k"/>
 </technology>
 </technologies>
 </device>
@@ -5408,11 +5429,8 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="GND14" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND15" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND16" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND17" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND18" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND19" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="GND20" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
-<part name="GND21" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 <part name="SUPPLY2" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 <part name="U$2" library="custom" deviceset="MOLEX_522070633" device=""/>
 <part name="U$3" library="custom" deviceset="MOLEX_522070633" device=""/>
@@ -5478,9 +5496,6 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="C13" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 <part name="C15" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
 <part name="C10" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0603-6.3V-(10%)" value="4.7uF"/>
-<part name="C12" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0603-6.3V-(10%)" value="4.7uF"/>
-<part name="C14" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0603-6.3V-(10%)" value="4.7uF"/>
-<part name="C16" library="SparkFun-Capacitors" deviceset="4.7UF" device="-0603-6.3V-(10%)" value="4.7uF"/>
 <part name="IC2" library="ftdichip" library_urn="urn:adsk.eagle:library:231" deviceset="FT230X" device="S" package3d_urn="urn:adsk.eagle:package:14016/1"/>
 <part name="MI0603K300R-10" library="SparkFun-Coils" deviceset="FERRITE_BEAD" device="-0603" value="30Ω/1.8A"/>
 <part name="R21" library="SparkFun-Resistors" deviceset="4.7KOHM" device="-0603-1/10W-1%" value="27R"/>
@@ -5512,12 +5527,31 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="VDD" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
 <part name="VCCIO" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
 <part name="VBUS" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B2,54" package3d_urn="urn:adsk.eagle:package:27948/1"/>
+<part name="C25" library="SparkFun-Capacitors" deviceset="10NF" device="-0603-50V-10%" value="10nF"/>
+<part name="C26" library="SparkFun-Capacitors" deviceset="1.0UF" device="-0603-16V-10%-X7R" value="1.0uF"/>
+<part name="GND31" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="GND32" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="SUPPLY24" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="C12" library="SparkFun-Capacitors" deviceset="0.1UF" device="-0603-25V-(+80/-20%)" value="0.1uF"/>
+<part name="GND17" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="RX_LED1" library="SparkFun-LED" deviceset="LED-GREEN" device="0603" value="GREEN"/>
+<part name="R32" library="SparkFun-Resistors" deviceset="4.7KOHM" device="-0603-1/10W-1%" value="270R"/>
+<part name="R33" library="SparkFun-Resistors" deviceset="1.5KOHM" device="-0603-1/10W-1%" value="1.5k"/>
+<part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="PAD5" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
+<part name="PAD6" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
+<part name="PAD8" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
+<part name="SUPPLY25" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
+<part name="R34" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
+<part name="GND33" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
 <text x="27.94" y="31.75" size="1.778" layer="91">PA0 - PA3 are for MCU USART2 
 with hardware flow control (RS232)</text>
+<text x="-17.78" y="190.5" size="1.778" layer="91">These 2 caps are for VDDA bypass</text>
+<text x="15.24" y="152.4" size="1.778" layer="91">Jumpers for BOOT0</text>
 </plain>
 <instances>
 <instance part="U5" gate="G$1" x="86.36" y="88.9" smashed="yes">
@@ -5621,20 +5655,11 @@ with hardware flow control (RS232)</text>
 <instance part="GND16" gate="1" x="66.04" y="172.72" smashed="yes">
 <attribute name="VALUE" x="66.04" y="172.466" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND17" gate="1" x="78.74" y="172.72" smashed="yes">
-<attribute name="VALUE" x="78.74" y="172.466" size="1.778" layer="96" align="top-center"/>
-</instance>
 <instance part="GND18" gate="1" x="96.52" y="172.72" smashed="yes">
 <attribute name="VALUE" x="96.52" y="172.466" size="1.778" layer="96" align="top-center"/>
 </instance>
-<instance part="GND19" gate="1" x="109.22" y="172.72" smashed="yes">
-<attribute name="VALUE" x="109.22" y="172.466" size="1.778" layer="96" align="top-center"/>
-</instance>
 <instance part="GND20" gate="1" x="129.54" y="172.72" smashed="yes">
 <attribute name="VALUE" x="129.54" y="172.466" size="1.778" layer="96" align="top-center"/>
-</instance>
-<instance part="GND21" gate="1" x="142.24" y="172.72" smashed="yes">
-<attribute name="VALUE" x="142.24" y="172.466" size="1.778" layer="96" align="top-center"/>
 </instance>
 <instance part="SUPPLY2" gate="VDD" x="88.9" y="190.5" smashed="yes">
 <attribute name="VALUE" x="88.9" y="193.294" size="1.778" layer="96" align="bottom-center"/>
@@ -5868,18 +5893,6 @@ with hardware flow control (RS232)</text>
 <attribute name="NAME" x="47.244" y="183.261" size="1.778" layer="95" font="vector"/>
 <attribute name="VALUE" x="47.244" y="178.181" size="1.778" layer="96" font="vector"/>
 </instance>
-<instance part="C12" gate="G$1" x="78.74" y="180.34" smashed="yes">
-<attribute name="NAME" x="80.264" y="183.261" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="80.264" y="178.181" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="C14" gate="G$1" x="109.22" y="180.34" smashed="yes">
-<attribute name="NAME" x="110.744" y="183.261" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="110.744" y="178.181" size="1.778" layer="96" font="vector"/>
-</instance>
-<instance part="C16" gate="G$1" x="142.24" y="180.34" smashed="yes">
-<attribute name="NAME" x="143.764" y="183.261" size="1.778" layer="95" font="vector"/>
-<attribute name="VALUE" x="143.764" y="178.181" size="1.778" layer="96" font="vector"/>
-</instance>
 <instance part="IC2" gate="G$1" x="92.71" y="-22.86" smashed="yes">
 <attribute name="NAME" x="80.01" y="-11.43" size="1.778" layer="95"/>
 <attribute name="VALUE" x="80.01" y="-38.1" size="1.778" layer="96"/>
@@ -5996,6 +6009,67 @@ with hardware flow control (RS232)</text>
 <attribute name="NAME" x="212.09" y="21.59" size="1.778" layer="95"/>
 <attribute name="TP_SIGNAL_NAME" x="214.63" y="19.05" size="1.778" layer="97"/>
 </instance>
+<instance part="C25" gate="G$1" x="17.78" y="180.34" smashed="yes">
+<attribute name="NAME" x="19.304" y="183.261" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="19.304" y="178.181" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="C26" gate="G$1" x="5.08" y="180.34" smashed="yes">
+<attribute name="NAME" x="6.604" y="183.261" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="6.604" y="178.181" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="GND31" gate="1" x="17.78" y="172.72" smashed="yes">
+<attribute name="VALUE" x="17.78" y="172.466" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="GND32" gate="1" x="5.08" y="172.72" smashed="yes">
+<attribute name="VALUE" x="5.08" y="172.466" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="SUPPLY24" gate="VDD" x="45.72" y="111.76" smashed="yes">
+<attribute name="VALUE" x="45.72" y="114.554" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="C12" gate="G$1" x="114.3" y="180.34" smashed="yes">
+<attribute name="NAME" x="115.824" y="183.261" size="1.778" layer="95" font="vector"/>
+<attribute name="VALUE" x="115.824" y="178.181" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="GND17" gate="1" x="114.3" y="172.72" smashed="yes">
+<attribute name="VALUE" x="114.3" y="172.466" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="RX_LED1" gate="G$1" x="132.08" y="36.83" smashed="yes">
+<attribute name="NAME" x="128.651" y="36.068" size="1.778" layer="95" font="vector" rot="R180"/>
+<attribute name="VALUE" x="140.335" y="34.798" size="1.778" layer="96" font="vector" rot="R180" align="top-left"/>
+</instance>
+<instance part="R32" gate="G$1" x="132.08" y="46.99" smashed="yes" rot="R270">
+<attribute name="NAME" x="136.144" y="45.72" size="1.778" layer="95" font="vector" align="bottom-center"/>
+<attribute name="VALUE" x="128.016" y="46.99" size="1.778" layer="96" font="vector" align="top-center"/>
+</instance>
+<instance part="R33" gate="G$1" x="172.72" y="40.64" smashed="yes" rot="R90">
+<attribute name="NAME" x="171.196" y="40.64" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="174.244" y="40.64" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+</instance>
+<instance part="GND21" gate="1" x="132.08" y="25.4" smashed="yes">
+<attribute name="VALUE" x="129.54" y="22.86" size="1.778" layer="96"/>
+</instance>
+<instance part="PAD5" gate="G$1" x="10.16" y="144.78" smashed="yes" rot="R270">
+<attribute name="NAME" x="12.0142" y="145.923" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="6.858" y="145.923" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="PAD6" gate="G$1" x="17.78" y="144.78" smashed="yes" rot="R270">
+<attribute name="NAME" x="19.6342" y="145.923" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="14.478" y="145.923" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="PAD8" gate="G$1" x="30.48" y="144.78" smashed="yes" rot="R270">
+<attribute name="NAME" x="32.3342" y="145.923" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="27.178" y="145.923" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="SUPPLY25" gate="VDD" x="38.1" y="144.78" smashed="yes">
+<attribute name="VALUE" x="38.1" y="147.574" size="1.778" layer="96" align="bottom-center"/>
+</instance>
+<instance part="R34" gate="G$1" x="10.16" y="132.08" smashed="yes" rot="R90">
+<attribute name="NAME" x="8.636" y="132.08" size="1.778" layer="95" font="vector" rot="R90" align="bottom-center"/>
+<attribute name="VALUE" x="11.684" y="132.08" size="1.778" layer="96" font="vector" rot="R90" align="top-center"/>
+</instance>
+<instance part="GND33" gate="1" x="17.78" y="129.54" smashed="yes">
+<attribute name="VALUE" x="17.78" y="129.286" size="1.778" layer="96" align="top-center"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -6086,29 +6160,14 @@ with hardware flow control (RS232)</text>
 <pinref part="C11" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<pinref part="GND17" gate="1" pin="GND"/>
-<wire x1="78.74" y1="175.26" x2="78.74" y2="177.8" width="0.1524" layer="91"/>
-<pinref part="C12" gate="G$1" pin="2"/>
-</segment>
-<segment>
 <pinref part="GND18" gate="1" pin="GND"/>
 <wire x1="96.52" y1="177.8" x2="96.52" y2="175.26" width="0.1524" layer="91"/>
 <pinref part="C13" gate="G$1" pin="2"/>
 </segment>
 <segment>
-<pinref part="GND19" gate="1" pin="GND"/>
-<wire x1="109.22" y1="175.26" x2="109.22" y2="177.8" width="0.1524" layer="91"/>
-<pinref part="C14" gate="G$1" pin="2"/>
-</segment>
-<segment>
 <pinref part="GND20" gate="1" pin="GND"/>
 <wire x1="129.54" y1="177.8" x2="129.54" y2="175.26" width="0.1524" layer="91"/>
 <pinref part="C15" gate="G$1" pin="2"/>
-</segment>
-<segment>
-<pinref part="GND21" gate="1" pin="GND"/>
-<wire x1="142.24" y1="175.26" x2="142.24" y2="177.8" width="0.1524" layer="91"/>
-<pinref part="C16" gate="G$1" pin="2"/>
 </segment>
 <segment>
 <pinref part="U5" gate="G$1" pin="VSS@63"/>
@@ -6263,6 +6322,36 @@ with hardware flow control (RS232)</text>
 <wire x1="175.26" y1="17.78" x2="175.26" y2="10.16" width="0.1524" layer="91"/>
 <label x="175.26" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="U5" gate="G$1" pin="VSSA/VREF-"/>
+<wire x1="50.8" y1="78.74" x2="43.18" y2="78.74" width="0.1524" layer="91"/>
+<label x="43.18" y="78.74" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="GND32" gate="1" pin="GND"/>
+<pinref part="C26" gate="G$1" pin="2"/>
+<wire x1="5.08" y1="175.26" x2="5.08" y2="177.8" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="C25" gate="G$1" pin="2"/>
+<pinref part="GND31" gate="1" pin="GND"/>
+<wire x1="17.78" y1="177.8" x2="17.78" y2="175.26" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="GND17" gate="1" pin="GND"/>
+<pinref part="C12" gate="G$1" pin="2"/>
+<wire x1="114.3" y1="175.26" x2="114.3" y2="177.8" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="RX_LED1" gate="G$1" pin="C"/>
+<pinref part="GND21" gate="1" pin="GND"/>
+<wire x1="132.08" y1="27.94" x2="132.08" y2="31.75" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="PAD6" gate="G$1" pin="P"/>
+<wire x1="17.78" y1="142.24" x2="17.78" y2="132.08" width="0.1524" layer="91"/>
+<pinref part="GND33" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="SWDIO" class="0">
 <segment>
@@ -6305,25 +6394,17 @@ with hardware flow control (RS232)</text>
 <wire x1="45.72" y1="187.96" x2="33.02" y2="187.96" width="0.1524" layer="91"/>
 <junction x="45.72" y="187.96"/>
 <wire x1="33.02" y1="187.96" x2="33.02" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="187.96" x2="78.74" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="78.74" y1="187.96" x2="66.04" y2="187.96" width="0.1524" layer="91"/>
-<junction x="78.74" y="187.96"/>
+<wire x1="88.9" y1="187.96" x2="66.04" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="66.04" y1="187.96" x2="66.04" y2="185.42" width="0.1524" layer="91"/>
 <wire x1="96.52" y1="187.96" x2="88.9" y2="187.96" width="0.1524" layer="91"/>
-<wire x1="88.9" y1="187.96" x2="78.74" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="45.72" y1="187.96" x2="66.04" y2="187.96" width="0.1524" layer="91"/>
 <junction x="66.04" y="187.96"/>
-<wire x1="109.22" y1="187.96" x2="109.22" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="109.22" y1="187.96" x2="96.52" y2="187.96" width="0.1524" layer="91"/>
-<junction x="109.22" y="187.96"/>
 <wire x1="96.52" y1="187.96" x2="96.52" y2="185.42" width="0.1524" layer="91"/>
 <junction x="96.52" y="187.96"/>
-<wire x1="142.24" y1="187.96" x2="142.24" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="142.24" y1="187.96" x2="129.54" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="129.54" y1="187.96" x2="129.54" y2="185.42" width="0.1524" layer="91"/>
-<wire x1="109.22" y1="187.96" x2="129.54" y2="187.96" width="0.1524" layer="91"/>
-<junction x="129.54" y="187.96"/>
+<wire x1="96.52" y1="187.96" x2="114.3" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="SUPPLY2" gate="VDD" pin="VDD"/>
+<wire x1="114.3" y1="187.96" x2="129.54" y2="187.96" width="0.1524" layer="91"/>
 <wire x1="88.9" y1="190.5" x2="88.9" y2="187.96" width="0.1524" layer="91"/>
 <junction x="88.9" y="187.96"/>
 <pinref part="C9" gate="G$1" pin="1"/>
@@ -6331,9 +6412,16 @@ with hardware flow control (RS232)</text>
 <pinref part="C13" gate="G$1" pin="1"/>
 <pinref part="C15" gate="G$1" pin="1"/>
 <pinref part="C10" gate="G$1" pin="1"/>
+<pinref part="C25" gate="G$1" pin="1"/>
+<wire x1="17.78" y1="185.42" x2="17.78" y2="187.96" width="0.1524" layer="91"/>
+<junction x="33.02" y="187.96"/>
+<pinref part="C26" gate="G$1" pin="1"/>
+<wire x1="17.78" y1="187.96" x2="33.02" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="185.42" x2="5.08" y2="187.96" width="0.1524" layer="91"/>
+<wire x1="5.08" y1="187.96" x2="17.78" y2="187.96" width="0.1524" layer="91"/>
 <pinref part="C12" gate="G$1" pin="1"/>
-<pinref part="C14" gate="G$1" pin="1"/>
-<pinref part="C16" gate="G$1" pin="1"/>
+<wire x1="114.3" y1="185.42" x2="114.3" y2="187.96" width="0.1524" layer="91"/>
+<junction x="114.3" y="187.96"/>
 </segment>
 <segment>
 <pinref part="U5" gate="G$1" pin="VDD@64"/>
@@ -6528,6 +6616,24 @@ with hardware flow control (RS232)</text>
 <wire x1="187.96" y1="17.78" x2="187.96" y2="10.16" width="0.1524" layer="91"/>
 <label x="187.96" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="U5" gate="G$1" pin="VDDA/VREF+"/>
+<wire x1="50.8" y1="76.2" x2="43.18" y2="76.2" width="0.1524" layer="91"/>
+<label x="43.18" y="76.2" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="SUPPLY24" gate="VDD" pin="VDD"/>
+<wire x1="45.72" y1="111.76" x2="45.72" y2="106.68" width="0.1524" layer="91"/>
+<pinref part="U5" gate="G$1" pin="VBAT"/>
+<wire x1="45.72" y1="106.68" x2="50.8" y2="106.68" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="PAD8" gate="G$1" pin="P"/>
+<wire x1="30.48" y1="142.24" x2="30.48" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="30.48" y1="137.16" x2="38.1" y2="137.16" width="0.1524" layer="91"/>
+<wire x1="38.1" y1="137.16" x2="38.1" y2="144.78" width="0.1524" layer="91"/>
+<pinref part="SUPPLY25" gate="VDD" pin="VDD"/>
+</segment>
 </net>
 <net name="USB_D-" class="0">
 <segment>
@@ -6603,6 +6709,11 @@ with hardware flow control (RS232)</text>
 <pinref part="U2" gate="G$1" pin="I/O1_2"/>
 <wire x1="205.74" y1="68.58" x2="195.58" y2="68.58" width="0.1524" layer="91"/>
 <label x="203.2" y="68.58" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R33" gate="G$1" pin="1"/>
+<wire x1="172.72" y1="33.02" x2="172.72" y2="35.56" width="0.1524" layer="91"/>
+<label x="172.72" y="33.02" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="D-" class="0">
@@ -7140,6 +7251,11 @@ with hardware flow control (RS232)</text>
 <wire x1="200.66" y1="17.78" x2="200.66" y2="10.16" width="0.1524" layer="91"/>
 <label x="200.66" y="10.16" size="1.778" layer="95" rot="R90"/>
 </segment>
+<segment>
+<pinref part="R33" gate="G$1" pin="2"/>
+<wire x1="172.72" y1="45.72" x2="172.72" y2="50.8" width="0.1524" layer="91"/>
+<label x="172.72" y="50.8" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="TXD" class="0">
 <segment>
@@ -7210,6 +7326,44 @@ with hardware flow control (RS232)</text>
 <wire x1="50.8" y1="73.66" x2="35.56" y2="73.66" width="0.1524" layer="91"/>
 <wire x1="35.56" y1="73.66" x2="35.56" y2="46.99" width="0.1524" layer="91"/>
 <label x="35.56" y="41.91" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="N$19" class="0">
+<segment>
+<pinref part="R32" gate="G$1" pin="2"/>
+<pinref part="RX_LED1" gate="G$1" pin="A"/>
+<wire x1="132.08" y1="41.91" x2="132.08" y2="39.37" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="PA5" class="0">
+<segment>
+<pinref part="U5" gate="G$1" pin="PA5"/>
+<wire x1="78.74" y1="50.8" x2="78.74" y2="30.48" width="0.1524" layer="91"/>
+<label x="78.74" y="30.48" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="R32" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="55.88" x2="132.08" y2="52.07" width="0.1524" layer="91"/>
+<label x="132.08" y="55.88" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="BOOT0" class="0">
+<segment>
+<pinref part="U5" gate="G$1" pin="BOOT0"/>
+<wire x1="78.74" y1="124.46" x2="78.74" y2="134.62" width="0.1524" layer="91"/>
+<label x="78.74" y="127" size="1.778" layer="95" rot="R90"/>
+</segment>
+<segment>
+<pinref part="R34" gate="G$1" pin="1"/>
+<wire x1="10.16" y1="127" x2="10.16" y2="119.38" width="0.1524" layer="91"/>
+<label x="10.16" y="116.84" size="1.778" layer="95" rot="R90"/>
+</segment>
+</net>
+<net name="N$21" class="0">
+<segment>
+<pinref part="R34" gate="G$1" pin="2"/>
+<pinref part="PAD5" gate="G$1" pin="P"/>
+<wire x1="10.16" y1="137.16" x2="10.16" y2="142.24" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
