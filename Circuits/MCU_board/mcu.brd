@@ -177,6 +177,8 @@ TEJASVI JODHKA
 GAUNTLET</text>
 <text x="75.7174" y="55.7022" size="0.8128" layer="21" font="vector" ratio="20">SWO</text>
 <text x="75.7174" y="58.42" size="0.8128" layer="21" font="vector" ratio="20">NRST</text>
+<text x="59.5884" y="57.912" size="0.8128" layer="21" font="vector" ratio="20">VDD</text>
+<text x="59.5884" y="56.2102" size="0.8128" layer="21" font="vector" ratio="20">GND</text>
 </plain>
 <libraries>
 <library name="SparkFun-Capacitors">
