@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5538,12 +5538,12 @@ new: Attribute TP_SIGNAL_NAME&lt;br&gt;
 <part name="R32" library="SparkFun-Resistors" deviceset="4.7KOHM" device="-0603-1/10W-1%" value="270R"/>
 <part name="R33" library="SparkFun-Resistors" deviceset="1.5KOHM" device="-0603-1/10W-1%" value="1.5k"/>
 <part name="GND21" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="PAD5" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
 <part name="PAD6" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
 <part name="PAD8" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="WIREPAD" device="2,54/1,0" package3d_urn="urn:adsk.eagle:package:30828/1"/>
 <part name="SUPPLY25" library="SparkFun-PowerSymbols" deviceset="VDD" device=""/>
 <part name="R34" library="SparkFun-Resistors" deviceset="10KOHM" device="-0603-1/10W-1%" value="10k"/>
 <part name="GND33" library="SparkFun-PowerSymbols" deviceset="GND" device=""/>
+<part name="TP1" library="testpad" library_urn="urn:adsk.eagle:library:385" deviceset="TP" device="B1,27" package3d_urn="urn:adsk.eagle:package:27944/2"/>
 </parts>
 <sheets>
 <sheet>
@@ -6048,10 +6048,6 @@ with hardware flow control (RS232)</text>
 <instance part="GND21" gate="1" x="132.08" y="25.4" smashed="yes">
 <attribute name="VALUE" x="129.54" y="22.86" size="1.778" layer="96"/>
 </instance>
-<instance part="PAD5" gate="G$1" x="10.16" y="144.78" smashed="yes" rot="R270">
-<attribute name="NAME" x="12.0142" y="145.923" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="6.858" y="145.923" size="1.778" layer="96" rot="R270"/>
-</instance>
 <instance part="PAD6" gate="G$1" x="17.78" y="144.78" smashed="yes" rot="R270">
 <attribute name="NAME" x="19.6342" y="145.923" size="1.778" layer="95" rot="R270"/>
 <attribute name="VALUE" x="14.478" y="145.923" size="1.778" layer="96" rot="R270"/>
@@ -6069,6 +6065,10 @@ with hardware flow control (RS232)</text>
 </instance>
 <instance part="GND33" gate="1" x="17.78" y="129.54" smashed="yes">
 <attribute name="VALUE" x="17.78" y="129.286" size="1.778" layer="96" align="top-center"/>
+</instance>
+<instance part="TP1" gate="G$1" x="10.16" y="144.78" smashed="yes">
+<attribute name="NAME" x="8.89" y="146.05" size="1.778" layer="95"/>
+<attribute name="TP_SIGNAL_NAME" x="11.43" y="143.51" size="1.778" layer="97"/>
 </instance>
 </instances>
 <busses>
@@ -7359,11 +7359,11 @@ with hardware flow control (RS232)</text>
 <label x="10.16" y="116.84" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
-<net name="N$21" class="0">
+<net name="N$20" class="0">
 <segment>
+<pinref part="TP1" gate="G$1" pin="TP"/>
 <pinref part="R34" gate="G$1" pin="2"/>
-<pinref part="PAD5" gate="G$1" pin="P"/>
-<wire x1="10.16" y1="137.16" x2="10.16" y2="142.24" width="0.1524" layer="91"/>
+<wire x1="10.16" y1="142.24" x2="10.16" y2="137.16" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
