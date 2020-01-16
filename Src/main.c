@@ -89,12 +89,6 @@ glove_status_t scheduler_tests();
 int main(void)
 {
 
-  while (1)
-  {
-    HAL_GPIO_TogglePin(I2C_MUX_RST_GPIO_Port, I2C_MUX_RST_Pin);
-    HAL_Delay(500);
-  }
-
   /* USER CODE BEGIN 1 */
   glove_status_t status = GLOVE_STATUS_OK;
 
@@ -123,6 +117,11 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   printf("Hello world!!\r\n");
+  while (1)
+  {
+    HAL_GPIO_TogglePin(I2C_MUX_RST_GPIO_Port, I2C_MUX_RST_Pin);
+    HAL_Delay(100);
+  }
 
   // initialize the serial interface wrapper
   if ((status = Serial_Init(&huart2)))
