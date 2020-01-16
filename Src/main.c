@@ -117,6 +117,12 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("Hello world!!\r\n");
 
+  // loop printf
+  while (1)
+  {
+    printf("Hello world!!!\r\n");
+  }
+
   // blinky
   // while (1)
   // {
