@@ -84,13 +84,9 @@ static uint32_t gTotal = 0;
 
 // for breadboard testing
 static imu_board_info_t FINGER_INFOS[] = {
-//    {.finger = PINKY, .knuckle = TIP,     .sad0 = 1, .sad1 = 1, .bus = 0, .imu = {0}},  // tip
-//    {.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 0, .imu = {0}},  // middle
-//
     {.finger = PINKY, .knuckle = BASE,     .sad0 = 1, .sad1 = 1, .bus = 0, .imu = {0}},  // tip
-    {.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 1, .imu = {0}},  // middle
-
-    {.finger = PINKY, .knuckle = TIP,    .sad0 = 1, .sad1 = 1, .bus = 1, .imu = {0}},  // base
+    // {.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 1, .imu = {0}},  // middle
+    // {.finger = PINKY, .knuckle = TIP,    .sad0 = 1, .sad1 = 1, .bus = 1, .imu = {0}},  // base
 
 };
 
@@ -116,7 +112,7 @@ static struct
 
 glove_status_t Hand_Init(I2C_HandleTypeDef * hi2c)
 {
-	imu_board_info_t info = {0};
+	imu_board_info_t * info = NULL;
 	glove_status_t status = GLOVE_STATUS_OK;
 	imu_t * imu = NULL;
 
@@ -127,19 +123,18 @@ glove_status_t Hand_Init(I2C_HandleTypeDef * hi2c)
 
 	for (int i = 0; i < NUM_IMUS; ++i)
 	{
-		info = FINGER_INFOS[i];
-		imu = &(info.imu);
-		info.imu.ag_addr = IMU_GET_AG_ADDR(info.sad0);
-		info.imu.m_addr = IMU_GET_M_ADDR(info.sad1);
-        printf("IMU addr: 0x%X and 0x%X\r\n", info.imu.ag_addr, info.imu.m_addr);
-		info.imu.hi2c = hi2c;
+		info = &(FINGER_INFOS[i]);
+		imu = &(info->imu);
+		imu->ag_addr = IMU_GET_AG_ADDR(info->sad0);
+		imu->m_addr = IMU_GET_M_ADDR(info->sad1);
+        printf("IMU addr: 0x%X and 0x%X\r\n", imu->ag_addr, imu->m_addr);
+		imu->hi2c = hi2c;
 
         // select the bus for the current IMU
-        status = I2CMux_Select(info.bus);
+        status = I2CMux_Select(info->bus);
         CHECK_STATUS_OK_RET(status);
 
         // init the imu
-        // TODO: change status check to return bad status code?
 		status = IMU_Init(imu);
 		CHECK_STATUS_OK_NO_RET(status);
 
@@ -233,7 +228,7 @@ static glove_status_t AcknowledgeTransferStopped()
     char msg [50] = {0};
     sprintf(msg, "average: %ld\r\n", gTotal/gCount);
     Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
-    Scheduler_EnableDebug();
+    // Scheduler_EnableDebug();
     char * message = "ack\r\n";
     return Serial_WriteBlocking((uint8_t *)message, sizeof(message));
 }

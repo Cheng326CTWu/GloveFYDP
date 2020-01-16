@@ -60,8 +60,8 @@ glove_status_t IMU_Init(imu_t * imu)
     }
 
     // // reset device
-    // status = IMU_Reset(imu);
-    // CHECK_STATUS_OK_RET(status);
+    status = IMU_Reset(imu);
+    CHECK_STATUS_OK_RET(status);
 
     // enable the 3-axes of the gyroscope
     status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG4, 0x38);
@@ -239,14 +239,13 @@ glove_status_t IMU_ReadAll(imu_t * imu, motion_data_t * motionData)
     int16_t magData[3] = {0};
 
     // read gyro and accel data
+    printf("%s read from address 0x%X 0x%X\r\n", __FUNCTION__, imu->ag_addr, imu->m_addr);
     halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->ag_addr, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
-    printf("%s: 0x%X\r\n", __FUNCTION__, halStatus);
-    CHECK_HAL_STATUS_OK(HALstatusToGlove(halStatus));
+    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     // read magnetometer data
     halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->m_addr, 0xFF & OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
-    printf("%s: 0x%X\r\n", __FUNCTION__, halStatus);
-    CHECK_HAL_STATUS_OK(HALstatusToGlove(halStatus));
+    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
 
     if (motionData)
     {

@@ -24,12 +24,14 @@ typedef enum
 	GLOVE_STATUS_INVALID_ARGUMENT =                GLOVE_STATUS_BASE + 0x0001,
 	GLOVE_STATUS_MODULE_NOT_INIT = 				   GLOVE_STATUS_BASE + 0x0002,
 	GLOVE_STATUS_NULL_PTR = 					   GLOVE_STATUS_BASE + 0x0003,
-	GLOVE_STATUS_FAIL = 						   GLOVE_STATUS_BASE + 0x0004
+	GLOVE_STATUS_FAIL = 						   GLOVE_STATUS_BASE + 0x0004,
 
 	// IMU driver statuses
 
 	// HAL statuses
 	// calculated in HALstatusToGlove()
+
+	GLOVE_STATUS_MAX =                             0xFFFF
 } glove_status_t;
 
 glove_status_t HALstatusToGlove(HAL_StatusTypeDef hStatus);
@@ -39,7 +41,7 @@ do																							\
 {																							\
 	if (GLOVE_STATUS_OK != (status))														\
 	{																						\
-		printf("%s:%d error, status=0x%08X\r\n", __FUNCTION__, __LINE__, (status));				\
+		printf("%s:%d error, status=0x%04X\r\n", __FUNCTION__, __LINE__, (status));				\
 		return (status);																	\
 	}																						\
 } while (0);
@@ -49,7 +51,7 @@ do																							\
 {																							\
 	if (GLOVE_STATUS_OK != (status))														\
 	{																						\
-		printf("%s:%d error, status=0x%08X\r\n", __FUNCTION__, __LINE__, (status));				\
+		printf("%s:%d error, status=0x%04X\r\n", __FUNCTION__, __LINE__, (status));				\
 	}																						\
 } while (0);
 
