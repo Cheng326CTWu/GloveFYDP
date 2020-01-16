@@ -117,11 +117,13 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   printf("Hello world!!\r\n");
-  while (1)
-  {
-    HAL_GPIO_TogglePin(I2C_MUX_RST_GPIO_Port, I2C_MUX_RST_Pin);
-    HAL_Delay(100);
-  }
+
+  // blinky
+  // while (1)
+  // {
+  //   HAL_GPIO_TogglePin(I2C_MUX_RST_GPIO_Port, I2C_MUX_RST_Pin);
+  //   HAL_Delay(100);
+  // }
 
   // initialize the serial interface wrapper
   if ((status = Serial_Init(&huart2)))
