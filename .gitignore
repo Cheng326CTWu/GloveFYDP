@@ -29,6 +29,7 @@ USB/obj/*
 #build
 Debug/*.elf
 Debug/*.hex
+!Debug/FydpProto.hex
 Debug/*.map
 
 #Circuits
