@@ -117,12 +117,6 @@ int main(void)
   /* USER CODE BEGIN 2 */
   printf("Hello world!!\r\n");
 
-  // loop printf
-  while (1)
-  {
-    printf("Hello world!!!\r\n");
-  }
-
   // blinky
   // while (1)
   // {
@@ -135,6 +129,13 @@ int main(void)
   {
     printf("Serial interface init failed, status=%X\r\n", status);
   }
+
+  // loop printf
+  while (1)
+  {
+    printf("Hello world!!!\r\n");
+  }
+
 
   // initialize the I2C mux
   if ( (status = I2CMux_Init(&hi2c1)) )
@@ -326,12 +327,12 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 1200;
+  huart2.Init.BaudRate = 1152000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
   huart2.Init.Mode = UART_MODE_TX_RX;
-  huart2.Init.HwFlowCtl = UART_HWCONTROL_RTS_CTS;
+  huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
