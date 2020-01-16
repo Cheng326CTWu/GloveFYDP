@@ -131,11 +131,11 @@ int main(void)
   }
 
   // loop printf
-  while (1)
-  {
-    printf("Hello world!!!\r\n");
-    HAL_Delay(100);
-  }
+  // while (1)
+  // {
+  //   printf("Hello world!!!\r\n");
+  //   HAL_Delay(100);
+  // }
 
 
   // initialize the I2C mux
