@@ -39,7 +39,7 @@ do																							\
 {																							\
 	if (GLOVE_STATUS_OK != (status))														\
 	{																						\
-		printf("%s:%d error, status=%X\r\n", __FUNCTION__, __LINE__, (status));				\
+		printf("%s:%d error, status=0x%08X\r\n", __FUNCTION__, __LINE__, (status));				\
 		return (status);																	\
 	}																						\
 } while (0);
@@ -49,7 +49,7 @@ do																							\
 {																							\
 	if (GLOVE_STATUS_OK != (status))														\
 	{																						\
-		printf("%s:%d error, status=%X\r\n", __FUNCTION__, __LINE__, (status));				\
+		printf("%s:%d error, status=0x%08X\r\n", __FUNCTION__, __LINE__, (status));				\
 	}																						\
 } while (0);
 
@@ -64,12 +64,13 @@ do																			\
 	}																		\
 }while(0);
 
-#define CHECK_HAL_STATUS_OK(status) 							\
+#define CHECK_HAL_STATUS_OK(status) 						\
 do															\
 {															\
 	if (HAL_OK != (status))									\
 	{														\
 		printf("HAL error, status=0x%x\r\n", (status));		\
+		return (status);									\
 	}														\
 }while(0);
 

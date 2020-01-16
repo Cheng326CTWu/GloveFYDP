@@ -240,11 +240,13 @@ glove_status_t IMU_ReadAll(imu_t * imu, motion_data_t * motionData)
 
     // read gyro and accel data
     halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->ag_addr, OUT_X_G, 1, (uint8_t *)gyroAndAccelData, sizeof(gyroAndAccelData), IMU_I2C_TIMEOUT);
-    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
+    printf("%s: 0x%X\r\n", __FUNCTION__, halStatus);
+    CHECK_HAL_STATUS_OK(HALstatusToGlove(halStatus));
 
     // read magnetometer data
     halStatus = HAL_I2C_Mem_Read(imu->hi2c, imu->m_addr, 0xFF & OUT_X_L_M, 1, (uint8_t *)magData, sizeof(magData), IMU_I2C_TIMEOUT);
-    CHECK_STATUS_OK_RET(HALstatusToGlove(halStatus));
+    printf("%s: 0x%X\r\n", __FUNCTION__, halStatus);
+    CHECK_HAL_STATUS_OK(HALstatusToGlove(halStatus));
 
     if (motionData)
     {
