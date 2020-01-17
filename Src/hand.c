@@ -53,33 +53,33 @@ static uint32_t gTotal = 0;
 // // the actual glove
 static imu_board_info_t FINGER_INFOS[] = 
 {
-	// // pinky
+//  	// pinky
 	// {.finger = PINKY, .knuckle = TIP,     .sad0 = 1, .sad1 = 1, .bus = 0, .imu = {0}},  // tip
 	// {.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 0, .imu = {0}},  // middle
 	// {.finger = PINKY, .knuckle = BASE,    .sad0 = 0, .sad1 = 0, .bus = 1, .imu = {0}},  // base
 
-    // ring finger
-	{.finger = RING, .knuckle = TIP,      .sad0 = 1, .sad1 = 1, .bus = 2, .imu = {0}},	// tip
-	{.finger = RING, .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 2, .imu = {0}},	// middle
-	{.finger = RING, .knuckle = BASE,     .sad0 = 1, .sad1 = 1, .bus = 1, .imu = {0}},	// base
+ //    // ring finger
+	// {.finger = RING, .knuckle = TIP,      .sad0 = 1, .sad1 = 1, .bus = 2, .imu = {0}},	// tip
+	// {.finger = RING, .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 2, .imu = {0}},	// middle
+	// {.finger = RING, .knuckle = BASE,     .sad0 = 1, .sad1 = 1, .bus = 1, .imu = {0}},	// base
 
-    // middle finger
-	{.finger = MIDDLE, .knuckle = TIP,    .sad0 = 1, .sad1 = 1, .bus = 3, .imu = {0}},	// tip
-	{.finger = MIDDLE, .knuckle = SECOND, .sad0 = 0, .sad1 = 0, .bus = 3, .imu = {0}},	// middle
-	{.finger = MIDDLE, .knuckle = BASE,   .sad0 = 0, .sad1 = 0, .bus = 4, .imu = {0}},	// base
+ //    // middle finger
+	// {.finger = MIDDLE, .knuckle = TIP,    .sad0 = 1, .sad1 = 1, .bus = 3, .imu = {0}},	// tip
+	// {.finger = MIDDLE, .knuckle = SECOND, .sad0 = 0, .sad1 = 0, .bus = 3, .imu = {0}},	// middle
+	// {.finger = MIDDLE, .knuckle = BASE,   .sad0 = 0, .sad1 = 0, .bus = 4, .imu = {0}},	// base
 
-    // index finger
-	{.finger = INDEX, .knuckle = TIP,     .sad0 = 1, .sad1 = 1, .bus = 5, .imu = {0}},	// tip
-	{.finger = INDEX, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 5, .imu = {0}},	// middle
-	{.finger = INDEX, .knuckle = BASE,    .sad0 = 1, .sad1 = 1, .bus = 4, .imu = {0}},	// base
+ //    // index finger
+	// {.finger = INDEX, .knuckle = TIP,     .sad0 = 1, .sad1 = 1, .bus = 5, .imu = {0}},	// tip
+	// {.finger = INDEX, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 5, .imu = {0}},	// middle
+	// {.finger = INDEX, .knuckle = BASE,    .sad0 = 1, .sad1 = 1, .bus = 4, .imu = {0}},	// base
 
  //    // thumb
 	// {.finger = THUMB, .knuckle = TIP,     .sad0 = 1, .sad1 = 1, .bus = 6, .imu = {0}},	// tip
 	// {.finger = THUMB, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 6, .imu = {0}},	// middle
 	// {.finger = THUMB, .knuckle = BASE,    .sad0 = 1, .sad1 = 1, .bus = 7, .imu = {0}},	// base
 
-//     // middle of the hand
-// 	{.finger = HAND, .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 7, .imu = {0}},
+    // middle of the hand
+	{.finger = HAND, .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 7, .imu = {0}},
 };
 
 // for breadboard testing
