@@ -84,7 +84,7 @@ static uint32_t gTotal = 0;
 
 // for breadboard testing
 static imu_board_info_t FINGER_INFOS[] = {
-    {.finger = PINKY, .knuckle = BASE,     .sad0 = 1, .sad1 = 1, .bus = 0, .imu = {0}},  // tip
+    {.finger = INDEX,    .knuckle = BASE,     .sad0 = 0, .sad1 = 0, .bus = 4, .imu = {0}},  // tip
     // {.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 1, .imu = {0}},  // middle
     // {.finger = PINKY, .knuckle = TIP,    .sad0 = 1, .sad1 = 1, .bus = 1, .imu = {0}},  // base
 

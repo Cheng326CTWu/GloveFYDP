@@ -126,7 +126,6 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
     sm_event_t event = EVENT_NONE;
     char commandStr[COMMAND_STRING_LENGTH] = {0};
-    printf("asdf\r\n");
     if (huart == gContext.huart)
     {
         if (!strncmp((char *)gEventData, COMMAND_DATA, COMMAND_STRING_LENGTH))
