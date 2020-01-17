@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.3.2">
+<eagle version="9.4.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -7281,10 +7281,9 @@ with hardware flow control (RS232)</text>
 <pinref part="R23" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="U5" gate="G$1" pin="PA2"/>
-<wire x1="50.8" y1="68.58" x2="44.45" y2="68.58" width="0.1524" layer="91"/>
-<wire x1="44.45" y1="68.58" x2="44.45" y2="46.99" width="0.1524" layer="91"/>
-<label x="44.45" y="41.91" size="1.778" layer="95" rot="R90"/>
+<pinref part="U5" gate="G$1" pin="PA3"/>
+<wire x1="68.58" y1="50.8" x2="68.58" y2="30.48" width="0.1524" layer="91"/>
+<label x="68.58" y="30.48" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="RXD" class="0">
@@ -7299,9 +7298,10 @@ with hardware flow control (RS232)</text>
 <pinref part="R24" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="U5" gate="G$1" pin="PA3"/>
-<wire x1="68.58" y1="50.8" x2="68.58" y2="30.48" width="0.1524" layer="91"/>
-<label x="68.58" y="30.48" size="1.778" layer="95" rot="R90"/>
+<pinref part="U5" gate="G$1" pin="PA2"/>
+<wire x1="50.8" y1="68.58" x2="44.45" y2="68.58" width="0.1524" layer="91"/>
+<wire x1="44.45" y1="68.58" x2="44.45" y2="46.99" width="0.1524" layer="91"/>
+<label x="44.45" y="41.91" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="RTS" class="0">
@@ -7316,10 +7316,10 @@ with hardware flow control (RS232)</text>
 <pinref part="R26" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="U5" gate="G$1" pin="PA1"/>
-<wire x1="50.8" y1="71.12" x2="39.37" y2="71.12" width="0.1524" layer="91"/>
-<wire x1="39.37" y1="71.12" x2="39.37" y2="46.99" width="0.1524" layer="91"/>
-<label x="39.37" y="41.91" size="1.778" layer="95" rot="R90"/>
+<pinref part="U5" gate="G$1" pin="PA0"/>
+<wire x1="50.8" y1="73.66" x2="35.56" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="73.66" x2="35.56" y2="46.99" width="0.1524" layer="91"/>
+<label x="35.56" y="41.91" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="CTS" class="0">
@@ -7334,10 +7334,10 @@ with hardware flow control (RS232)</text>
 <pinref part="R25" gate="G$1" pin="1"/>
 </segment>
 <segment>
-<pinref part="U5" gate="G$1" pin="PA0"/>
-<wire x1="50.8" y1="73.66" x2="35.56" y2="73.66" width="0.1524" layer="91"/>
-<wire x1="35.56" y1="73.66" x2="35.56" y2="46.99" width="0.1524" layer="91"/>
-<label x="35.56" y="41.91" size="1.778" layer="95" rot="R90"/>
+<pinref part="U5" gate="G$1" pin="PA1"/>
+<wire x1="50.8" y1="71.12" x2="39.37" y2="71.12" width="0.1524" layer="91"/>
+<wire x1="39.37" y1="71.12" x2="39.37" y2="46.99" width="0.1524" layer="91"/>
+<label x="39.37" y="41.91" size="1.778" layer="95" rot="R90"/>
 </segment>
 </net>
 <net name="N$19" class="0">
