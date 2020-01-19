@@ -116,10 +116,10 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   printf("\r\nHello world!!\r\n");
-  while (1) {
-    printf("Hello world!!!\r\n");
-    HAL_Delay(200);
-  }
+  // while (1) {
+  //   printf("Hello world!!!\r\n");
+  //   HAL_Delay(200);
+  // }
 
   // blinky
   // while (1)
