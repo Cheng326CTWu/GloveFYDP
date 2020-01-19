@@ -154,7 +154,6 @@ glove_status_t Hand_StartContinuousRead()
     glove_status_t status = GLOVE_STATUS_OK;
 
     Main_SetEnablePrintf(false);
-    gContext.fContinuousRead = true;
     status = Scheduler_AddTask(&Task_IMUSweep);
     CHECK_STATUS_OK_RET(status);
 
@@ -168,7 +167,6 @@ glove_status_t Hand_StopContinuousRead()
     glove_status_t status = GLOVE_STATUS_OK;
     
     gContext.fContinuousRead = false;
-    Main_SetEnablePrintf(true);
     status = Scheduler_RemoveTask(&Task_IMUSweep);
     CHECK_STATUS_OK_RET(status);
     return GLOVE_STATUS_OK;

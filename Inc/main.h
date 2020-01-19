@@ -52,7 +52,6 @@ extern "C" {
 
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
-void Main_SetEnablePrintf(bool enable);
 
 /* USER CODE BEGIN EFP */
 

@@ -115,7 +115,7 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  printf("Hello world!!\r\n");
+  printf("\r\nHello world!!\r\n");
   while (1) {
     printf("Hello world!!!\r\n");
     HAL_Delay(200);
@@ -199,6 +199,8 @@ int main(void)
   // }
 
   printf("Main pre-loop done\r\n");
+
+  gfEnablePrintf = false;
 
   /* USER CODE END 2 */
 
@@ -604,11 +606,6 @@ glove_status_t scheduler_tests()
   }
   
   return GLOVE_STATUS_OK;
-}
-
-void Main_SetEnablePrintf(bool enable)
-{
-  gfEnablePrintf = enable;
 }
 
 /* USER CODE END 4 */
