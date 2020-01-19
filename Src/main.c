@@ -115,6 +115,7 @@ int main(void)
   MX_I2C1_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
+  HAL_Delay(200);
   printf("\r\nHello world!!\r\n");
   // while (1) {
   //   printf("Hello world!!!\r\n");
@@ -202,7 +203,7 @@ int main(void)
 
   HAL_Delay(200);
 
-  gfEnablePrintf = true;
+  gfEnablePrintf = false;
 
   /* USER CODE END 2 */
 
