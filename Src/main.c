@@ -200,7 +200,9 @@ int main(void)
 
   printf("Main pre-loop done\r\n");
 
-  gfEnablePrintf = false;
+  HAL_Delay(200);
+
+  gfEnablePrintf = true;
 
   /* USER CODE END 2 */
 
