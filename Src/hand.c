@@ -9,18 +9,18 @@
 #include "TCA9548A.h"
 
 typedef enum {
-	PINKY,
-	RING,
-	MIDDLE,
-	INDEX,
-	THUMB,
-	HAND
+	PINKY = 0,
+	RING = 1,
+	MIDDLE = 2,
+	INDEX = 3,
+	THUMB = 4,
+	HAND = 5,
 } finger_t;
 
 typedef enum {
-	TIP,
-	SECOND,
-	BASE
+    BASE = 0,
+    SECOND = 1,
+	TIP = 2,
 } knuckle_t;
 
 typedef struct {
@@ -82,25 +82,6 @@ static imu_board_info_t FINGER_INFOS[] =
     // middle of the hand
 	{.finger = HAND, .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 7, .imu = {0}},
 };
-
-// for breadboard testing
-// static imu_board_info_t FINGER_INFOS[] = {
-//     {.finger = INDEX,    .knuckle = BASE,     .sad0 = 1, .sad1 = 1, .bus = 4, .imu = {0}},  // tip
-//     {.finger = INDEX,    .knuckle = SECOND,   .sad0 = 0, .sad1 = 0, .bus = 5, .imu = {0}},  // middle
-//     {.finger = INDEX,    .knuckle = TIP,      .sad0 = 1, .sad1 = 1, .bus = 5, .imu = {0}},  // base
-
-// };
-
-// // a single middle board
-// static imu_board_info_t FINGER_INFOS[] = {
-//     {{.finger = PINKY, .knuckle = SECOND,  .sad0 = 0, .sad1 = 0, .bus = 0, .imu = {0}},  // middle
-// };
-
-// // a single base board
-// static imu_board_info_t FINGER_INFOS[] = {
-//     {.finger = PINKY, .knuckle = BASE,    .sad0 = 0, .sad1 = 0, .bus = 1, .imu = {0}},  // base
-// };
-
 
 #define NUM_IMUS (sizeof(FINGER_INFOS) / sizeof(imu_board_info_t))
 
@@ -172,11 +153,20 @@ glove_status_t Hand_StopContinuousRead()
     return GLOVE_STATUS_OK;
 }
 #define PRETTY_PRINT_DATA 0
+#define DELIMITER 0xABCD
 static glove_status_t ReadAllMotionSensors()
 {
     uint8_t i = 0;
     glove_status_t status = GLOVE_STATUS_OK;
-    motion_data_t allMotionData[16] = {0};
+
+    struct 
+    {
+        uint32_t delim;
+        uint8_t finger;
+        uint8_t knuckle;
+        motion_data_t allMotionData[NUM_IMUS];
+    } outputData = {0};
+
     uint32_t startTime = HAL_GetTick();
 
     for (i = 0; i < NUM_IMUS; ++i)
@@ -186,7 +176,7 @@ static glove_status_t ReadAllMotionSensors()
         CHECK_STATUS_OK_RET(status);
 
         // read the data
-        status = IMU_ReadAll(&(FINGER_INFOS[i].imu), allMotionData + i);
+        status = IMU_ReadAll(&(FINGER_INFOS[i].imu), outputData.allMotionData + i);
         CHECK_STATUS_OK_RET(status);
     }
 
@@ -194,21 +184,24 @@ static glove_status_t ReadAllMotionSensors()
     {
         // transmit the data
         printf("acc: %.3f, %.3f, %.3f\r\n", 
-            allMotionData[0].xAcc*SENS_ACCELEROMETER_2, 
-            allMotionData[0].yAcc*SENS_ACCELEROMETER_2, 
-            allMotionData[0].zAcc*SENS_ACCELEROMETER_2);
+            outputData.allMotionData[0].xAcc*SENS_ACCELEROMETER_2, 
+            outputData.allMotionData[0].yAcc*SENS_ACCELEROMETER_2, 
+            outputData.allMotionData[0].zAcc*SENS_ACCELEROMETER_2);
         printf("gyro: %.3f, %.3f, %.3f\r\n", 
-            allMotionData[0].xGyro*SENS_GYROSCOPE_245, 
-            allMotionData[0].yGyro*SENS_GYROSCOPE_245, 
-            allMotionData[0].zGyro*SENS_GYROSCOPE_245);
+            outputData.allMotionData[0].xGyro*SENS_GYROSCOPE_245, 
+            outputData.allMotionData[0].yGyro*SENS_GYROSCOPE_245, 
+            outputData.allMotionData[0].zGyro*SENS_GYROSCOPE_245);
         printf("mag: %d, %d, %d\r\n",
-            allMotionData[0].xMag,
-            allMotionData[0].yMag,
-            allMotionData[0].zMag);
+            outputData.allMotionData[0].xMag,
+            outputData.allMotionData[0].yMag,
+            outputData.allMotionData[0].zMag);
     }
     else
     {
-        status = Serial_WriteBlocking((uint8_t *)allMotionData, sizeof(allMotionData));
+        outputData.delim = DELIMITER;
+        outputData.finger = FINGER_INFOS[i].finger;
+        outputData.knuckle = FINGER_INFOS[i].knuckle;
+        status = Serial_WriteBlocking((uint8_t *)(&outputData), sizeof(outputData));
         CHECK_STATUS_OK_RET(status);
     }
     
