@@ -161,11 +161,11 @@ static glove_status_t ReadAllMotionSensors()
 
     struct 
     {
-        uint32_t delim;
+        uint16_t delim;
         uint8_t finger;
         uint8_t knuckle;
-        motion_data_t allMotionData[NUM_IMUS];
-    } outputData = {0};
+        motion_data_t allMotionData;
+    } outputData[NUM_IMUS] = {0};
 
     uint32_t startTime = HAL_GetTick();
 
@@ -176,31 +176,33 @@ static glove_status_t ReadAllMotionSensors()
         CHECK_STATUS_OK_RET(status);
 
         // read the data
-        status = IMU_ReadAll(&(FINGER_INFOS[i].imu), outputData.allMotionData + i);
+        status = IMU_ReadAll(&(FINGER_INFOS[i].imu), &(outputData[i].allMotionData));
         CHECK_STATUS_OK_RET(status);
+
+        // format the serial output
+        outputData[i].delim = DELIMITER;
+        outputData[i].finger = FINGER_INFOS[i].finger;
+        outputData[i].knuckle = FINGER_INFOS[i].knuckle;
     }
 
     if (PRETTY_PRINT_DATA)
     {
         // transmit the data
         printf("acc: %.3f, %.3f, %.3f\r\n", 
-            outputData.allMotionData[0].xAcc*SENS_ACCELEROMETER_2, 
-            outputData.allMotionData[0].yAcc*SENS_ACCELEROMETER_2, 
-            outputData.allMotionData[0].zAcc*SENS_ACCELEROMETER_2);
+            outputData[0].allMotionData.xAcc*SENS_ACCELEROMETER_2, 
+            outputData[0].allMotionData.yAcc*SENS_ACCELEROMETER_2, 
+            outputData[0].allMotionData.zAcc*SENS_ACCELEROMETER_2);
         printf("gyro: %.3f, %.3f, %.3f\r\n", 
-            outputData.allMotionData[0].xGyro*SENS_GYROSCOPE_245, 
-            outputData.allMotionData[0].yGyro*SENS_GYROSCOPE_245, 
-            outputData.allMotionData[0].zGyro*SENS_GYROSCOPE_245);
+            outputData[0].allMotionData.xGyro*SENS_GYROSCOPE_245, 
+            outputData[0].allMotionData.yGyro*SENS_GYROSCOPE_245, 
+            outputData[0].allMotionData.zGyro*SENS_GYROSCOPE_245);
         printf("mag: %d, %d, %d\r\n",
-            outputData.allMotionData[0].xMag,
-            outputData.allMotionData[0].yMag,
-            outputData.allMotionData[0].zMag);
+            outputData[0].allMotionData.xMag,
+            outputData[0].allMotionData.yMag,
+            outputData[0].allMotionData.zMag);
     }
     else
     {
-        outputData.delim = DELIMITER;
-        outputData.finger = FINGER_INFOS[i].finger;
-        outputData.knuckle = FINGER_INFOS[i].knuckle;
         status = Serial_WriteBlocking((uint8_t *)(&outputData), sizeof(outputData));
         CHECK_STATUS_OK_RET(status);
     }
