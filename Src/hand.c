@@ -153,6 +153,7 @@ glove_status_t Hand_StartContinuousRead()
 {
     glove_status_t status = GLOVE_STATUS_OK;
 
+    gContext.fContinuousRead = true;
     status = Scheduler_AddTask(&Task_IMUSweep);
     CHECK_STATUS_OK_RET(status);
 
