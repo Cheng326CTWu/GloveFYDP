@@ -4,6 +4,7 @@
 #include "glove_status_codes.h"
 #include "LSM9DS1.h"
 #include "LSM9DS1_Reg.h"
+#include "main.h"
 #include "serial.h"
 #include "TCA9548A.h"
 
@@ -148,12 +149,11 @@ glove_status_t Hand_Init(I2C_HandleTypeDef * hi2c)
     return GLOVE_STATUS_OK;
 }
 
-extern bool gfEnablePrintf;
 glove_status_t Hand_StartContinuousRead()
 {
     glove_status_t status = GLOVE_STATUS_OK;
-    gfEnablePrintf = false;
 
+    Main_SetEnablePrintf(false);
     gContext.fContinuousRead = true;
     status = Scheduler_AddTask(&Task_IMUSweep);
     CHECK_STATUS_OK_RET(status);
@@ -166,9 +166,9 @@ glove_status_t Hand_StartContinuousRead()
 glove_status_t Hand_StopContinuousRead()
 {
     glove_status_t status = GLOVE_STATUS_OK;
+    
     gContext.fContinuousRead = false;
-    gfEnablePrintf = true;
-
+    Main_SetEnablePrintf(true);
     status = Scheduler_RemoveTask(&Task_IMUSweep);
     CHECK_STATUS_OK_RET(status);
     return GLOVE_STATUS_OK;

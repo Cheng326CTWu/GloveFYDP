@@ -606,6 +606,11 @@ glove_status_t scheduler_tests()
   return GLOVE_STATUS_OK;
 }
 
+void Main_SetEnablePrintf(bool enable)
+{
+  gfEnablePrintf = enable;
+}
+
 /* USER CODE END 4 */
 
 /**
