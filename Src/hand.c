@@ -162,7 +162,7 @@ static void dump_hex(uint8_t * arr, uint32_t size)
         if (i%8 == 0) {
             printf("\r\n");
         }
-        printf("0x%02X", arr + i);
+        printf("0x%02X ", *(arr + i));
     }
 }
 
