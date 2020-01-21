@@ -152,7 +152,7 @@ glove_status_t Hand_StopContinuousRead()
     CHECK_STATUS_OK_RET(status);
     return GLOVE_STATUS_OK;
 }
-#define PRETTY_PRINT_DATA 1
+#define PRETTY_PRINT_DATA 0
 #define DELIMITER 0xABCD
 
 static void dump_hex(uint8_t * arr, uint32_t size)
