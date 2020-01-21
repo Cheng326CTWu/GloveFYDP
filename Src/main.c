@@ -203,7 +203,7 @@ int main(void)
 
   HAL_Delay(200);
 
-  gfEnablePrintf = false;
+  gfEnablePrintf = true;
 
   /* USER CODE END 2 */
 
