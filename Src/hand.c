@@ -223,6 +223,10 @@ static glove_status_t ReadAllMotionSensors()
     gTotal += HAL_GetTick() - startTime;
     ++gCount;
 
+    if (gCount == 20) {
+        return AcknowledgeTransferStopped();
+    }
+
     // schedule the next sensor scan if we are still in continuous mode
     if (gContext.fContinuousRead)
     {
