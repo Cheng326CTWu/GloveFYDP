@@ -238,12 +238,10 @@ static glove_status_t ReadAllMotionSensors()
 static glove_status_t AcknowledgeTransferStopped()
 {
     // for profiling
-    char msg [50] = {0};
-    sprintf(msg, "average: %ld\r\n", gTotal/gCount);
+    char msg [100] = {0};
+    sprintf(msg, "\r\n\r\nasdfasdfasdfasdf average: %ld\r\n", gTotal/gCount);
     Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
     // Scheduler_EnableDebug();
-    char * message = "ack\r\n";
-    return Serial_WriteBlocking((uint8_t *)message, sizeof(message));
 }
 
 
