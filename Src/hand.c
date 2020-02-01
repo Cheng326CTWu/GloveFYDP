@@ -109,7 +109,7 @@ glove_status_t Hand_Init(I2C_HandleTypeDef * hi2c)
 		imu = &(info->imu);
 		imu->ag_addr = IMU_GET_AG_ADDR(info->sad0);
 		imu->m_addr = IMU_GET_M_ADDR(info->sad1);
-        printf("IMU addr: 0x%X and 0x%X\r\n", imu->ag_addr, imu->m_addr);
+        printf("IMU addr: 0x%lX and 0x%lX\r\n", imu->ag_addr, imu->m_addr);
 		imu->hi2c = hi2c;
 
         // select the bus for the current IMU
@@ -240,7 +240,7 @@ static glove_status_t AcknowledgeTransferStopped()
     // for profiling
     char msg [100] = {0};
     sprintf(msg, "\r\n\r\nasdfasdfasdfasdf average: %ld\r\n", gTotal/gCount);
-    Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
+    return Serial_WriteBlocking((uint8_t *) msg, strlen(msg));
     // Scheduler_EnableDebug();
 }
 

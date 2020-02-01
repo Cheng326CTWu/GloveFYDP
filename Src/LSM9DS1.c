@@ -35,9 +35,9 @@ do                                                  \
 } while (0);
 
 // forward declarations
-static glove_status_t IMU_SelfTest(imu_t * imu);
+static GLOVE_UNUSED glove_status_t IMU_SelfTest(imu_t * imu);
 static glove_status_t IMU_Calibrate(imu_t * imu, int16_t * caliAcc, int16_t * caliGyro, int16_t * caliMag);
-static glove_status_t IMU_SetRegBits(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);
+static GLOVE_UNUSED glove_status_t IMU_SetRegBits(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t mask, uint8_t values);
 static glove_status_t IMU_ReadReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t *readvalue);
 static glove_status_t IMU_WriteReg(imu_t * imu, uint8_t baseAddress, uint8_t regAddress, uint8_t value);
 static glove_status_t IMU_Reset(imu_t * imu);
@@ -59,7 +59,7 @@ glove_status_t IMU_Init(imu_t * imu)
         return GLOVE_STATUS_INVALID_ARGUMENT;
     }
 
-    // // reset device
+    // reset device
     status = IMU_Reset(imu);
     CHECK_STATUS_OK_RET(status);
 
@@ -68,7 +68,7 @@ glove_status_t IMU_Init(imu_t * imu)
     CHECK_STATUS_OK_RET(status);
 
     // configure the gyroscope
-    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG1_G, 2 << 5 | 0 << 3 | 0);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG1_G, 0x60);
     CHECK_STATUS_OK_RET(status);
     HAL_Delay(200);
 
@@ -77,7 +77,7 @@ glove_status_t IMU_Init(imu_t * imu)
     CHECK_STATUS_OK_RET(status);
 
     // configure the accelerometer-specify bandwidth selection with Abw
-    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG6_XL, 2 << 5 | 0 << 3);
+    status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG6_XL, 0x60);
     CHECK_STATUS_OK_RET(status);
 
     HAL_Delay(200);
@@ -96,16 +96,16 @@ glove_status_t IMU_Init(imu_t * imu)
 
     // configure the magnetometer, copied from:
     // https://github.com/kriswiner/LSM9DS1/blob/master/LSM9DS1_MS5611_BasicAHRS_t3.ino
-    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG1_M, 0x80 | 2 << 5 | 4 << 2); // select x,y-axis mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG1_M, 0xF0); // select x,y-axis mode
     CHECK_STATUS_OK_RET(status);
 
-    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG2_M, 0 << 5 ); // select mag full scale
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG2_M, 0); // select mag full scale
     CHECK_STATUS_OK_RET(status);
 
-    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG3_M, 0x00 ); // continuous conversion mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG3_M, 0); // continuous conversion mode
     CHECK_STATUS_OK_RET(status);
     
-    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG4_M, 2 << 2 ); // select z-axis mode
+    status = IMU_WriteReg(imu, imu->m_addr, CTRL_REG4_M, 0x8); // select z-axis mode
     CHECK_STATUS_OK_RET(status);
 
     // // set magnetometer ODR to 40 Hz

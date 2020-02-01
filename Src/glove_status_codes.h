@@ -16,6 +16,8 @@
 #define IMU_STATUS_BASE 0x1000
 #define HAL_STATUS_BASE 0x2000
 
+#define GLOVE_UNUSED __attribute__((unused))
+
 // All status codes
 typedef enum
 {
