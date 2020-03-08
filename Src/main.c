@@ -116,7 +116,7 @@ int main(void)
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_Delay(200);
-  printf("\r\nHello world!!\r\n");
+  printf("Hello world!!\r\n");
   // while (1) {
   //   printf("Hello world!!!\r\n");
   //   HAL_Delay(200);
@@ -337,7 +337,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 115200;
+  huart2.Init.BaudRate = 1152000;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;

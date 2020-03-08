@@ -67,7 +67,7 @@ glove_status_t IMU_Init(imu_t * imu)
     status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG4, 0x38);
     CHECK_STATUS_OK_RET(status);
 
-    // configure the gyroscope
+    // configure the gyroscope 119 Hz ODR, 38 Hz cutoff, 245 dps range
     status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG1_G, 0x60);
     CHECK_STATUS_OK_RET(status);
     HAL_Delay(200);
@@ -77,6 +77,7 @@ glove_status_t IMU_Init(imu_t * imu)
     CHECK_STATUS_OK_RET(status);
 
     // configure the accelerometer-specify bandwidth selection with Abw
+    // 119 Hz ODR, +/- 2G range
     status = IMU_WriteReg(imu, imu->ag_addr, CTRL_REG6_XL, 0x60);
     CHECK_STATUS_OK_RET(status);
 

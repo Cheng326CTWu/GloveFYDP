@@ -1,7 +1,7 @@
 import math
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-from matplotlib import style
+# from matplotlib import style
 import serial
 import struct
 import time
@@ -12,7 +12,7 @@ import numpy as np
 from scipy.signal import butter, lfilter, freqz
 
 # matplotlib style
-style.use('fivethirtyeight')
+# style.use('fivethirtyeight')
 
 # sensitivities
 SENSITIVITY_ACCELEROMETER_2  = 0.000061
@@ -43,38 +43,72 @@ def to_deg(x):
 class Driver():
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/cu.usbmodem14103', 1152000, timeout=1)
-        self.xAccOffset = 0
-        self.yAccOffset = 0
-        self.zAccOffset = 0
-        self.xGyroOffset = 0
-        self.yGyroOffset = 0
-        self.zGyroOffset = 0
-        self.xMagOffset = 0
-        self.yMagOffset = 0
-        self.zMagOffset = 0
+        self.ser = serial.Serial('/dev/cu.usbserial-DN05ACYN', 115200, timeout=1)
+        self.xAccOffsets = [[0,0,0] for i in range(6)]
+        self.yAccOffsets = [[0,0,0] for i in range(6)]
+        self.zAccOffsets = [[0,0,0] for i in range(6)]
+        self.xGyroOffsets = [[0,0,0] for i in range(6)]
+        self.yGyroOffsets = [[0,0,0] for i in range(6)]
+        self.zGyroOffsets = [[0,0,0] for i in range(6)]
+        self.xMagOffsets = [[0,0,0] for i in range(6)]
+        self.yMagOffsets = [[0,0,0] for i in range(6)]
+        self.zMagOffsets = [[0,0,0] for i in range(6)]
 
     def continuousRead(self, duration):
 
         self.ser.write("data")
-        data = []
+        data = [ [ [],[],[] ] for i in range(6)]
         start = time.time()
-        offsets = (self.xAccOffset, self.yAccOffset, 0,
-                   self.xGyroOffset, self.yGyroOffset, self.zGyroOffset,
-                   self.xMagOffset, self.yMagOffset, self.zMagOffset)
-
+        counts = [[0,0,0] for i in range(6)]
         while (time.time() - start < duration):
-            newData = self.ser.read(288)        # 9 * 2 * 16 = 288 bytes
-            (xAcc, yAcc, zAcc, xGyro, yGyro, zGyro, xMag, yMag, zMag) = struct.unpack('<hhhhhhhhh', newData[0:18])
+            fmt = '<' + 'hBBhhhhhhhhh'
+            newData = self.ser.read(352)        # = length(fmt) * 16
 
-            # multiply each value that was read by its scaling factor
-            raw = (tuple(a * b for a,b in zip((xAcc, yAcc, zAcc, xGyro, yGyro, zGyro, xMag, yMag, zMag), sens)))
+            bytes_remaining = 352
+            offset = 0
+            while (bytes_remaining > 0):
+                (delim, finger, knuckle, xAcc, yAcc, zAcc, xGyro, yGyro, zGyro, xMag, yMag, zMag) = struct.unpack(fmt, newData[offset:offset+22])
+                bytes_remaining -= 22;
+                offset += 22
 
-            # subtract each value by its offset
-            data.append(tuple(a - b for a,b in zip(raw, offsets)))
+                # multiply each value that was read by its scaling factor
+                # raw = (tuple(a * b for a,b in zip((xAcc, yAcc, zAcc, xGyro, yGyro, zGyro, xMag, yMag, zMag), sens)))
+
+                print(finger, knuckle)
+
+                # validate finger and knuckle
+                if finger < 4 and knuckle > 2:
+                    print("Invalid finger and/or knuckle %d %d"%(finger, knuckle))
+                    continue
+                elif finger == 5 and knuckle != 1:
+                    print("Invalid finger and/or knuckle %d %d"%(finger, knuckle))
+                    continue
+                elif finger > 5:
+                    print("Invalid finger and/or knuckle %d %d"%(finger, knuckle))
+                    continue
+
+                # subtract each value by its offset
+                counts[finger][knuckle] += 1
+                data[finger][knuckle].append([
+                    xAcc * sens[0] - self.xAccOffsets[finger][knuckle],
+                    yAcc * sens[1] - self.yAccOffsets[finger][knuckle],
+                    zAcc * sens[2] - self.zAccOffsets[finger][knuckle],
+                    xGyro * sens[3] - self.xGyroOffsets[finger][knuckle],
+                    yGyro * sens[4] - self.yGyroOffsets[finger][knuckle],
+                    zGyro * sens[5] - self.zGyroOffsets[finger][knuckle],
+                    xMag * sens[6] - self.xMagOffsets[finger][knuckle],
+                    yMag * sens[7] - self.yMagOffsets[finger][knuckle],
+                    zMag * sens[8] - self.zMagOffsets[finger][knuckle]
+                ])
 
         self.ser.write("stop")
-        print(self.ser.read(1000))
+        output = self.ser.read(1000)
+        print(output)
+        time.sleep(0.5)
+        print("Done reading")
+        for finger in data:
+            print(len(finger[0]), len(finger[1]), len(finger[2]))
+        print(counts)
         return data
 
     def calibrate(self):
@@ -83,41 +117,52 @@ class Driver():
         print("Performing 5-second read for gyro and accel calibration.")
         data = self.continuousRead(5)
 
-        allxAcc = [d[0] for d in data]
-        allYAcc = [d[1] for d in data]
-        allZacc = [d[2] for d in data]
+        finger_idx = 0
+        for finger in data:
+            knuckle_idx = 0
+            for knuckle in finger:
+                if len(knuckle) > 0:
+                    allxAcc = [d[0] for d in knuckle]
+                    allYAcc = [d[1] for d in knuckle]
+                    allZacc = [d[2] for d in knuckle]
+                    allxGyro = [d[3] for d in knuckle]
+                    allyGyro = [d[4] for d in knuckle]
+                    allzGyro = [d[5] for d in knuckle]
 
-        allxGyro = [d[3] for d in data]
-        allyGyro = [d[4] for d in data]
-        allzGyro = [d[5] for d in data]
-
-        self.xAccOffset = sum(allxAcc)/len(allxAcc)
-        self.yAccOffset = sum(allYAcc)/len(allYAcc)
-        self.zAccOffset = sum(allZacc)/len(allZacc)
-        self.xGyroOffset = sum(allxGyro)/len(allxGyro)
-        self.yGyroOffset = sum(allyGyro)/len(allyGyro)
-        self.zGyroOffset = sum(allzGyro)/len(allzGyro)
+                    self.xAccOffsets[finger_idx][knuckle_idx] = sum(allxAcc)/len(allxAcc)
+                    self.yAccOffsets[finger_idx][knuckle_idx] = sum(allYAcc)/len(allYAcc)
+                    self.zAccOffsets[finger_idx][knuckle_idx] = sum(allZacc)/len(allZacc) - 1
+                    self.xGyroOffsets[finger_idx][knuckle_idx] = sum(allxGyro)/len(allxGyro)
+                    self.yGyroOffsets[finger_idx][knuckle_idx] = sum(allyGyro)/len(allyGyro)
+                    self.zGyroOffsets[finger_idx][knuckle_idx] = sum(allzGyro)/len(allzGyro)
+                    
+                knuckle_idx += 1
+            finger_idx += 1
 
         # print("Preparing for magnetometer calibration. Start moving IMU slowly in figure 8's to cover a sphere.")
         # time.sleep(2)
         # print("Performing magnetometer calibration")
         # data = self.continuousRead(15)
         
-        # allXMag = [d[6] for d in data]
-        # allYMag = [d[7] for d in data]
-        # allZMag = [d[8] for d in data]
+        # finger_idx = 0
+        # for finger in data:
+        #     knuckle_idx = 0
+        #     for knuckle in finger:
+        #         if len(knuckle) > 0:
+        #             allXMag = [d[6] for d in knuckle]
+        #             allYMag = [d[7] for d in knuckle]
+        #             allZMag = [d[8] for d in knuckle]
 
-        # self.xMagOffset = (max(allXMag) + min(allXMag))/2
-        # self.yMagOffset = (max(allYMag) + min(allYMag))/2
-        # self.zMagOffset = (max(allZMag) + min(allZMag))/2
+        #             self.xMagOffsets[finger_idx][knuckle_idx] = (max(allXMag) + min(allXMag))/2
+        #             self.yMagOffsets[finger_idx][knuckle_idx] = (max(allYMag) + min(allYMag))/2
+        #             self.zMagOffsets[finger_idx][knuckle_idx] = (max(allZMag) + min(allZMag))/2
 
-        self.xMagOffset = -0.09093
-        self.yMagOffset = 0.21447999999999998
-        self.zMagOffset = -0.52108
+        #         knuckle_idx += 1
+        #     finger_idx += 1
 
-        offsets = (self.xAccOffset, self.yAccOffset, self.zAccOffset,
-            self.xGyroOffset, self.yGyroOffset, self.zGyroOffset,
-            self.xMagOffset, self.yMagOffset, self.zMagOffset)
+        offsets = (self.xAccOffsets, self.yAccOffsets, self.zAccOffsets,
+            self.xGyroOffsets, self.yGyroOffsets, self.zGyroOffsets,
+            self.xMagOffsets, self.yMagOffsets, self.zMagOffsets)
         print("offsets:")
         print(offsets)
         
@@ -130,8 +175,9 @@ if __name__ == "__main__":
     # init driver, calibrate, and read for 5 seconds
     driver = Driver()
     driver.calibrate()
-    data = driver.continuousRead(30)
+    all_data = driver.continuousRead(10)
 
+    data = all_data[0][0]
     allxAcc = [d[0] for d in data]
     allYAcc = [d[1] for d in data]
     allZacc = [d[2] for d in data]
@@ -163,16 +209,21 @@ if __name__ == "__main__":
     plt.plot([i for i in range(len(allZMag))], allZMag, '-')
     
     # get pitch roll and yaw of filtered data with downloaded madgwick filter
-    madgwick = Madgwick.MadgwickAHRS(sampleperiod=0.004, quaternion=Q.Quaternion(1, 0, 0, 0), beta=0.06)
+    madgwick = Madgwick.MadgwickAHRS(sampleperiod=0.013, quaternion=Q.Quaternion(1, 0, 0, 0), beta=0.06)
     pitch = []
     roll = []
     yaw = []
     for i in range(len(data)):
         for j in range(10):
-            madgwick.update(
+            # madgwick.update(
+            #     [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
+            #     [allxAcc[i], allYAcc[i], allZacc[i]],
+            #     data[6:9])
+
+            madgwick.update_imu(
                 [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
-                [allxAcc[i], allYAcc[i], allZacc[i]],
-                data[6:9])
+                [allxAcc[i], allYAcc[i], allZacc[i]])
+
         (r, p, y) = madgwick.quaternion.to_euler123()
         pitch.append(to_deg(p))
         roll.append(to_deg(r))
