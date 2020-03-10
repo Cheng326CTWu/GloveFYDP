@@ -34,16 +34,24 @@ sens = (SENSITIVITY_ACCELEROMETER_2, SENSITIVITY_ACCELEROMETER_2, SENSITIVITY_AC
 def to_rad(x):
     return (3.14159265 / 180) * x
 
-def to_deg(x):
+def to_deg(x, prev):
     # if x < 0:
     #     return 180/math.pi * x + 360
+
+    # if 360*0.92 < abs(x - prev) < 360*1.08:
+    #     return 180/math.pi * (x % 360)
+
+    if 2*math.pi*0.9 < x - prev < 2*math.pi*1.1:
+        return 180/math.pi * (x - 2*math.pi)
+    elif 2*math.pi*0.9 < prev - x < 2*math.pi*1.1:
+        return 180/math.pi * (x + 2*math.pi)
     return 180/math.pi * x
 
 
 class Driver():
 
     def __init__(self):
-        self.ser = serial.Serial('/dev/cu.usbserial-DN05ACYN', 115200, timeout=1)
+        self.ser = serial.Serial('/dev/cu.usbserial-DN05ACYN', 1152000, timeout=3)
         self.xAccOffsets = [[0,0,0] for i in range(6)]
         self.yAccOffsets = [[0,0,0] for i in range(6)]
         self.zAccOffsets = [[0,0,0] for i in range(6)]
@@ -102,7 +110,7 @@ class Driver():
                 ])
 
         self.ser.write("stop")
-        output = self.ser.read(1000)
+        output = self.ser.read(10000)
         print(output)
         time.sleep(0.5)
         print("Done reading")
@@ -135,7 +143,7 @@ class Driver():
                     self.xGyroOffsets[finger_idx][knuckle_idx] = sum(allxGyro)/len(allxGyro)
                     self.yGyroOffsets[finger_idx][knuckle_idx] = sum(allyGyro)/len(allyGyro)
                     self.zGyroOffsets[finger_idx][knuckle_idx] = sum(allzGyro)/len(allzGyro)
-                    
+
                 knuckle_idx += 1
             finger_idx += 1
 
@@ -143,7 +151,7 @@ class Driver():
         # time.sleep(2)
         # print("Performing magnetometer calibration")
         # data = self.continuousRead(15)
-        
+
         # finger_idx = 0
         # for finger in data:
         #     knuckle_idx = 0
@@ -160,15 +168,47 @@ class Driver():
         #         knuckle_idx += 1
         #     finger_idx += 1
 
-        offsets = (self.xAccOffsets, self.yAccOffsets, self.zAccOffsets,
-            self.xGyroOffsets, self.yGyroOffsets, self.zGyroOffsets,
-            self.xMagOffsets, self.yMagOffsets, self.zMagOffsets)
-        print("offsets:")
-        print(offsets)
-        
+        # offsets = (self.xAccOffsets, self.yAccOffsets, self.zAccOffsets,
+        #     self.xGyroOffsets, self.yGyroOffsets, self.zGyroOffsets,
+        #     self.xMagOffsets, self.yMagOffsets, self.zMagOffsets)
+        # print("offsets:")
+        # print(offsets)
+
         print("Done calibrating. Put the device back down.")
         time.sleep(2)
 
+
+def dump_data(data):
+    num_samples = len(data[0][0])
+    with open("data.txt", "w") as f:
+        for i in range(num_samples):
+            finger_idx = 0
+            for finger in data:
+                knuckle_idx = 0
+                for knuckle in finger:
+                    # print(finger_idx, knuckle_idx, len(knuckle))
+                    if finger_idx == 5 and (knuckle_idx == 0 or knuckle_idx == 2):
+                        knuckle_idx += 1
+                        continue
+                    f.write("%d %d %d %d %d %d %d %d %d %d %d\r\n"%(
+                        finger_idx,
+                        knuckle_idx,
+                        knuckle[i][0]/sens[0],
+                        knuckle[i][1]/sens[1],
+                        knuckle[i][2]/sens[2],
+                        knuckle[i][3]/sens[3],
+                        knuckle[i][4]/sens[4],
+                        knuckle[i][5]/sens[5],
+                        knuckle[i][6]/sens[6],
+                        knuckle[i][7]/sens[7],
+                        knuckle[i][8]/sens[8]
+                    ))
+                    knuckle_idx += 1
+                finger_idx += 1
+
+def lpf(val, prev):
+    a = 0.1
+    return a*val + (1-a)*prev
 
 if __name__ == "__main__":
 
@@ -176,8 +216,9 @@ if __name__ == "__main__":
     driver = Driver()
     driver.calibrate()
     all_data = driver.continuousRead(10)
+    dump_data(all_data)
 
-    data = all_data[0][0]
+    data = all_data[4][2]
     allxAcc = [d[0] for d in data]
     allYAcc = [d[1] for d in data]
     allZacc = [d[2] for d in data]
@@ -207,27 +248,61 @@ if __name__ == "__main__":
     plt.plot([i for i in range(len(allXMag))], allXMag, '-o')
     plt.plot([i for i in range(len(allYMag))], allYMag, '-x')
     plt.plot([i for i in range(len(allZMag))], allZMag, '-')
-    
+
     # get pitch roll and yaw of filtered data with downloaded madgwick filter
-    madgwick = Madgwick.MadgwickAHRS(sampleperiod=0.013, quaternion=Q.Quaternion(1, 0, 0, 0), beta=0.06)
+    madgwick = Madgwick.MadgwickAHRS(sampleperiod=0.013, quaternion=Q.Quaternion(1, 0, 0, 0), beta=1)
     pitch = []
     roll = []
     yaw = []
-    for i in range(len(data)):
-        for j in range(10):
-            # madgwick.update(
-            #     [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
-            #     [allxAcc[i], allYAcc[i], allZacc[i]],
-            #     data[6:9])
+    for i in range(0, len(data)):
+        # for j in range(10):
+        # madgwick.update(
+        #     [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
+        #     [allxAcc[i], allYAcc[i], allZacc[i]],
+        #     data[6:9])
 
-            madgwick.update_imu(
-                [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
-                [allxAcc[i], allYAcc[i], allZacc[i]])
+        # madgwick.update_imu(
+        #     [to_rad(allxGyro[i]), to_rad(allyGyro[i]), to_rad(allzGyro[i])],
+        #     [allxAcc[i], allYAcc[i], allZacc[i]])
 
-        (r, p, y) = madgwick.quaternion.to_euler123()
-        pitch.append(to_deg(p))
-        roll.append(to_deg(r))
-        yaw.append(to_deg(y))
+        # (r, p, y) = madgwick.quaternion.to_euler123()
+        # (r, p, y) = madgwick.quaternion.to_euler_angles()
+        # xAcc = sum(allxAcc[i:i+10])/10
+        # yAcc = sum(allYAcc[i:i+10])/10
+        # zAcc = sum(allZacc[i:i+10])/10
+        # xMag = sum(allXMag[i:i+10])/10
+        # yMag = sum(allYMag[i:i+10])/10
+        # zMag = sum(allZMag[i:i+10])/10
+
+        xAcc = allxAcc[i]
+        yAcc = allYAcc[i]
+        zAcc = allZacc[i]
+        xMag = allXMag[i]
+        yMag = allYMag[i]
+        zMag = allZMag[i]
+
+        p = np.arctan2(-xAcc, (np.sqrt ((yAcc * yAcc) + (zAcc * zAcc))))
+        r = np.arctan2(yAcc, (np.sqrt((xAcc * xAcc) + (zAcc * zAcc))))
+        # y = np.arctan2(zAcc, np.sqrt(xAcc*xAcc + zAcc*zAcc))
+
+        xh = xMag * np.cos(p) + zMag * np.sin(p);
+        yh = xMag * np.sin(r) * np.sin(p) + yMag * np.cos(r) - zMag * np.sin(r) * np.cos(p);
+        # zh = -xMag * np.cos(r) * np.sin(p) + yMag * np.sin(r) + yMag * np.cos(r) * np.cos(p);
+        y = np.arctan2(yh, xh)
+
+        if i == 0:
+            pitch.append(to_deg(p, 0))
+            roll.append(to_deg(r, 0))
+            yaw.append(to_deg(y, 0))
+        else:
+            pitch.append(to_deg(p, math.pi/180 * pitch[-1]))
+            roll.append(to_deg(r, math.pi/180 * roll[-1]))
+            yaw.append(to_deg(y, math.pi/180 * yaw[-1]))
+
+            pitch[-1] = lpf(pitch[-1], pitch[-2])
+            roll[-1] = lpf(roll[-1], roll[-2])
+            yaw[-1] = lpf(yaw[-1], yaw[-2])
+
 
     # # get pitch roll and yaw of filtered data with madgwick filter converted from C
     # pitch = []
@@ -277,6 +352,7 @@ if __name__ == "__main__":
     # plot pitch roll and yaw
     plt.figure(4)
     plt.title("Pitch (degrees)")
+    print(len(pitch))
     plt.plot([i for i in range(len(pitch))], pitch, '-o')
 
     plt.figure(5)
