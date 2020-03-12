@@ -70,7 +70,7 @@ class Driver():
             pass
 
     def dump_data(self, finger_idx, knuckle_idx, data):
-        print("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n"%(
+        print("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f"%(
             finger_idx,
             knuckle_idx,
             data[0],
@@ -84,13 +84,13 @@ class Driver():
             data[8],
         ))
 
-    def continuousRead(self, duration, save=False):
+    def continuousRead(self, duration, save=False, forever=False):
 
         self.ser.write("data")
         data = [ [ [],[],[] ] for i in range(6)]
         start = time.time()
         counts = [[0,0,0] for i in range(6)]
-        while (time.time() - start < duration):
+        while (forever or time.time() - start < duration):
             fmt = '<' + 'hBBhhhhhhhhh'
             newData = self.ser.read(352)        # = length(fmt) * 16
 
@@ -238,7 +238,7 @@ if __name__ == "__main__":
     driver = Driver()
     driver.calibrate()
     print("Here's the data:")
-    all_data = driver.continuousRead(100, save=True)
+    all_data = driver.continuousRead(5, save=True, forever=True)
     exit()
 
 
