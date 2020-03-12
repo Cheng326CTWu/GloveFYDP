@@ -5,9 +5,9 @@ import matplotlib.animation as animation
 import serial
 import struct
 import time
-import madgwick_py.madgwickahrs as Madgwick
+# import madgwick_py.madgwickahrs as Madgwick
 # import madgwick
-import madgwick_py.quaternion as Q
+# import madgwick_py.quaternion as Q
 import numpy as np
 from scipy.signal import butter, lfilter, freqz
 
@@ -65,8 +65,12 @@ class Driver():
         self.yMagOffsets = [[0,0,0] for i in range(6)]
         self.zMagOffsets = [[0,0,0] for i in range(6)]
 
+        # create the file
+        with open("data.txt", "w") as f:
+            pass
+
     def dump_data(self, finger_idx, knuckle_idx, data):
-        with open("data.txt", "a+") as f:
+        with open("data.txt", "a") as f:
             # print(finger_idx, knuckle_idx, len(knuckle))
             f.write("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n"%(
                 finger_idx,
