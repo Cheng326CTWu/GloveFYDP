@@ -155,7 +155,7 @@ int main(void)
   //   printf("I2C mux select failed, status=%X\r\n", status);
   // }
 
-  // initialize Hand 
+  // initialize Hand
   if ( (status = Hand_Init(&hi2c1)) )
   {
     printf("Hand init failed, status=%x\r\n", status);
@@ -192,7 +192,7 @@ int main(void)
   // {
   //   printf("Scheduler tests passed!\r\n");
   // }
-  
+
 
   // if ((status = IMU_ReadAll(&motionData)))
   // {
@@ -231,7 +231,7 @@ void SystemClock_Config(void)
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
   RCC_PeriphCLKInitTypeDef PeriphClkInit = {0};
 
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
@@ -247,7 +247,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Initializes the CPU, AHB and APB busses clocks 
+  /** Initializes the CPU, AHB and APB busses clocks
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
@@ -267,7 +267,7 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  /** Configure the main internal regulator output voltage 
+  /** Configure the main internal regulator output voltage
   */
   if (HAL_PWREx_ControlVoltageScaling(PWR_REGULATOR_VOLTAGE_SCALE1) != HAL_OK)
   {
@@ -303,13 +303,13 @@ static void MX_I2C1_Init(void)
   {
     Error_Handler();
   }
-  /** Configure Analogue filter 
+  /** Configure Analogue filter
   */
   if (HAL_I2CEx_ConfigAnalogFilter(&hi2c1, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
     Error_Handler();
   }
-  /** Configure Digital filter 
+  /** Configure Digital filter
   */
   if (HAL_I2CEx_ConfigDigitalFilter(&hi2c1, 0) != HAL_OK)
   {
@@ -337,7 +337,7 @@ static void MX_USART2_UART_Init(void)
 
   /* USER CODE END USART2_Init 1 */
   huart2.Instance = USART2;
-  huart2.Init.BaudRate = 1152000;
+  huart2.Init.BaudRate = 115200;
   huart2.Init.WordLength = UART_WORDLENGTH_8B;
   huart2.Init.StopBits = UART_STOPBITS_1;
   huart2.Init.Parity = UART_PARITY_NONE;
@@ -357,10 +357,10 @@ static void MX_USART2_UART_Init(void)
 
 }
 
-/** 
+/**
   * Enable DMA controller clock
   */
-static void MX_DMA_Init(void) 
+static void MX_DMA_Init(void)
 {
   /* DMA controller clock enable */
   __HAL_RCC_DMA1_CLK_ENABLE();
@@ -475,7 +475,7 @@ glove_status_t queue_test()
       return GLOVE_STATUS_FAIL;
     }
   }
-  
+
   // enqueue 8 items, dequeing right after enqueue
   printf("%s enqueue immediate dequeue\r\n", __FUNCTION__);
   status = Queue_Init(&testQueue, 4);
@@ -514,7 +514,7 @@ glove_status_t queue_test()
   }
 
   // enqueue 16 items in a 8-item queue, and make sure that only the last 8 are dequeued
-  printf("%s enqueue 2x extra \r\n", __FUNCTION__);  
+  printf("%s enqueue 2x extra \r\n", __FUNCTION__);
   status = Queue_Init(&testQueue, 8);
   for (i = 0; i < 16; ++i)
   {
@@ -549,7 +549,7 @@ glove_status_t empty_task()
 {
   return GLOVE_STATUS_OK;
 }
-task_t emptyTask = 
+task_t emptyTask =
 {
   .pTaskFn = &empty_task,
   .name = "Empty Task"
@@ -561,7 +561,7 @@ glove_status_t test_task()
   ++test_counter;
   return GLOVE_STATUS_OK;
 }
-task_t testTask = 
+task_t testTask =
 {
   .pTaskFn = &test_task,
   .name = "Test task"
@@ -607,7 +607,7 @@ glove_status_t scheduler_tests()
     printf("test fail %s:%d, test_counter = %lu\r\n", __FUNCTION__, __LINE__, test_counter);
     return GLOVE_STATUS_FAIL;
   }
-  
+
   return GLOVE_STATUS_OK;
 }
 
@@ -634,7 +634,7 @@ void Error_Handler(void)
   * @retval None
   */
 void assert_failed(char *file, uint32_t line)
-{ 
+{
   /* USER CODE BEGIN 6 */
   /* User can add his own implementation to report the file name and line number,
      tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
