@@ -14,6 +14,8 @@ from scipy.signal import butter, lfilter, freqz
 # matplotlib style
 # style.use('fivethirtyeight')
 
+LIVE_FILE_NAME = "data.txt"
+
 # sensitivities
 SENSITIVITY_ACCELEROMETER_2  = 0.000061
 SENSITIVITY_ACCELEROMETER_4  = 0.000122
@@ -33,6 +35,7 @@ sens = (SENSITIVITY_ACCELEROMETER_2, SENSITIVITY_ACCELEROMETER_2, SENSITIVITY_AC
 
 def to_rad(x):
     return (3.14159265 / 180) * x
+
 
 def to_deg(x, prev):
     # if x < 0:
@@ -62,7 +65,24 @@ class Driver():
         self.yMagOffsets = [[0,0,0] for i in range(6)]
         self.zMagOffsets = [[0,0,0] for i in range(6)]
 
-    def continuousRead(self, duration):
+    def dump_data(self, finger_idx, knuckle_idx, data):
+        with open("data.txt", "a+") as f:
+            # print(finger_idx, knuckle_idx, len(knuckle))
+            f.write("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n"%(
+                finger_idx,
+                knuckle_idx,
+                data[0],
+                data[1],
+                data[2],
+                data[3],
+                data[4],
+                data[5],
+                data[6],
+                data[7],
+                data[8],
+            ))
+
+    def continuousRead(self, duration, save=False):
 
         self.ser.write("data")
         data = [ [ [],[],[] ] for i in range(6)]
@@ -108,6 +128,8 @@ class Driver():
                     yMag * sens[7] - self.yMagOffsets[finger][knuckle],
                     zMag * sens[8] - self.zMagOffsets[finger][knuckle]
                 ])
+                if save:
+                    self.dump_data(finger, knuckle, data[finger][knuckle][-1])
 
         self.ser.write("stop")
         output = self.ser.read(10000)
@@ -209,6 +231,13 @@ def dump_data(data):
 def lpf(val, prev):
     a = 0.1
     return a*val + (1-a)*prev
+
+if __name__ == "__main__":
+    driver = Driver()
+    driver.calibrate()
+    all_data = driver.continuousRead(100, save=True)
+    exit()
+
 
 if __name__ == "__main__":
 
