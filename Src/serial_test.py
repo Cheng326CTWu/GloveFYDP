@@ -70,21 +70,19 @@ class Driver():
             pass
 
     def dump_data(self, finger_idx, knuckle_idx, data):
-        with open("data.txt", "a") as f:
-            # print(finger_idx, knuckle_idx, len(knuckle))
-            f.write("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n"%(
-                finger_idx,
-                knuckle_idx,
-                data[0],
-                data[1],
-                data[2],
-                data[3],
-                data[4],
-                data[5],
-                data[6],
-                data[7],
-                data[8],
-            ))
+        print("%d %d %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f\r\n"%(
+            finger_idx,
+            knuckle_idx,
+            data[0],
+            data[1],
+            data[2],
+            data[3],
+            data[4],
+            data[5],
+            data[6],
+            data[7],
+            data[8],
+        ))
 
     def continuousRead(self, duration, save=False):
 
