@@ -106,7 +106,7 @@ class Driver():
                 # multiply each value that was read by its scaling factor
                 # raw = (tuple(a * b for a,b in zip((xAcc, yAcc, zAcc, xGyro, yGyro, zGyro, xMag, yMag, zMag), sens)))
 
-                print(finger, knuckle)
+                # print(finger, knuckle)
 
                 # validate finger and knuckle
                 if finger < 4 and knuckle > 2:
@@ -239,6 +239,7 @@ def lpf(val, prev):
 if __name__ == "__main__":
     driver = Driver()
     driver.calibrate()
+    print("Here's the data:")
     all_data = driver.continuousRead(100, save=True)
     exit()
 
