@@ -55,15 +55,15 @@ class Driver():
 
     def __init__(self):
         self.ser = serial.Serial('/dev/cu.usbserial-DN05ACYN', 115200, timeout=3)
-        self.xAccOffsets = [[0,0,0] for i in range(1)]
-        self.yAccOffsets = [[0,0,0] for i in range(1)]
-        self.zAccOffsets = [[0,0,0] for i in range(1)]
-        self.xGyroOffsets = [[0,0,0] for i in range(1)]
-        self.yGyroOffsets = [[0,0,0] for i in range(1)]
-        self.zGyroOffsets = [[0,0,0] for i in range(1)]
-        self.xMagOffsets = [[0,0,0] for i in range(1)]
-        self.yMagOffsets = [[0,0,0] for i in range(1)]
-        self.zMagOffsets = [[0,0,0] for i in range(1)]
+        self.xAccOffsets = [[0,0,0] for i in range(6)]
+        self.yAccOffsets = [[0,0,0] for i in range(6)]
+        self.zAccOffsets = [[0,0,0] for i in range(6)]
+        self.xGyroOffsets = [[0,0,0] for i in range(6)]
+        self.yGyroOffsets = [[0,0,0] for i in range(6)]
+        self.zGyroOffsets = [[0,0,0] for i in range(6)]
+        self.xMagOffsets = [[0,0,0] for i in range(6)]
+        self.yMagOffsets = [[0,0,0] for i in range(6)]
+        self.zMagOffsets = [[0,0,0] for i in range(6)]
 
         # create the file
         with open("data.txt", "w") as f:
@@ -88,9 +88,9 @@ class Driver():
     def continuousRead(self, duration, save=False, forever=False):
 
         self.ser.write("data")
-        data = [ [ [],[],[] ] for i in range(1)]
+        data = [ [ [],[],[] ] for i in range(6)]
         start = time.time()
-        counts = [[0,0,0] for i in range(1)]
+        counts = [[0,0,0] for i in range(6)]
         while (forever or time.time() - start < duration):
             fmt = '<' + 'hBBhhhhhhhhh'
             newData = self.ser.read(352)        # = length(fmt) * 16
